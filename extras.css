@@ -281,4 +281,335 @@
 
 @media (prefers-reduced-motion: reduce) {
     .lightbox-content, .skip-link { transition: none !important; }
-          }
+}
+
+/* ==========================================================
+   Automatic Dark Theme (Phone or Browser in Dark Mode)
+   - Uses deep dark for background
+   - Uses rich blue shades for other places (accents, buttons,
+     surfaces, badges, glows, borders)
+   - Keeps light theme untouched (same original peach palette)
+   ========================================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Deep dark background */
+        --bg: #090e1a;
+        --surface: #0f172a;
+        --surface-hover: #1e293b;
+        --surface-subtle: #172554;
+        --border: #1e293b;
+        --border-hover: #3b82f6;
+
+        /* High contrast text */
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+
+        /* Blue shades palette */
+        --accent: #3b82f6;
+        --accent-hover: #2563eb;
+        --accent-deep: #1d4ed8;
+        --accent-soft: #172554;
+        --accent-on-soft: #93c5fd;
+        --accent-glow: rgba(59, 130, 246, 0.4);
+
+        --tertiary: #1e293b;
+        --tertiary-deep: #172554;
+        --secondary-soft: #1e293b;
+
+        --bezel: #050811;
+        --bezel-hi: #111a2e;
+
+        --hi: rgba(147, 197, 253, 0.15);
+        --lo: rgba(0, 0, 0, 0.65);
+
+        --shadow-sm: 0 2px 0 #070b14, 0 8px 14px -6px rgba(0, 0, 0, 0.6);
+        --shadow-md: 0 3px 0 #05080f, 0 16px 26px -8px rgba(0, 0, 0, 0.7);
+        --shadow-lg: 0 4px 0 #020408, 0 26px 40px -10px rgba(0, 0, 0, 0.85);
+
+        --raised-bg: linear-gradient(180deg, #162035 0%, #0f1728 100%);
+        --raised-inset: inset 0 1px 0 rgba(147, 197, 253, 0.15), inset 0 -1.5px 0 rgba(0, 0, 0, 0.5);
+        --well-bg: linear-gradient(180deg, #090e1a 0%, #0d1526 100%);
+        --well-inset: inset 0 3px 6px rgba(0, 0, 0, 0.6), inset 0 -1px 0 rgba(147, 197, 253, 0.08);
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text-primary);
+        background-image:
+            radial-gradient(60% 50% at 8% 0%, rgba(37, 99, 235, 0.18) 0%, transparent 70%),
+            radial-gradient(50% 45% at 100% 100%, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+    }
+
+    body::before {
+        opacity: 0.03;
+        mix-blend-mode: screen;
+    }
+
+    /* ---------- Navigation ---------- */
+    .navbar {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(9, 14, 26, 0.92));
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+    }
+    .brand {
+        text-shadow: none;
+        color: var(--text-primary);
+    }
+    .brand-logo {
+        box-shadow: 0 2px 0 #172554, 0 6px 10px -3px rgba(37, 99, 235, 0.5);
+    }
+    .nav-links a {
+        color: var(--text-secondary);
+    }
+    .nav-links a:hover {
+        color: #93c5fd;
+        background: var(--well-bg);
+    }
+    .menu-toggle {
+        border-color: rgba(59, 130, 246, 0.3);
+        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+    }
+    .mobile-nav {
+        background: linear-gradient(180deg, #131c31, #0b1120);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn-primary {
+        background: linear-gradient(180deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+        box-shadow:
+            inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+            0 4px 0 #172554,
+            0 12px 20px -6px rgba(37, 99, 235, 0.5);
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    }
+    .btn-primary:hover {
+        box-shadow:
+            inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.3),
+            0 6px 0 #172554,
+            0 18px 26px -8px rgba(37, 99, 235, 0.65);
+    }
+    .btn-primary:active {
+        box-shadow:
+            inset 0 3px 6px rgba(0, 0, 0, 0.4),
+            0 0 0 #172554,
+            0 2px 4px -2px rgba(37, 99, 235, 0.5);
+    }
+    .btn-secondary {
+        background: var(--raised-bg);
+        color: #93c5fd;
+        text-shadow: none;
+        border: 1px solid rgba(59, 130, 246, 0.25);
+        box-shadow: var(--raised-inset), 0 4px 0 #070b14, 0 12px 16px -8px rgba(0, 0, 0, 0.5);
+    }
+    .btn-secondary:hover {
+        color: #ffffff;
+        border-color: rgba(96, 165, 250, 0.5);
+        box-shadow: var(--raised-inset), 0 6px 0 #070b14, 0 16px 20px -8px rgba(37, 99, 235, 0.35);
+    }
+
+    /* ---------- Typography & Headers ---------- */
+    .hero h1,
+    .showcase-header h2,
+    .section-header h2,
+    .feature-card h3 {
+        text-shadow: none;
+        color: var(--text-primary);
+    }
+    .hero-desc,
+    .section-header p,
+    .showcase-header p {
+        text-shadow: none;
+        color: var(--text-secondary);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero-pill {
+        background: var(--well-bg);
+        color: #93c5fd;
+        box-shadow: var(--well-inset);
+        text-shadow: none;
+        border: 1px solid rgba(59, 130, 246, 0.25);
+    }
+    .hero-pill svg {
+        background: radial-gradient(circle at 35% 30%, #3b82f6, #1e3a8a 70%);
+        color: #ffffff;
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+    }
+    .chip-row li {
+        background: var(--well-bg);
+        color: #93c5fd;
+        box-shadow: var(--well-inset);
+        text-shadow: none;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    /* ---------- Cards & Containers ---------- */
+    .feature-card,
+    .download-card,
+    .trust-item,
+    .faq details,
+    .support-card {
+        background: var(--raised-bg);
+        border: 1px solid rgba(59, 130, 246, 0.18);
+        box-shadow: var(--raised-inset), var(--shadow-md);
+    }
+    .feature-card:hover,
+    .support-card:hover {
+        border-color: rgba(96, 165, 250, 0.4);
+    }
+    .feature-icon {
+        background: var(--well-bg);
+        color: #60a5fa;
+        box-shadow: var(--well-inset);
+    }
+    .feature-card:hover .feature-icon {
+        background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+        color: #ffffff;
+        box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.45), 0 3px 0 #172554;
+    }
+    .feature-icon svg {
+        filter: none;
+    }
+    .feature-card:hover .feature-icon svg {
+        filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.4));
+    }
+
+    /* ---------- Gallery ---------- */
+    .gallery-group h3 {
+        color: #93c5fd;
+        text-shadow: none;
+    }
+    .showcase-scroll::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+    }
+
+    /* ---------- Download center & Assets ---------- */
+    .asset-row {
+        background: var(--well-bg);
+        border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    .asset-name {
+        color: #93c5fd;
+    }
+    .asset-name:hover {
+        color: #ffffff;
+    }
+    .asset-size {
+        color: #64748b;
+    }
+    .hash {
+        color: #60a5fa;
+    }
+    .hash-label {
+        color: #94a3b8;
+    }
+    .fact {
+        background: var(--raised-bg);
+        border: 1px solid rgba(59, 130, 246, 0.18);
+        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+    }
+    .verify {
+        background: var(--well-bg);
+        border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    .verify pre {
+        background: #060911;
+        color: #bfdbfe;
+        border: 1px solid #1e293b;
+    }
+
+    /* ---------- Legal / Policies ---------- */
+    .legal-tab-nav {
+        background: var(--well-bg);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .tab-btn {
+        background: var(--raised-bg);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        color: var(--text-secondary);
+        text-shadow: none;
+        box-shadow: var(--raised-inset), 0 3px 0 #070b14;
+    }
+    .tab-btn:hover {
+        color: #bfdbfe;
+    }
+    .tab-btn.active {
+        background: linear-gradient(180deg, #2563eb, #1d4ed8);
+        color: #ffffff;
+        border-color: transparent;
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4), 0 0 0 #172554;
+    }
+    .legal-card {
+        background:
+            linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 90px),
+            linear-gradient(180deg, #131c31, #0b1120);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-top: 6px solid #3b82f6;
+    }
+    .legal-card code {
+        background: var(--well-bg);
+        color: #93c5fd;
+        border: 1px solid rgba(59, 130, 246, 0.18);
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .callout {
+        background: var(--well-bg);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .callout::before {
+        background: linear-gradient(180deg, #60a5fa, #2563eb, #1e3a8a);
+        box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+    }
+    .callout p {
+        color: #bfdbfe;
+    }
+    .callout a,
+    .trust-item a,
+    .legal-card a,
+    .faq a,
+    .faq details[open] summary {
+        color: #60a5fa;
+    }
+
+    /* ---------- Lightbox ---------- */
+    .lightbox {
+        background: rgba(4, 8, 18, 0.88);
+    }
+    .lightbox-nav,
+    .lightbox-close {
+        background: var(--raised-bg);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: var(--text-primary);
+        box-shadow: var(--raised-inset), 0 3px 0 #070b14;
+    }
+    .lightbox-caption {
+        color: #bfdbfe;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+        background: var(--well-bg);
+        border: 1px solid rgba(59, 130, 246, 0.15);
+    }
+    .footer-brand {
+        text-shadow: none;
+        color: var(--text-primary);
+    }
+    .footer-links a {
+        color: var(--text-secondary);
+    }
+    .footer-links a:hover {
+        color: #ffffff;
+        background: var(--raised-bg);
+        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+    }
+    .footer-copy {
+        text-shadow: none;
+        color: var(--text-muted);
+    }
+}

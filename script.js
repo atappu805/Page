@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Interactive Legal Tabs & Hash Routing
+    // 2. Interactive Legal Tabs (Clean URL - No #terms or #ytm-policy in address bar)
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -34,29 +34,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Clean any hash from address bar so URL remains clear (https://pixelmusic.pages.dev)
+    function cleanUrlHash() {
+        if (window.location.hash && history.replaceState) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    }
+
     tabButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const target = btn.dataset.target;
             switchTab(target);
-            history.replaceState(null, null, '#' + target);
+            cleanUrlHash();
         });
     });
 
-    // Check URL hash on page load for deep-linking (e.g. #privacy, #terms, #ytm-policy)
-    function handleHash() {
-        const hash = window.location.hash.replace('#', '');
-        if (['ytm-policy', 'privacy', 'terms'].includes(hash)) {
-            switchTab(hash);
-            const element = document.getElementById('legal');
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
+    // Intercept footer/policy links to #ytm-policy, #privacy, #terms without adding hash to URL
+    document.querySelectorAll('a[href="#ytm-policy"], a[href="#privacy"], a[href="#terms"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').replace('#', '');
+            switchTab(targetId);
+            const legalSection = document.getElementById('legal');
+            if (legalSection) {
+                legalSection.scrollIntoView({ behavior: 'smooth' });
             }
+            cleanUrlHash();
+        });
+    });
+
+    // On page load or refresh: if a policy hash exists, open the tab and scroll to it,
+    // then immediately strip the hash so the user has the clear URL (https://pixelmusic.pages.dev)
+    const initialHash = window.location.hash.replace('#', '');
+    if (['ytm-policy', 'privacy', 'terms'].includes(initialHash)) {
+        switchTab(initialHash);
+        const legalSection = document.getElementById('legal');
+        if (legalSection) {
+            legalSection.scrollIntoView({ behavior: 'smooth' });
         }
     }
-
-    window.addEventListener('hashchange', handleHash);
-    handleHash();
+    cleanUrlHash();
 
     // 3. Screenshot Lightbox Modal with Gallery Navigation
     const lightbox = document.getElementById('lightboxModal');
