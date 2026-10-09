@@ -47,10 +47,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Check URL hash on page load for deep-linking (e.g. #privacy, #terms, #drive-policy)
+    // Check URL hash on page load for deep-linking (e.g. #privacy, #terms, #ytm-policy)
     function handleHash() {
         const hash = window.location.hash.replace('#', '');
-        if (['drive-policy', 'privacy', 'terms'].includes(hash)) {
+        if (['ytm-policy', 'privacy', 'terms'].includes(hash)) {
             switchTab(hash);
             const element = document.getElementById('legal');
             if (element) {
