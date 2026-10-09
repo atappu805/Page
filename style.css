@@ -1,38 +1,35 @@
 /* ==========================================================
    PixelMusic — Material 3 Expressive × Skeuomorphism
-   Expressive: tonal indigo palette, bold type, varied shapes,
-               springy motion, shape-morph on press.
-   Skeuo:      raised keys, inset wells, phone bezels, paper
-               sheets, embossed type, soft-plastic grain.
-   Drop-in replacement: no HTML / JS changes needed.
+   Expressive: dynamic dark palette, frosted glass blurs,
+               bold type, springy motion.
    ========================================================== */
 
 :root {
-    /* Tonal palette (Material You style roles) */
-    --bg: #e6e2f1;
-    --surface: #f6f4fc;
-    --surface-hover: #fbfaff;
-    --surface-subtle: #ddd8ec;
-    --border: #cfc9e3;
-    --border-hover: #b7afd6;
+    /* Tonal palette (Dark Mode & YouTube Music Red Theme) */
+    --bg: #030303;
+    --surface: #121212;
+    --surface-hover: #1f1f1f;
+    --surface-subtle: #0f0f0f;
+    --border: #272727;
+    --border-hover: #3f3f3f;
 
-    --text-primary: #1d1a2b;
-    --text-secondary: #4a4660;
-    --text-muted: #6a6585;
+    --text-primary: #ffffff;
+    --text-secondary: #aaaaaa;
+    --text-muted: #717171;
 
-    --accent: #5a49d6;            /* primary */
-    --accent-hover: #4637bd;
-    --accent-deep: #34279a;       /* key edge / pressed */
-    --accent-soft: #e0dbff;       /* primary container */
-    --accent-on-soft: #2a1f86;
-    --accent-glow: rgba(90, 73, 214, 0.28);
+    --accent: #ff0000;            /* Primary Red */
+    --accent-hover: #cc0000;
+    --accent-deep: #990000;       /* key edge / pressed */
+    --accent-soft: #330000;       /* primary container */
+    --accent-on-soft: #ff4d4d;
+    --accent-glow: rgba(255, 0, 0, 0.28);
 
-    --tertiary: #d3f06a;          /* "power LED" lime */
-    --tertiary-deep: #8aa512;
-    --secondary-soft: #ffdcc8;    /* warm secondary container */
+    --tertiary: #ffffff;          
+    --tertiary-deep: #cccccc;
+    --secondary-soft: #2a2a2a;    
 
-    --bezel: #1a1824;
-    --bezel-hi: #3a3650;
+    --bezel: #000000;
+    --bezel-hi: #1a1a1a;
 
     /* Expressive shape scale */
     --pill-radius: 9999px;
@@ -40,17 +37,17 @@
     --card-radius-lg: 40px;
 
     /* Skeuomorphic light: soft top-left source */
-    --hi: rgba(255, 255, 255, 0.95);
-    --lo: rgba(52, 39, 154, 0.14);
+    --hi: rgba(255, 255, 255, 0.1);
+    --lo: rgba(0, 0, 0, 0.8);
 
-    --shadow-sm: 0 2px 0 #c9c2e0, 0 8px 14px -6px rgba(52, 39, 154, 0.22);
-    --shadow-md: 0 3px 0 #c2bbdc, 0 16px 26px -8px rgba(52, 39, 154, 0.3);
-    --shadow-lg: 0 4px 0 #b9b1d6, 0 26px 40px -10px rgba(52, 39, 154, 0.38);
+    --shadow-sm: 0 2px 0 #000, 0 8px 14px -6px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 3px 0 #000, 0 16px 26px -8px rgba(0, 0, 0, 0.7);
+    --shadow-lg: 0 4px 0 #000, 0 26px 40px -10px rgba(0, 0, 0, 0.9);
 
-    --raised-bg: linear-gradient(180deg, #ffffff 0%, #efecf9 100%);
-    --raised-inset: inset 0 1.5px 0 var(--hi), inset 0 -2px 0 var(--lo);
-    --well-bg: linear-gradient(180deg, #d6d0ea 0%, #e6e2f4 100%);
-    --well-inset: inset 0 3px 6px rgba(52, 39, 154, 0.28), inset 0 -1px 0 var(--hi);
+    --raised-bg: linear-gradient(180deg, #1f1f1f 0%, #121212 100%);
+    --raised-inset: inset 0 1.5px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.8);
+    --well-bg: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+    --well-inset: inset 0 3px 6px rgba(0,0,0,0.8), inset 0 -1px 0 rgba(255,255,255,0.05);
 
     /* Motion */
     --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -77,22 +74,21 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    padding-top: 80px; /* room for floating navbar */
+    padding-top: 80px;
     background-image:
-        radial-gradient(60% 50% at 8% 0%, rgba(200, 190, 255, 0.7) 0%, transparent 70%),
-        radial-gradient(50% 45% at 100% 100%, rgba(255, 214, 190, 0.55) 0%, transparent 70%);
+        radial-gradient(60% 50% at 8% 0%, rgba(255, 0, 0, 0.08) 0%, transparent 70%),
+        radial-gradient(50% 45% at 100% 100%, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
     background-attachment: fixed;
 }
 
-/* Soft-plastic grain */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.07;
-    mix-blend-mode: multiply;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
@@ -114,7 +110,7 @@ button:focus-visible {
     outline-offset: 3px;
 }
 
-/* ==================== NAVBAR (floating raised pill) ==================== */
+/* ==================== NAVBAR ==================== */
 .navbar-wrapper {
     position: fixed;
     top: 0;
@@ -133,11 +129,11 @@ button:focus-visible {
     align-items: center;
     justify-content: space-between;
     border-radius: var(--pill-radius);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(238, 235, 250, 0.92));
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: linear-gradient(180deg, rgba(30, 30, 30, 0.7), rgba(18, 18, 18, 0.8));
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     box-shadow: var(--raised-inset), var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .brand {
@@ -150,7 +146,7 @@ button:focus-visible {
     font-weight: 700;
     font-size: 1.2rem;
     letter-spacing: -0.02em;
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: 0 1px 0 #000;
 }
 
 .brand-logo {
@@ -159,7 +155,7 @@ button:focus-visible {
     border-radius: 12px;
     object-fit: cover;
     background-color: var(--surface-subtle);
-    box-shadow: 0 2px 0 var(--accent-deep), 0 6px 10px -3px rgba(52, 39, 154, 0.45);
+    box-shadow: 0 2px 0 #000, 0 6px 10px -3px rgba(0, 0, 0, 0.6);
 }
 
 .nav-links {
@@ -192,18 +188,17 @@ button:focus-visible {
     gap: 10px;
 }
 
-/* Hamburger (mobile) as a physical key */
 .menu-toggle {
     display: none;
     background: var(--raised-bg);
-    border: 1px solid #fff;
+    border: 1px solid rgba(255,255,255,0.1);
     color: var(--text-primary);
     width: 44px;
     height: 44px;
     padding: 10px;
     cursor: pointer;
     border-radius: 16px;
-    box-shadow: var(--raised-inset), 0 2px 0 #c9c2e0;
+    box-shadow: var(--raised-inset), 0 2px 0 #000;
     transition: var(--transition-spring);
 }
 
@@ -219,15 +214,14 @@ button:focus-visible {
     display: block;
 }
 
-/* Mobile drawer */
 .mobile-nav {
     display: none;
     position: fixed;
     top: 80px;
     left: 12px;
     right: 12px;
-    background: linear-gradient(180deg, #ffffff, #f0edfa);
-    border: 1px solid #fff;
+    background: linear-gradient(180deg, #1f1f1f, #121212);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--card-radius-lg);
     padding: 18px 20px 20px;
     box-shadow: var(--raised-inset), var(--shadow-lg);
@@ -265,10 +259,9 @@ button:focus-visible {
 .mobile-nav .btn {
     margin-top: 10px;
     width: 100%;
-    color: #fff;
 }
 
-/* ==================== BUTTONS (tactile keys that morph on press) ==================== */
+/* ==================== BUTTONS ==================== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -288,11 +281,11 @@ button:focus-visible {
 
 .btn-primary {
     color: #ffffff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.28);
-    background: linear-gradient(180deg, #7766f0 0%, var(--accent) 55%, var(--accent-hover) 100%);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    background: linear-gradient(180deg, #ff4d4d 0%, var(--accent) 55%, var(--accent-hover) 100%);
     box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.12),
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.3),
         0 4px 0 var(--accent-deep),
         0 12px 18px -6px var(--accent-glow);
 }
@@ -300,17 +293,17 @@ button:focus-visible {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.12),
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.4),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.3),
         0 6px 0 var(--accent-deep),
         0 18px 24px -8px var(--accent-glow);
 }
 
 .btn-primary:active {
     transform: translateY(4px);
-    border-radius: 18px; /* shape morph */
+    border-radius: 18px;
     box-shadow:
-        inset 0 3px 6px rgba(0, 0, 0, 0.3),
+        inset 0 3px 6px rgba(0, 0, 0, 0.5),
         0 0 0 var(--accent-deep),
         0 2px 4px -2px var(--accent-glow);
 }
@@ -318,14 +311,14 @@ button:focus-visible {
 .btn-secondary {
     background: var(--raised-bg);
     color: var(--text-primary);
-    text-shadow: 0 1px 0 #fff;
-    border: 1px solid #fff;
-    box-shadow: var(--raised-inset), 0 4px 0 #c2bbdc, 0 12px 16px -8px rgba(52, 39, 154, 0.3);
+    text-shadow: 0 1px 0 #000;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: var(--raised-inset), 0 4px 0 #000, 0 12px 16px -8px rgba(0, 0, 0, 0.6);
 }
 
 .btn-secondary:hover {
     transform: translateY(-2px);
-    box-shadow: var(--raised-inset), 0 6px 0 #c2bbdc, 0 16px 20px -8px rgba(52, 39, 154, 0.35);
+    box-shadow: var(--raised-inset), 0 6px 0 #000, 0 16px 20px -8px rgba(0, 0, 0, 0.7);
 }
 
 .btn-secondary:active {
@@ -341,7 +334,6 @@ button:focus-visible {
     padding: 36px 0 64px;
 }
 
-/* Status plate: inset well with a glowing LED */
 .hero-pill {
     display: inline-flex;
     align-items: center;
@@ -354,7 +346,7 @@ button:focus-visible {
     font-weight: 800;
     margin-bottom: 26px;
     box-shadow: var(--well-inset);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 0 #000;
 }
 
 .hero-pill svg {
@@ -362,9 +354,9 @@ button:focus-visible {
     width: 22px;
     height: 22px;
     border-radius: 50%;
-    color: #34400a;
-    background: radial-gradient(circle at 35% 30%, #efffa0, var(--tertiary) 60%, var(--tertiary-deep));
-    box-shadow: 0 0 10px 2px rgba(211, 240, 106, 0.8), inset 0 -1px 2px rgba(0, 0, 0, 0.25);
+    color: #1a0000;
+    background: radial-gradient(circle at 35% 30%, #ffcccc, var(--accent) 60%, var(--accent-deep));
+    box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.4), inset 0 -1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .hero h1 {
@@ -375,7 +367,7 @@ button:focus-visible {
     line-height: 1.04;
     margin-bottom: 22px;
     color: var(--text-primary);
-    text-shadow: 0 2px 0 #fff, 0 -1px 0 rgba(52, 39, 154, 0.18); /* embossed */
+    text-shadow: 0 2px 0 #000, 0 -1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .hero-desc {
@@ -383,7 +375,7 @@ button:focus-visible {
     color: var(--text-secondary);
     max-width: 640px;
     margin: 0 auto 36px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: none;
 }
 
 .hero-actions {
@@ -399,7 +391,7 @@ button:focus-visible {
     font-size: 1rem;
 }
 
-/* ==================== SHOWCASE (phone bezels) ==================== */
+/* ==================== SHOWCASE ==================== */
 .showcase-header {
     text-align: center;
     margin-bottom: 26px;
@@ -411,7 +403,7 @@ button:focus-visible {
     font-weight: 700;
     letter-spacing: -0.035em;
     margin-bottom: 8px;
-    text-shadow: 0 2px 0 #fff;
+    text-shadow: 0 2px 0 #000;
 }
 
 .showcase-header p {
@@ -446,28 +438,27 @@ button:focus-visible {
 }
 
 .showcase-scroll::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #8a7cf2, var(--accent));
+    background: linear-gradient(180deg, #660000, var(--accent));
     border-radius: 10px;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .device-card {
     position: relative;
     flex: 0 0 244px;
     scroll-snap-align: center;
-    background: linear-gradient(145deg, var(--bezel-hi) 0%, var(--bezel) 35%, #0f0e16 100%);
+    background: linear-gradient(145deg, var(--bezel-hi) 0%, var(--bezel) 35%, #050505 100%);
     border-radius: 42px;
     padding: 12px 12px 6px;
     box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
-        inset 0 0 0 2px #0a0911,
-        0 4px 0 #0a0911,
-        0 24px 32px -10px rgba(26, 24, 36, 0.55);
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 0 2px #050505,
+        0 4px 0 #050505,
+        0 24px 32px -10px rgba(0, 0, 0, 0.8);
     transition: var(--transition-spring);
     cursor: pointer;
 }
 
-/* speaker / camera slot */
 .device-card::before {
     content: "";
     position: absolute;
@@ -477,8 +468,8 @@ button:focus-visible {
     height: 7px;
     transform: translateX(-50%);
     border-radius: 6px;
-    background: #07060c;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.1);
+    background: #020202;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9), 0 1px 0 rgba(255, 255, 255, 0.05);
     z-index: 2;
     opacity: 0.85;
 }
@@ -509,7 +500,7 @@ button:focus-visible {
     padding: 12px 4px 8px;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #d9d4f5;
+    color: #aaaaaa;
     letter-spacing: 0.01em;
     text-shadow: 0 -1px 0 #000;
 }
@@ -526,7 +517,7 @@ button:focus-visible {
     font-weight: 700;
     letter-spacing: -0.035em;
     margin-bottom: 10px;
-    text-shadow: 0 2px 0 #fff;
+    text-shadow: 0 2px 0 #000;
 }
 
 .section-header p {
@@ -545,14 +536,13 @@ button:focus-visible {
 
 .feature-card {
     background: var(--raised-bg);
-    border: 1px solid #fff;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--card-radius);
     padding: 30px;
     box-shadow: var(--raised-inset), var(--shadow-md);
     transition: var(--transition-spring);
 }
 
-/* Expressive: varied corner shapes across the grid */
 .feature-card:nth-child(3n + 1) { border-radius: 44px 16px 44px 16px; }
 .feature-card:nth-child(3n + 2) { border-radius: 16px 44px 16px 44px; }
 .feature-card:nth-child(3n)     { border-radius: 36px; }
@@ -567,7 +557,6 @@ button:focus-visible {
     box-shadow: var(--raised-inset), var(--shadow-sm);
 }
 
-/* Icon = engraved well holding a tonal glyph, each in a different shape */
 .feature-icon {
     width: 58px;
     height: 58px;
@@ -591,19 +580,19 @@ button:focus-visible {
 
 .feature-card:hover .feature-icon {
     color: #fff;
-    background: linear-gradient(180deg, #7766f0, var(--accent));
-    box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.45), 0 3px 0 var(--accent-deep);
+    background: linear-gradient(180deg, #ff4d4d, var(--accent));
+    box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.3), 0 3px 0 var(--accent-deep);
     transform: rotate(-6deg) scale(1.06);
 }
 
 .feature-icon svg {
     width: 26px;
     height: 26px;
-    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.7));
+    filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.5));
 }
 
 .feature-card:hover .feature-icon svg {
-    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.5));
 }
 
 .feature-card h3 {
@@ -613,7 +602,7 @@ button:focus-visible {
     letter-spacing: -0.02em;
     color: var(--text-primary);
     margin-bottom: 8px;
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: 0 1px 0 #000;
 }
 
 .feature-card p {
@@ -628,7 +617,6 @@ button:focus-visible {
     scroll-margin-top: 90px;
 }
 
-/* Tabs = segmented hardware switch set into a tray */
 .legal-tab-nav {
     display: flex;
     justify-content: center;
@@ -647,14 +635,14 @@ button:focus-visible {
     padding: 11px 22px;
     border-radius: var(--pill-radius);
     background: var(--raised-bg);
-    border: 1px solid #fff;
+    border: 1px solid rgba(255,255,255,0.1);
     color: var(--text-secondary);
     font-family: inherit;
     font-size: 0.88rem;
     font-weight: 800;
     cursor: pointer;
-    text-shadow: 0 1px 0 #fff;
-    box-shadow: var(--raised-inset), 0 3px 0 #c2bbdc;
+    text-shadow: 0 1px 0 #000;
+    box-shadow: var(--raised-inset), 0 3px 0 #000;
     transition: var(--transition-spring);
 }
 
@@ -668,14 +656,13 @@ button:focus-visible {
     border-radius: 16px;
 }
 
-/* Active = key pushed in & lit */
 .tab-btn.active {
     background: linear-gradient(180deg, var(--accent-hover), var(--accent));
     color: #ffffff;
     border-color: transparent;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(3px);
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.35), 0 0 0 var(--accent-deep);
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.6), 0 0 0 var(--accent-deep);
 }
 
 .tab-pane {
@@ -692,12 +679,11 @@ button:focus-visible {
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* Paper sheet with a faint ruled header */
 .legal-card {
     background:
-        linear-gradient(180deg, rgba(90, 73, 214, 0.06), transparent 90px),
-        linear-gradient(180deg, #ffffff, #f7f5fd);
-    border: 1px solid #fff;
+        linear-gradient(180deg, rgba(255, 0, 0, 0.04), transparent 90px),
+        linear-gradient(180deg, #111111, #0a0a0a);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px 12px var(--card-radius-lg) var(--card-radius-lg);
     border-top: 6px solid var(--accent);
     padding: 40px;
@@ -745,12 +731,11 @@ button:focus-visible {
     padding: 2px 8px;
     border-radius: 8px;
     background: var(--well-bg);
-    box-shadow: inset 0 1px 3px rgba(52, 39, 154, 0.25);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
     color: var(--accent-on-soft);
     word-break: break-all;
 }
 
-/* Callout = recessed panel with a lit indicator edge */
 .callout {
     position: relative;
     background: var(--well-bg);
@@ -768,8 +753,8 @@ button:focus-visible {
     top: 0;
     bottom: 0;
     width: 7px;
-    background: linear-gradient(180deg, #efffa0, var(--tertiary), var(--tertiary-deep));
-    box-shadow: 0 0 12px rgba(211, 240, 106, 0.9);
+    background: linear-gradient(180deg, #ff4d4d, var(--accent), var(--accent-deep));
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
 }
 
 .callout p {
@@ -778,7 +763,6 @@ button:focus-visible {
     font-weight: 600;
 }
 
-/* Overrides the blue inline link colour used in the HTML */
 .callout a {
     color: var(--accent) !important;
 }
@@ -788,9 +772,9 @@ button:focus-visible {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(26, 24, 36, 0.82);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     z-index: 2000;
     align-items: center;
     justify-content: center;
@@ -810,9 +794,9 @@ button:focus-visible {
     border-radius: 44px;
     background: linear-gradient(145deg, var(--bezel-hi), var(--bezel));
     box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.3),
-        0 4px 0 #0a0911,
-        0 30px 60px rgba(0, 0, 0, 0.55);
+        inset 0 1.5px 0 rgba(255, 255, 255, 0.1),
+        0 4px 0 #000,
+        0 30px 60px rgba(0, 0, 0, 0.8);
     animation: scaleUp 0.45s var(--spring);
 }
 
@@ -822,7 +806,7 @@ button:focus-visible {
     right: 22px;
     width: 48px;
     height: 48px;
-    border: 1px solid #fff;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 18px;
     background: var(--raised-bg);
     color: var(--text-primary);
@@ -832,7 +816,7 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--raised-inset), 0 3px 0 #b9b1d6;
+    box-shadow: var(--raised-inset), 0 3px 0 #000;
     transition: var(--transition-spring);
 }
 
@@ -850,7 +834,7 @@ button:focus-visible {
     to { transform: scale(1); opacity: 1; }
 }
 
-/* ==================== FOOTER (engraved base plate) ==================== */
+/* ==================== FOOTER ==================== */
 footer {
     margin: 0 12px 12px;
     padding: 44px 0 52px;
@@ -870,7 +854,7 @@ footer {
     font-weight: 700;
     font-size: 1.1rem;
     color: var(--text-primary);
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 0 #000;
 }
 
 .footer-links {
@@ -894,14 +878,14 @@ footer {
 .footer-links a:hover {
     color: var(--accent-on-soft);
     background: var(--raised-bg);
-    box-shadow: var(--raised-inset), 0 2px 0 #c2bbdc;
+    box-shadow: var(--raised-inset), 0 2px 0 #000;
     transform: translateY(-1px);
 }
 
 .footer-copy {
     color: var(--text-muted);
     font-size: 0.82rem;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 0 #000;
 }
 
 /* ==================== RESPONSIVE ==================== */
@@ -957,7 +941,6 @@ footer {
 }
 
 @media (max-width: 400px) {
-    /* Keep the navbar from overflowing on very narrow phones */
     .nav-actions .btn-primary {
         display: none;
     }
