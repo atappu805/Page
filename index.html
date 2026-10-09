@@ -3,46 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>PixelMusic — Beautiful, High-Fidelity Music Player for Android</title>
-    <meta name="description" content="PixelMusic is an open-source, privacy-first Android music player featuring Material You design, real-time synchronized lyrics, lossless audio, and YouTube Music integration via WebView.">
-    <!-- Theme Color for Status Bar -->
-    <meta name="theme-color" content="#FFD6C9" />
-    <!-- Google Search Console Verification Tag -->
-    <meta name="google-site-verification" content="PASTE_SEARCH_CONSOLE_CODE_HERE">
+    <title>PixelMusic — Open-Source Music Player for Android</title>
+    <meta name="description" content="PixelMusic is a free, open-source Android music player with Material You design, synchronized lyrics, local library support and YouTube Music access through WebView.">
+    <link rel="canonical" href="https://pixelmusic.pages.dev/">
+    <meta name="theme-color" content="#FFD6C9">
+    <!-- Add your Search Console verification tag here once you have the real code:
+         <meta name="google-site-verification" content="YOUR_REAL_CODE"> -->
 
-    <!-- Fonts -->
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="PixelMusic">
+    <meta property="og:title" content="PixelMusic — Open-Source Music Player for Android">
+    <meta property="og:description" content="Material You design, synchronized lyrics, local library and YouTube Music via WebView. Free and open source.">
+    <meta property="og:url" content="https://pixelmusic.pages.dev/">
+    <meta property="og:image" content="https://pixelmusic.pages.dev/IMG_20261002_115841.jpg">
+    <meta property="og:image:alt" content="PixelMusic Now Playing screen">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" href="./Gemini_Generated_Image_9tunck9tunck9tun.png">
+    <link rel="apple-touch-icon" href="./Gemini_Generated_Image_9tunck9tunck9tun.png">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "PixelMusic",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Android",
+      "description": "Open-source Android music player with synchronized lyrics, local library support and YouTube Music access through WebView.",
+      "url": "https://pixelmusic.pages.dev/",
+      "downloadUrl": "https://github.com/Saurav-02/PixelMusic/releases",
+      "codeRepository": "https://github.com/Saurav-02/PixelMusic",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="extras.css">
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- Top Navigation Bar -->
     <div class="navbar-wrapper">
         <div class="container">
-            <nav class="navbar">
-                <a href="#" class="brand">
-                    <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic Logo" class="brand-logo" onerror="this.style.display='none'">
+            <nav class="navbar" aria-label="Primary">
+                <a href="#top" class="brand">
+                    <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="" class="brand-logo" width="36" height="36" onerror="this.style.display='none'">
                     <span>PixelMusic</span>
                 </a>
 
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#showcase">Gallery</a></li>
-                    <li><a href="#ytm-policy">YouTube Music Policy</a></li>
-                    <li><a href="#privacy">Privacy</a></li>
-                    <li><a href="#terms">Terms</a></li>
+                    <li><a href="#download">Download</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#legal">Policies</a></li>
                 </ul>
 
                 <div class="nav-actions">
-                    <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
-                        Download APK
-                    </a>
-                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                    <a href="#download" class="btn btn-primary">Download APK</a>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNav">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
                     </button>
                 </div>
             </nav>
@@ -53,239 +79,401 @@
     <div class="mobile-nav" id="mobileNav">
         <a href="#features">Features</a>
         <a href="#showcase">App Gallery</a>
-        <a href="#ytm-policy">YouTube Music Policy</a>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Service</a>
-        <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Latest APK</a>
+        <a href="#download">Download</a>
+        <a href="#faq">FAQ</a>
+        <a href="#support">Support</a>
+        <a href="#legal">Policies</a>
+        <a href="#download" class="btn btn-primary">Download Latest APK</a>
     </div>
 
-    <main class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-pill">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                <span>Material You & High-Fidelity Audio</span>
-            </div>
-            <h1>Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
-            <p class="hero-desc">PixelMusic is an open-source, ad-free Android music player engineered for pure audio fidelity. Stream directly from YouTube Music via WebView, experience synchronized real-time lyrics, and enjoy lossless playback.</p>
-            <div class="hero-actions">
-                <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
-                    Download on GitHub
-                </a>
-                <a href="https://github.com/Saurav-02/PixelMusic" class="btn btn-secondary" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                    Source Code
-                </a>
-            </div>
-        </section>
+    <main class="container" id="main">
+        <span id="top"></span>
 
-        <!-- App Screenshots Showcase -->
-        <section id="showcase" class="showcase-container">
+        <!-- Hero -->
+        <div class="hero-grid">
+            <section class="hero" aria-labelledby="hero-title">
+                <div class="hero-pill">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                    <span>Open source · Material You</span>
+                </div>
+                <h1 id="hero-title">Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
+                <p class="hero-desc">PixelMusic is a free, open-source Android music player. Play your local library, follow synchronized lyrics, and open YouTube Music inside the app through WebView.</p>
+                <div class="hero-actions">
+                    <a href="#download" class="btn btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                        Download APK
+                    </a>
+                    <a href="#features" class="btn btn-secondary">Explore Features</a>
+                </div>
+                <ul class="chip-row" aria-label="Highlights">
+                    <li>Local Music</li>
+                    <li>Synced Lyrics</li>
+                    <li>Dynamic Themes</li>
+                </ul>
+            </section>
+
+            <div class="hero-visual">
+                <div class="device-card hero-phone">
+                    <img src="./IMG_20261002_115841.jpg" alt="PixelMusic Now Playing screen" width="720" height="1560" fetchpriority="high">
+                    <div class="device-caption">Now Playing</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery -->
+        <section id="showcase" class="showcase-container" aria-labelledby="showcase-title">
             <div class="showcase-header">
-                <h2>Designed for Android</h2>
-                <p>Fluid animations, dynamic color themes, and distraction-free listening.</p>
+                <h2 id="showcase-title">Designed for Android</h2>
+                <p>Real screenshots from the current build. Tap one to enlarge.</p>
             </div>
-            <div class="showcase-scroll">
-                <div class="device-card">
-                    <img src="./IMG_20261002_115841.jpg" alt="Now Playing Player" loading="lazy">
-                    <div class="device-caption">Now Playing Player</div>
+
+            <div class="gallery-group">
+                <h3>Listening</h3>
+                <div class="showcase-scroll">
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115841.jpg" alt="Now Playing screen with album art and controls" loading="lazy">
+                        <div class="device-caption">Now Playing</div>
+                    </div>
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115849.jpg" alt="Synchronized lyrics view" loading="lazy" onerror="this.closest('.device-card').style.display='none'">
+                        <div class="device-caption">Synchronized Lyrics</div>
+                    </div>
                 </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115754.jpg" alt="Home Screen & Quick Picks" loading="lazy">
-                    <div class="device-caption">Home & Quick Picks</div>
+            </div>
+
+            <div class="gallery-group">
+                <h3>Library</h3>
+                <div class="showcase-scroll">
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115754.jpg" alt="Home screen with quick picks" loading="lazy">
+                        <div class="device-caption">Home &amp; Quick Picks</div>
+                    </div>
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115823.jpg" alt="Library and playlists" loading="lazy">
+                        <div class="device-caption">Library &amp; Playlists</div>
+                    </div>
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115810.jpg" alt="Explore and discover screen" loading="lazy">
+                        <div class="device-caption">Explore &amp; Discover</div>
+                    </div>
                 </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115823.jpg" alt="Library & Playlists" loading="lazy">
-                    <div class="device-caption">Library & Playlists</div>
-                </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115810.jpg" alt="Explore & Discover" loading="lazy">
-                    <div class="device-caption">Explore & Discover</div>
-                </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115831.jpg" alt="Audio Settings & Controls" loading="lazy">
-                    <div class="device-caption">Settings & Controls</div>
-                </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115849.jpg" alt="Synchronized Lyrics" loading="lazy" onerror="this.parentElement.style.display='none'">
-                    <div class="device-caption">Synchronized Lyrics</div>
+            </div>
+
+            <div class="gallery-group">
+                <h3>Customization</h3>
+                <div class="showcase-scroll">
+                    <div class="device-card" role="button" tabindex="0" data-gallery>
+                        <img src="./IMG_20261002_115831.jpg" alt="Audio settings and controls" loading="lazy">
+                        <div class="device-caption">Settings &amp; Controls</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Core Features -->
-        <section id="features">
+        <!-- Features -->
+        <section id="features" aria-labelledby="features-title">
             <div class="section-header">
-                <h2>Built-in Capabilities</h2>
-                <p>Everything you need for an unmatched audio experience on your device.</p>
+                <h2 id="features-title">Built-in Capabilities</h2>
+                <p>What PixelMusic does today.</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
                     </div>
-                    <h3>YouTube Music Streaming</h3>
-                    <p>Stream your favorite tracks directly from YouTube Music. Log in securely through a native WebView client to access your library, mixes, and playlists without leaving the app.</p>
+                    <h3>YouTube Music via WebView</h3>
+                    <p>Sign in to YouTube Music inside the app to reach your library, mixes and playlists. Sign-in and activity are handled by Google.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                     </div>
-                    <h3>Lossless High-Fidelity Audio</h3>
-                    <p>Engineered for audiophiles. Native playback support for FLAC, WAV, ALAC, Opus, AAC, and MP3 with gapless transitions and customizable audio offload.</p>
+                    <h3>Local High-Fidelity Playback</h3>
+                    <p>Plays FLAC, WAV, ALAC, Opus, AAC and MP3 files with gapless transitions and configurable audio offload.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-7 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-7 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                     </div>
-                    <h3>Synchronized Real-Time Lyrics</h3>
-                    <p>Line-by-line synchronized scrolling, word-by-word karaoke highlight mode, translations, and auto-scanning for local .lrc subtitle files.</p>
+                    <h3>Synchronized Lyrics</h3>
+                    <p>Line-by-line scrolling, word-by-word highlight mode, translations, and automatic detection of local .lrc files.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
                     </div>
-                    <h3>Smart Library & Folder Explorer</h3>
-                    <p>Scan and index your local device with directory-level blacklist rules, storage filters, custom playlist creation, and tag editing.</p>
+                    <h3>Library &amp; Folder Explorer</h3>
+                    <p>Index your device with folder blacklist rules and storage filters, build playlists, and edit tags.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     </div>
-                    <h3>Material You Dynamic Theming</h3>
-                    <p>Fluidly adapts to album art color palettes and Android system themes. Features modern squircle corners, fluid seekbars, and gesture navigation.</p>
+                    <h3>Material You Theming</h3>
+                    <p>Colors adapt to album art and the Android system theme, with squircle corners, fluid seekbars and gesture navigation.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                     </div>
-                    <h3>100% Private & Ad-Free</h3>
-                    <p>Zero advertisements, zero behavioral tracking, and zero telemetry. Your music files, tokens, and playback history remain strictly on your device.</p>
+                    <h3>Ad-Free &amp; Open Source</h3>
+                    <p>PixelMusic shows no ads, and its full source is public so you can inspect what it does. Your local library stays on your device.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Compliance & Legal Documentation -->
-        <section id="legal" class="legal-section">
+        <!-- Download center -->
+        <section id="download" class="download-section" aria-labelledby="download-title">
             <div class="section-header">
-                <h2>Policies & Compliance</h2>
-                <p>Read our policies regarding YouTube Music integration, user privacy, and terms of use.</p>
+                <h2 id="download-title">Download PixelMusic</h2>
+                <p>Version details are loaded live from GitHub Releases.</p>
             </div>
-
-            <div class="legal-tab-nav">
-                <button class="tab-btn active" data-target="ytm-policy">YouTube Music Policy</button>
-                <button class="tab-btn" data-target="privacy">Privacy Policy</button>
-                <button class="tab-btn" data-target="terms">Terms of Service</button>
-            </div>
-
-            <!-- Tab 1: YouTube Music & WebView Policy -->
-            <div id="ytm-policy" class="tab-pane active">
-                <div class="legal-card">
-                    <h2>YouTube Music & WebView Policy</h2>
-                    <div class="callout">
-                        <p>PixelMusic provides an interface for accessing YouTube Music through an Android WebView. When you sign in, browse, or play content, your interactions with YouTube Music are subject to Google's applicable terms and privacy policies.</p>
+            <div class="download-card" id="releaseCard" aria-live="polite">
+                <div class="release-head">
+                    <div>
+                        <div class="release-version" id="relVersion">Loading latest release…</div>
+                        <div class="release-meta" id="relMeta"></div>
                     </div>
-                    <h3>1. Authentication & Security</h3>
-                    <p>Sign-in is handled through the YouTube Music website displayed within PixelMusic's WebView. Your authentication is processed by Google through its services.
-PixelMusic is designed to use the WebView's session mechanisms rather than requiring you to enter your Google password into a separate PixelMusic login form. Please review Google's privacy policies to understand how Google processes your account information and activity.</p>
+                    <a class="btn btn-primary" id="relPrimary" href="https://github.com/Saurav-02/PixelMusic/releases" target="_blank" rel="noopener">View releases on GitHub</a>
+                </div>
+                <div class="release-assets" id="relAssets"></div>
+                <div class="whatsnew" id="relNotes" hidden>
+                    <h3>What's new</h3>
+                    <ul id="relNotesList"></ul>
+                </div>
+                <div class="release-actions">
+                    <a class="btn btn-secondary" id="relChangelog" href="https://github.com/Saurav-02/PixelMusic/releases" target="_blank" rel="noopener">Full changelog</a>
+                    <a class="btn btn-secondary" href="https://github.com/Saurav-02/PixelMusic/releases" target="_blank" rel="noopener">All releases</a>
+                </div>
+                <noscript><p class="noscript-note">Enable JavaScript to see live version details, or open <a href="https://github.com/Saurav-02/PixelMusic/releases">GitHub Releases</a>.</p></noscript>
 
-                    <h3>2. How Your Data Is Handled</h3>
+                <details class="verify">
+                    <summary>How to verify your download</summary>
+                    <p>Compare the SHA-256 shown above (when GitHub provides one for the file) with your downloaded copy:</p>
+                    <pre>sha256sum PixelMusic-*.apk</pre>
+                    <p>To check the signing certificate on a computer with Android build-tools installed:</p>
+                    <pre>apksigner verify --print-certs PixelMusic-*.apk</pre>
+                    <p>Only install APKs from this repository's Releases page.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Trust -->
+        <section id="trust" class="trust-section" aria-labelledby="trust-title">
+            <div class="section-header">
+                <h2 id="trust-title">Open and Verifiable</h2>
+                <p>Everything you need to check the project for yourself.</p>
+            </div>
+            <div class="trust-grid">
+                <div class="trust-item">
+                    <h3>Source code</h3>
+                    <p><a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">github.com/Saurav-02/PixelMusic</a></p>
+                </div>
+                <div class="trust-item">
+                    <h3>Latest release</h3>
+                    <p id="trustRelease"><a href="https://github.com/Saurav-02/PixelMusic/releases/latest" target="_blank" rel="noopener">See latest release</a></p>
+                </div>
+                <div class="trust-item">
+                    <h3>License</h3>
+                    <p>See the <a href="https://github.com/Saurav-02/PixelMusic#license" target="_blank" rel="noopener">license in the repository</a>.</p>
+                </div>
+                <div class="trust-item">
+                    <h3>Report a security issue</h3>
+                    <p><a href="https://github.com/Saurav-02/PixelMusic/security/advisories/new" target="_blank" rel="noopener">Private security report</a></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="faq-section" aria-labelledby="faq-title">
+            <div class="section-header">
+                <h2 id="faq-title">FAQ</h2>
+                <p>Installation, updates, permissions and common fixes.</p>
+            </div>
+            <div class="faq">
+                <details>
+                    <summary>How do I install the APK?</summary>
+                    <ol>
+                        <li>Download the APK from the Download section above.</li>
+                        <li>Open it on your phone and allow installs from your browser or file manager when Android asks.</li>
+                        <li>Tap Install, then turn that permission back off if you like.</li>
+                    </ol>
+                </details>
+                <details>
+                    <summary>How do I update PixelMusic?</summary>
+                    <p>Download the newer APK from this page and install it over the existing app. Your data is kept as long as the new APK is signed with the same key as the old one.</p>
+                </details>
+                <details>
+                    <summary>Which permissions does it ask for, and why?</summary>
+                    <p>Media/audio access to find and play local music, notifications for playback controls, and internet access for YouTube Music and online features. The exact list is in the app's manifest in the source repository.</p>
+                </details>
+                <details>
+                    <summary>YouTube Music won't sign in or play. What can I try?</summary>
+                    <p>Update Android System WebView and Chrome from Google Play, then clear the web data from PixelMusic's settings and sign in again. If it still fails, <a href="https://github.com/Saurav-02/PixelMusic/issues/new" target="_blank" rel="noopener">open an issue</a> with your Android version and what you saw.</p>
+                </details>
+                <details>
+                    <summary>My local songs or lyrics are missing.</summary>
+                    <p>Check that media permission is granted, that the folder isn't blacklisted in the library settings, and rescan the library. Lyrics files need to be .lrc files next to the song.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- Support -->
+        <section id="support" class="support-section" aria-labelledby="support-title">
+            <div class="section-header">
+                <h2 id="support-title">Support &amp; Community</h2>
+                <p>PixelMusic is a personal open-source project. Help shape it.</p>
+            </div>
+            <div class="support-grid">
+                <a class="support-card" href="https://github.com/Saurav-02/PixelMusic/issues/new" target="_blank" rel="noopener">
+                    <h3>Report a bug</h3>
+                    <p>Open a GitHub issue with steps to reproduce.</p>
+                </a>
+                <a class="support-card" href="https://github.com/Saurav-02/PixelMusic/issues/new" target="_blank" rel="noopener">
+                    <h3>Request a feature</h3>
+                    <p>Suggest an idea through a new issue.</p>
+                </a>
+                <a class="support-card" href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">
+                    <h3>Contribute</h3>
+                    <p>Browse the code and send a pull request.</p>
+                </a>
+                <a class="support-card" href="https://github.com/Saurav-02/PixelMusic/graphs/contributors" target="_blank" rel="noopener">
+                    <h3>Contributors</h3>
+                    <p>See who has helped build PixelMusic.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Policies -->
+        <section id="legal" class="legal-section" aria-labelledby="legal-title">
+            <div class="section-header">
+                <h2 id="legal-title">Policies &amp; Compliance</h2>
+                <p>How PixelMusic handles YouTube Music, your data, and use of the app.</p>
+            </div>
+
+            <div class="legal-tab-nav" role="tablist" aria-label="Policies">
+                <button class="tab-btn active" data-target="ytm-policy" role="tab" aria-selected="true">YouTube Music Policy</button>
+                <button class="tab-btn" data-target="privacy" role="tab" aria-selected="false">Privacy Policy</button>
+                <button class="tab-btn" data-target="terms" role="tab" aria-selected="false">Terms of Service</button>
+            </div>
+
+            <!-- YouTube Music policy -->
+            <div id="ytm-policy" class="tab-pane active" role="tabpanel">
+                <div class="legal-card">
+                    <h2>YouTube Music &amp; WebView Policy</h2>
+                    <p class="policy-meta">Version 1.1 · Effective October 9, 2026</p>
+                    <div class="callout">
+                        <p>PixelMusic opens YouTube Music in an Android WebView. When you sign in, browse or play content, that activity is handled by Google under Google's terms and privacy policies.</p>
+                    </div>
+                    <h3>1. Sign-in</h3>
+                    <p>Sign-in happens on the YouTube Music website shown inside PixelMusic's WebView, and Google processes your authentication. PixelMusic does not provide its own Google password form.</p>
+
+                    <h3>2. What Google handles and what stays on your device</h3>
                     <ul>
-                        <li><strong>YouTube Music Activity:</strong> Playback history, liked songs, recommendations, and other account activity may be associated with your Google account and handled according to Google's settings and policies.</li>
-                        <li><strong>Network Communications:</strong> Requests required for authentication, browsing, and playback are handled by YouTube Music and its supporting services. Depending on the implementation, PixelMusic may also process technical information needed to operate the app.</li>
-                        <li><strong>Session Data:</strong> WebView cookies and other session data may be stored on your device to maintain your sign-in. You can clear available WebView data through PixelMusic's settings, where supported. Doing so may sign you out or reset website preferences.</li>
+                        <li><strong>Handled by Google:</strong> account activity such as playback history, liked songs and recommendations, according to your Google account settings.</li>
+                        <li><strong>Stored on your device:</strong> WebView cookies and session data that keep you signed in, plus your local library index and app settings.</li>
+                        <li><strong>Network requests:</strong> sign-in, browsing and playback requests go to YouTube Music and its supporting services.</li>
                     </ul>
 
-                    <h3>3. Disconnecting Access</h3>
-                    <p>You can sign out through YouTube Music where supported, or clear the relevant WebView data in PixelMusic's settings. You can also review your Google Account's security settings to manage account access and connected devices.
-Clearing app data may remove locally stored session information, but it does not necessarily delete activity already associated with your Google account.</p>
+                    <h3>3. Signing out and clearing data</h3>
+                    <p>Sign out in YouTube Music, or clear the WebView data in PixelMusic's settings where available. Clearing data on your device removes locally stored session information but does not delete activity already saved to your Google account. Manage connected devices and account activity in your Google Account settings.</p>
 
-                    <h3>4. Third-Party Policies</h3>
-                    <p>YouTube Music and Google services are operated by Google. Your use of those services is subject to their applicable terms and privacy policies.</p>
+                    <h3>4. Third-party policies</h3>
                     <ul>
-                        <li><strong>Google Privacy Policy:</strong> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener" style="color: var(--accent);">https://policies.google.com/privacy</a></li>
-                        <li><strong>YouTube Terms of Service:</strong> <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener" style="color: var(--accent);">https://www.youtube.com/t/terms</a></li>
+                        <li><strong>Google Privacy Policy:</strong> <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a></li>
+                        <li><strong>YouTube Terms of Service:</strong> <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">youtube.com/t/terms</a></li>
                     </ul>
-                    <p>PixelMusic is an independent application and should not imply endorsement by or affiliation with Google unless such an affiliation actually exists.</p>
+                    <p>PixelMusic is an independent project and is not affiliated with or endorsed by Google or YouTube.</p>
                 </div>
             </div>
 
-            <!-- Tab 2: Privacy Policy -->
-            <div id="privacy" class="tab-pane">
+            <!-- Privacy -->
+            <div id="privacy" class="tab-pane" role="tabpanel">
                 <div class="legal-card">
                     <h2>Privacy Policy</h2>
-                    <p><em>Effective Date: October 2026</em></p>
-                    <p>PixelMusic is developed as an open-source, privacy-first Android application. This policy details how data is handled.</p>
+                    <p class="policy-meta">Version 1.1 · Effective October 9, 2026</p>
+                    <p>This policy explains what the PixelMusic app does with data. The app's source code is public, so you can check these statements against the implementation.</p>
 
-                    <h3>1. Information Collection</h3>
-                    <p>PixelMusic does not collect, sell, or transmit any personally identifiable information. We do not use third-party analytics trackers, advertising identifiers, or behavioral logging tools.</p>
+                    <h3>1. What PixelMusic itself collects</h3>
+                    <p>The PixelMusic project does not run a server that collects your personal information, and the app is not built to show ads. Your local library index, playlists and settings are stored on your device.</p>
 
-                    <h3>2. Local Device Permissions</h3>
+                    <h3>2. What third parties handle</h3>
+                    <p>When you use YouTube Music or other online sources inside the app, those services receive the requests needed to work and process them under their own policies. See the YouTube Music Policy tab for details.</p>
+
+                    <h3>3. Permissions</h3>
                     <ul>
-                        <li><strong>Audio Files & Media:</strong> Used exclusively to index, sort, and play local music files on your device.</li>
-                        <li><strong>Notifications & Foreground Service:</strong> Used to display persistent playback controls and album artwork while audio is playing.</li>
-                        <li><strong>Internet Permission:</strong> Used solely to stream audio requested by the user from external sources (such as YouTube Music or online audio streams).</li>
+                        <li><strong>Audio files &amp; media:</strong> to index and play music stored on your device.</li>
+                        <li><strong>Notifications &amp; foreground service:</strong> to show playback controls while audio plays.</li>
+                        <li><strong>Internet:</strong> to stream content you request, such as YouTube Music.</li>
                     </ul>
 
-                    <h3>3. Open Source Verification</h3>
-                    <p>PixelMusic's complete codebase is publicly accessible and auditable on GitHub at <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener" style="color: var(--accent);">github.com/Saurav-02/PixelMusic</a>.</p>
+                    <h3>4. Verify it yourself</h3>
+                    <p>Source code: <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">github.com/Saurav-02/PixelMusic</a>. Third-party libraries and their licenses are listed in the repository.</p>
+
+                    <h3>5. Questions and security reports</h3>
+                    <p>Ask privacy questions by <a href="https://github.com/Saurav-02/PixelMusic/issues/new" target="_blank" rel="noopener">opening an issue</a>. Report security problems privately through <a href="https://github.com/Saurav-02/PixelMusic/security/advisories/new" target="_blank" rel="noopener">GitHub security advisories</a>.</p>
+
+                    <h3>6. Changes</h3>
+                    <p>If this policy changes, the version number and effective date above will be updated.</p>
                 </div>
             </div>
 
-            <!-- Tab 3: Terms of Service -->
-            <div id="terms" class="tab-pane">
+            <!-- Terms -->
+            <div id="terms" class="tab-pane" role="tabpanel">
                 <div class="legal-card">
                     <h2>Terms of Service</h2>
-                    <p><em>Effective Date: October 2026</em></p>
+                    <p class="policy-meta">Version 1.1 · Effective October 9, 2026</p>
 
-                    <h3>1. Acceptance of Terms</h3>
-                    <p>By downloading, installing, or using PixelMusic, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, please discontinue use of the application.</p>
+                    <h3>1. Acceptance</h3>
+                    <p>By downloading, installing or using PixelMusic you agree to these terms. If you disagree, stop using the app.</p>
 
-                    <h3>2. Software License</h3>
-                    <p>PixelMusic is distributed under open-source software licensing. You are granted permission to download, execute, and modify the application for personal use in accordance with the repository's open-source license.</p>
+                    <h3>2. Software license</h3>
+                    <p>PixelMusic is distributed under the open-source license in its <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">GitHub repository</a>. That license governs how you may use, copy and modify the code.</p>
 
-                    <h3>3. Third-Party Integrations</h3>
-                    <p>When accessing external service providers (such as YouTube Music), your usage is governed by both these Terms and the terms and policies of the respective service provider.</p>
+                    <h3>3. Third-party services</h3>
+                    <p>Use of YouTube Music or other external services is also governed by those providers' terms and policies.</p>
 
                     <h3>4. Disclaimer</h3>
-                    <p>PixelMusic is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. The maintainers shall not be liable for any damages arising out of the use of this software.</p>
+                    <p>PixelMusic is provided "AS IS" and "AS AVAILABLE" without warranties of any kind, express or implied. The maintainers are not liable for damages arising from use of this software.</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Screenshot Lightbox Modal -->
-    <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+    <!-- Screenshot viewer -->
+    <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
         <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">✕</button>
-        <img src="" alt="Enlarged screenshot preview" class="lightbox-content" id="lightboxImg">
+        <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous screenshot">‹</button>
+        <button class="lightbox-nav next" id="lightboxNext" aria-label="Next screenshot">›</button>
+        <img src="" alt="" class="lightbox-content" id="lightboxImg">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-brand">
-                <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic" style="width: 22px; height: 22px; border-radius: 6px;" onerror="this.style.display='none'">
+                <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="" style="width: 22px; height: 22px; border-radius: 6px;" onerror="this.style.display='none'">
                 <span>PixelMusic Project</span>
             </div>
             <div class="footer-links">
                 <a href="#features">Features</a>
                 <a href="#showcase">Gallery</a>
+                <a href="#download">Download</a>
+                <a href="#faq">FAQ</a>
                 <a href="#ytm-policy">YouTube Music Policy</a>
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>
                 <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">GitHub Repository</a>
             </div>
-            <p class="footer-copy">© 2026 PixelMusic Project. Free and open source software.</p>
+            <p class="footer-copy">© 2026 PixelMusic Project. Free and open source software. Not affiliated with Google or YouTube.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script src="script.js" defer></script>
 </body>
 </html>
