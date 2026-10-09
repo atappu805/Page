@@ -184,25 +184,27 @@
                 <button class="tab-btn" data-target="terms">Terms of Service</button>
             </div>
 
-            <!-- Tab 1: YouTube Music Policy -->
+            <!-- Tab 1: YouTube Music & WebView Policy -->
             <div id="ytm-policy" class="tab-pane active">
                 <div class="legal-card">
                     <h2>YouTube Music & WebView Policy</h2>
                     <div class="callout">
-                        <p>PixelMusic acts as a client wrapper and utilizes a secure Android WebView to authenticate and stream content directly from YouTube Music.</p>
+                        <p>PixelMusic provides an interface for accessing YouTube Music through an Android WebView. When you sign in, browse, or play content, your interactions with YouTube Music are subject to Google's applicable terms and privacy policies.</p>
                     </div>
                     <h3>1. Authentication & Security</h3>
-                    <p>Logins are handled entirely through the native WebView directly connecting to Google/YouTube's official authentication servers. PixelMusic does not intercept, read, store, or transmit your Google or YouTube account credentials.</p>
+                    <p>Sign-in is handled through the YouTube Music website displayed within PixelMusic's WebView. Your authentication is processed by Google through its services.
+PixelMusic is designed to use the WebView's session mechanisms rather than requiring you to enter your Google password into a separate PixelMusic login form. Please review Google's privacy policies to understand how Google processes your account information and activity.</p>
 
                     <h3>2. How Your Data Is Handled</h3>
                     <ul>
-                        <li><strong>Direct Streaming:</strong> Audio streaming occurs directly between YouTube's media servers and your device's native playback engine.</li>
-                        <li><strong>No Cloud Syncing to Third Parties:</strong> Your playback history, liked songs, and preferences remain tied to your YouTube account and are governed by Google's overarching Privacy Policy.</li>
-                        <li><strong>Session Management:</strong> Authentication tokens and cookies are strictly managed by the Android WebView sandbox and can be cleared at any time from the app settings.</li>
+                        <li><strong>YouTube Music Activity:</strong> Playback history, liked songs, recommendations, and other account activity may be associated with your Google account and handled according to Google's settings and policies.</li>
+                        <li><strong>Network Communications:</strong> Requests required for authentication, browsing, and playback are handled by YouTube Music and its supporting services. Depending on the implementation, PixelMusic may also process technical information needed to operate the app.</li>
+                        <li><strong>Session Management:</strong> WebView cookies and other session data may be stored on your device to maintain your sign-in. You can clear available WebView data through PixelMusic's settings, where supported. Doing so may sign you out or reset website preferences.</li>
                     </ul>
 
                     <h3>3. Disconnecting Access</h3>
-                    <p>You can log out of your YouTube Music account at any time by clearing the WebView cookies within PixelMusic's settings, or by managing connected devices via your Google Account Security Settings.</p>
+                    <p>You can sign out through YouTube Music where supported, or clear the relevant WebView data in PixelMusic's settings. You can also review your Google Account's security settings to manage account access and connected devices.
+Clearing app data may remove locally stored session information, but it does not necessarily delete activity already associated with your Google account.</p>
                 </div>
             </div>
 
