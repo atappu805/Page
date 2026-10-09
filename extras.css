@@ -29,6 +29,12 @@
 }
 .skip-link:focus { top: 12px; }
 
+/* ---------- Mobile CTA button contrast fix in light theme ---------- */
+.mobile-nav a.btn-primary,
+.mobile-nav .btn-primary {
+    color: #ffffff !important;
+}
+
 /* ---------- Hero: two-column with phone ---------- */
 .hero-grid {
     display: grid;
@@ -386,19 +392,27 @@
     }
 
     /* ---------- Buttons (B/W High Contrast) ---------- */
-    .btn-primary {
-        background: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
-        color: #000000;
-        text-shadow: none;
+    .btn-primary,
+    a.btn-primary,
+    .mobile-nav a.btn-primary,
+    .mobile-nav .btn-primary,
+    #relPrimary {
+        background: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%) !important;
+        color: #000000 !important;
+        text-shadow: none !important;
         box-shadow:
             inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
             inset 0 -2px 0 rgba(0, 0, 0, 0.15),
             0 4px 0 #333333,
             0 10px 20px rgba(255, 255, 255, 0.12);
     }
-    .btn-primary:hover {
-        background: #ffffff;
-        color: #000000;
+    .btn-primary:hover,
+    a.btn-primary:hover,
+    .mobile-nav a.btn-primary:hover,
+    .mobile-nav .btn-primary:hover,
+    #relPrimary:hover {
+        background: #ffffff !important;
+        color: #000000 !important;
         box-shadow:
             inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
             inset 0 -2px 0 rgba(0, 0, 0, 0.15),
