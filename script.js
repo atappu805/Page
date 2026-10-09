@@ -86,21 +86,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryCards = Array.from(document.querySelectorAll('.device-card[data-gallery]'));
 
     let currentGalleryIndex = 0;
+    let isTransitioning = false;
 
-    function updateLightbox(index) {
+    function updateLightbox(index, direction = null) {
         if (!galleryCards.length) return;
-        currentGalleryIndex = (index + galleryCards.length) % galleryCards.length;
+        const newIndex = (index + galleryCards.length) % galleryCards.length;
+        currentGalleryIndex = newIndex;
         const card = galleryCards[currentGalleryIndex];
         const img = card.querySelector('img');
         const caption = card.querySelector('.device-caption');
 
-        if (img && lightboxImg) {
+        if (!img || !lightboxImg) return;
+
+        if (direction && !isTransitioning) {
+            isTransitioning = true;
+            const outOffset = direction === 'next' ? -22 : 22;
+            lightboxImg.style.transition = 'opacity 0.16s ease, transform 0.16s ease';
+            lightboxImg.style.opacity = '0';
+            lightboxImg.style.transform = 'translateX(' + outOffset + 'px) scale(0.96)';
+
+            setTimeout(() => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt || '';
+                lightboxImg.classList.remove('zoomed');
+                if (lightboxCaption) {
+                    lightboxCaption.textContent = caption ? caption.textContent.trim() : (img ? img.alt : '');
+                }
+
+                const inOffset = direction === 'next' ? 22 : -22;
+                lightboxImg.style.transition = 'none';
+                lightboxImg.style.transform = 'translateX(' + inOffset + 'px) scale(0.96)';
+
+                // Force reflow
+                void lightboxImg.offsetWidth;
+
+                lightboxImg.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                lightboxImg.style.opacity = '1';
+                lightboxImg.style.transform = 'translateX(0) scale(1)';
+
+                setTimeout(() => {
+                    isTransitioning = false;
+                    lightboxImg.style.transition = '';
+                    lightboxImg.style.transform = '';
+                }, 260);
+            }, 160);
+        } else {
             lightboxImg.src = img.src;
             lightboxImg.alt = img.alt || '';
             lightboxImg.classList.remove('zoomed');
-        }
-        if (lightboxCaption) {
-            lightboxCaption.textContent = caption ? caption.textContent.trim() : (img ? img.alt : '');
+            lightboxImg.style.opacity = '1';
+            lightboxImg.style.transform = '';
+            if (lightboxCaption) {
+                lightboxCaption.textContent = caption ? caption.textContent.trim() : (img ? img.alt : '');
+            }
         }
     }
 
@@ -114,7 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeLightbox() {
         if (!lightbox) return;
         lightbox.classList.remove('active');
-        if (lightboxImg) lightboxImg.classList.remove('zoomed');
+        if (lightboxImg) {
+            lightboxImg.classList.remove('zoomed');
+            lightboxImg.style.opacity = '1';
+            lightboxImg.style.transform = '';
+        }
         document.body.style.overflow = '';
     }
 
@@ -150,13 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (lightboxPrev) {
             lightboxPrev.addEventListener('click', (e) => {
                 e.stopPropagation();
-                updateLightbox(currentGalleryIndex - 1);
+                updateLightbox(currentGalleryIndex - 1, 'prev');
             });
         }
         if (lightboxNext) {
             lightboxNext.addEventListener('click', (e) => {
                 e.stopPropagation();
-                updateLightbox(currentGalleryIndex + 1);
+                updateLightbox(currentGalleryIndex + 1, 'next');
             });
         }
 
@@ -177,9 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Escape') {
                 closeLightbox();
             } else if (e.key === 'ArrowLeft') {
-                updateLightbox(currentGalleryIndex - 1);
+                updateLightbox(currentGalleryIndex - 1, 'prev');
             } else if (e.key === 'ArrowRight') {
-                updateLightbox(currentGalleryIndex + 1);
+                updateLightbox(currentGalleryIndex + 1, 'next');
             }
         });
     }

@@ -68,12 +68,22 @@
 .hero-visual { display: flex; justify-content: center; }
 .hero-phone {
     flex: 0 0 auto;
-    width: min(270px, 70vw);
-    cursor: default;
-    transform: rotate(3deg);
+    width: min(260px, 70vw);
+    cursor: pointer;
+    transform: rotate(2deg);
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .hero-phone:hover,
-.hero-phone:nth-child(even):hover { transform: rotate(3deg) translateY(-6px); }
+.hero-phone:nth-child(even):hover {
+    transform: rotate(0deg) translateY(-8px) scale(1.02);
+}
+.hero-phone img {
+    border-radius: 28px;
+    border: 2px solid rgba(255, 255, 255, 0.95);
+    box-shadow:
+        0 4px 0 rgba(152, 73, 39, 0.16),
+        0 24px 44px -10px rgba(152, 73, 39, 0.35);
+}
 
 /* ---------- Download center ---------- */
 .download-section { margin-bottom: 100px; }
@@ -196,7 +206,14 @@
     color: var(--accent-on-soft);
     text-shadow: 0 1px 0 #fff;
 }
-.gallery-group .showcase-scroll { padding-top: 14px; padding-bottom: 20px; }
+.gallery-group .showcase-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 16px;
+    padding-bottom: 28px;
+    gap: 20px;
+    scroll-padding: 0 20px;
+}
 .device-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 
 /* ---------- Lightbox nav ---------- */
@@ -517,6 +534,32 @@
     }
     .showcase-scroll::-webkit-scrollbar-thumb {
         background: #3f3f46;
+    }
+
+    /* Clean Floating Cards in Dark Mode */
+    .device-card {
+        background: transparent;
+        box-shadow: none;
+    }
+    .device-card img {
+        background-color: #0f0f12;
+        border: 1.5px solid #27272a;
+        box-shadow: 0 4px 0 #000000, 0 16px 30px -6px rgba(0, 0, 0, 0.9);
+    }
+    .device-card:hover img {
+        border-color: #52525b;
+        box-shadow: 0 6px 0 #000000, 0 24px 40px -6px rgba(0, 0, 0, 0.95);
+    }
+    .device-caption {
+        color: #e4e4e7;
+        text-shadow: none;
+    }
+    .device-card:hover .device-caption {
+        color: #ffffff;
+    }
+    .hero-phone img {
+        border-color: #27272a;
+        box-shadow: 0 4px 0 #000000, 0 24px 48px rgba(0, 0, 0, 0.95);
     }
 
     /* ---------- Download center & Assets ---------- */
