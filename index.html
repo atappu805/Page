@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>PixelMusic — Beautiful, High-Fidelity Music Player for Android</title>
-    <meta name="description" content="PixelMusic is a modern, privacy-focused open source Android music player featuring Material You design, studio parametric equalizer, real-time lyrics, and Google Drive streaming.">
+    <meta name="description" content="PixelMusic is an open-source, privacy-first Android music player featuring Material You design, real-time synchronized lyrics, lossless audio, and Google Drive cloud streaming.">
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="PASTE_SEARCH_CONSOLE_CODE_HERE">
 
@@ -13,484 +13,59 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --surface-elevated: #ffffff;
-            --surface-subtle: #f1f5f9;
-            --border: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #64748b;
-            --accent: #2563eb;
-            --accent-soft: #eff6ff;
-            --accent-glow: rgba(37, 99, 235, 0.15);
-            --pill-radius: 9999px;
-            --card-radius: 24px;
-            --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(219, 234, 254, 0.5) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(243, 232, 255, 0.4) 0px, transparent 50%);
-            background-attachment: fixed;
-        }
-
-        .container {
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        /* Header Navigation */
-        header {
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            margin: 0 auto 36px;
-            max-width: 960px;
-            padding: 12px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: var(--pill-radius);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-            transition: var(--transition-smooth);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-weight: 800;
-            font-size: 1.15rem;
-            letter-spacing: -0.02em;
-        }
-
-        .brand-logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            object-fit: cover;
-            box-shadow: 0 4px 12px var(--accent-glow);
-        }
-
-        .nav-menu {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.92rem;
-            font-weight: 600;
-            transition: var(--transition-smooth);
-        }
-
-        .nav-menu a:hover {
-            color: var(--accent);
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            border-radius: var(--pill-radius);
-            text-decoration: none;
-            transition: var(--transition-smooth);
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background-color: var(--text-primary);
-            color: #ffffff;
-            box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.22);
-            background-color: #1e293b;
-        }
-
-        .btn-secondary {
-            background-color: var(--surface);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--surface-subtle);
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 50px 0 60px;
-        }
-
-        .hero-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 18px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            border-radius: var(--pill-radius);
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(2.4rem, 5.5vw, 4.2rem);
-            font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1.15;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-        }
-
-        .hero-desc {
-            font-size: clamp(1.05rem, 2vw, 1.25rem);
-            color: var(--text-secondary);
-            max-width: 660px;
-            margin: 0 auto 36px;
-            font-weight: 400;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-
-        /* App Showcase Slider / Preview */
-        .showcase {
-            margin-bottom: 100px;
-        }
-
-        .showcase-scroll {
-            display: flex;
-            gap: 24px;
-            overflow-x: auto;
-            padding: 20px 10px 30px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-        }
-
-        .showcase-scroll::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .showcase-scroll::-webkit-scrollbar-thumb {
-            background: var(--border-hover);
-            border-radius: 10px;
-        }
-
-        .device-card {
-            flex: 0 0 260px;
-            scroll-snap-align: center;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 32px;
-            padding: 10px;
-            box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.08);
-            transition: var(--transition-smooth);
-        }
-
-        .device-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.12);
-            border-color: var(--accent);
-        }
-
-        .device-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 24px;
-            background-color: var(--surface-subtle);
-        }
-
-        .device-card-caption {
-            text-align: center;
-            padding: 12px 6px 4px;
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        /* Features Section */
-        .section-header {
-            text-align: center;
-            margin-bottom: 52px;
-        }
-
-        .section-header h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            margin-bottom: 12px;
-            color: var(--text-primary);
-        }
-
-        .section-header p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            max-width: 580px;
-            margin: 0 auto;
-        }
-
-        .grid-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 100px;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--card-radius);
-            padding: 32px;
-            box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.03);
-            transition: var(--transition-smooth);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.06);
-            border-color: var(--border-hover);
-        }
-
-        .feature-icon-wrapper {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: var(--accent-soft);
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .feature-icon-wrapper svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .feature-card h3 {
-            font-size: 1.22rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Legal / Compliance Section */
-        .legal-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .legal-tab-btn {
-            padding: 10px 22px;
-            border-radius: var(--pill-radius);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-        }
-
-        .legal-tab-btn.active, .legal-tab-btn:hover {
-            background: var(--accent);
-            color: #ffffff;
-            border-color: var(--accent);
-        }
-
-        .legal-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--card-radius);
-            padding: 44px;
-            box-shadow: 0 8px 30px -10px rgba(0, 0, 0, 0.04);
-            margin-bottom: 80px;
-        }
-
-        .legal-card h2 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 16px;
-        }
-
-        .legal-card h3 {
-            font-size: 1.15rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin: 28px 0 10px;
-        }
-
-        .legal-card p, .legal-card li {
-            color: var(--text-secondary);
-            font-size: 0.96rem;
-            line-height: 1.65;
-            margin-bottom: 14px;
-        }
-
-        .legal-card ul {
-            padding-left: 24px;
-            margin-bottom: 16px;
-        }
-
-        .callout-box {
-            background-color: var(--accent-soft);
-            border: 1px solid rgba(37, 99, 235, 0.25);
-            border-radius: 16px;
-            padding: 20px 24px;
-            margin: 24px 0;
-        }
-
-        .callout-box p {
-            color: #1e40af;
-            margin-bottom: 0;
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 50px 0 60px;
-            text-align: center;
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-primary);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: var(--transition-smooth);
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .footer-copy {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            .legal-card {
-                padding: 28px 20px;
-            }
-        }
-    </style>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <a href="#" class="brand">
-                <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic Logo" class="brand-logo" onerror="this.style.display='none'">
-                <span>PixelMusic</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#showcase">Gallery</a></li>
-                <li><a href="#drive-policy">Google Drive Policy</a></li>
-                <li><a href="#privacy">Privacy</a></li>
-                <li><a href="#terms">Terms</a></li>
-            </ul>
-            <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
-                Download APK
-            </a>
-        </header>
+    <!-- Top Navigation Bar -->
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="brand">
+                    <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic Logo" class="brand-logo" onerror="this.style.display='none'">
+                    <span>PixelMusic</span>
+                </a>
 
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#showcase">Gallery</a></li>
+                    <li><a href="#drive-policy">Google Drive Policy</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
+                    <li><a href="#terms">Terms</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
+                        Download APK
+                    </a>
+                    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Mobile Slide-down Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#features">Features</a>
+        <a href="#showcase">App Gallery</a>
+        <a href="#drive-policy">Google Drive Policy</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Latest APK</a>
+    </div>
+
+    <main class="container">
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-pill">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
                 <span>Material You & High-Fidelity Audio</span>
             </div>
             <h1>Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
-            <p class="hero-desc">PixelMusic is an open-source, ad-free Android music player engineered for pure audio fidelity. Stream directly from Google Drive, dial in sound with studio equalizers, and experience synchronized real-time lyrics.</p>
+            <p class="hero-desc">PixelMusic is an open-source, ad-free Android music player engineered for pure audio fidelity. Stream directly from Google Drive, experience synchronized real-time lyrics, and enjoy lossless playback.</p>
             <div class="hero-actions">
                 <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
@@ -504,171 +79,187 @@
         </section>
 
         <!-- App Screenshots Showcase -->
-        <section id="showcase" class="showcase">
-            <div class="section-header">
+        <section id="showcase" class="showcase-container">
+            <div class="showcase-header">
                 <h2>Designed for Android</h2>
                 <p>Fluid animations, dynamic color themes, and distraction-free listening.</p>
             </div>
             <div class="showcase-scroll">
                 <div class="device-card">
-                    <img src="./IMG_20261002_115841.jpg" alt="PixelMusic Now Playing Screen" loading="lazy">
-                    <div class="device-card-caption">Now Playing Player</div>
+                    <img src="./IMG_20261002_115841.jpg" alt="Now Playing Player" loading="lazy">
+                    <div class="device-caption">Now Playing Player</div>
                 </div>
                 <div class="device-card">
-                    <img src="./IMG_20261002_115754.jpg" alt="PixelMusic Home Screen" loading="lazy">
-                    <div class="device-card-caption">Personalized Home & Quick Picks</div>
+                    <img src="./IMG_20261002_115754.jpg" alt="Home Screen & Quick Picks" loading="lazy">
+                    <div class="device-caption">Home & Quick Picks</div>
                 </div>
                 <div class="device-card">
-                    <img src="./IMG_20261002_115823.jpg" alt="PixelMusic Library Screen" loading="lazy">
-                    <div class="device-card-caption">Playlists & Cloud Library</div>
+                    <img src="./IMG_20261002_115823.jpg" alt="Library & Playlists" loading="lazy">
+                    <div class="device-caption">Library & Playlists</div>
                 </div>
                 <div class="device-card">
-                    <img src="./IMG_20261002_115810.jpg" alt="PixelMusic Explore Screen" loading="lazy">
-                    <div class="device-card-caption">Explore & Discover</div>
+                    <img src="./IMG_20261002_115810.jpg" alt="Explore & Discover" loading="lazy">
+                    <div class="device-caption">Explore & Discover</div>
                 </div>
                 <div class="device-card">
-                    <img src="./IMG_20261002_115831.jpg" alt="PixelMusic Settings Screen" loading="lazy">
-                    <div class="device-card-caption">Audio DSP & Customization</div>
+                    <img src="./IMG_20261002_115831.jpg" alt="Audio Settings & Controls" loading="lazy">
+                    <div class="device-caption">Settings & Controls</div>
                 </div>
                 <div class="device-card">
-                    <img src="./IMG_20261002_115849.jpg" alt="PixelMusic Interface" loading="lazy" onerror="this.parentElement.style.display='none'">
-                    <div class="device-card-caption">Synchronized Lyrics</div>
-                </div>
-                <div class="device-card">
-                    <img src="./IMG_20261002_115857.jpg" alt="PixelMusic Interface" loading="lazy" onerror="this.parentElement.style.display='none'">
-                    <div class="device-card-caption">Studio Equalizer</div>
+                    <img src="./IMG_20261002_115849.jpg" alt="Synchronized Lyrics" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="device-caption">Synchronized Lyrics</div>
                 </div>
             </div>
         </section>
 
-        <!-- Real Core Features -->
+        <!-- Core Features -->
         <section id="features">
             <div class="section-header">
                 <h2>Built-in Capabilities</h2>
                 <p>Everything you need for an unmatched audio experience on your device.</p>
             </div>
-            <div class="grid-features">
+            <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon-wrapper">
+                    <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
                     </div>
                     <h3>Google Drive Cloud Streaming</h3>
-                    <p>Stream your personal music library directly from Google Drive without filling up local device storage. Includes automated chunk caching so played tracks buffer instantly.</p>
+                    <p>Stream your personal audio library directly from Google Drive without consuming internal storage. Features automatic chunk caching for instant playback.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon-wrapper">
+                    <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                     </div>
-                    <h3>Master Studio Equalizer</h3>
-                    <p>High-precision multi-band parametric equalizer featuring tactile channel faders, center 0 dB haptic detents, real-time frequency curves, and curated sound presets.</p>
+                    <h3>Lossless High-Fidelity Audio</h3>
+                    <p>Engineered for audiophiles. Native playback support for FLAC, WAV, ALAC, Opus, AAC, and MP3 with gapless transitions and customizable audio offload.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon-wrapper">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h3c1.66 0 3-1.34 3-3v-7a9 9 0 0 0-9-9z"/></svg>
-                    </div>
-                    <h3>Dolby Atmos & Spatial Audio</h3>
-                    <p>Binaural 3D surround sound field expansion with hardware bass boost, stereo virtualizer, and direct OEM audio effect panel launching.</p>
-                </div>
-
-                <div class="feature-card">
-                    <div class="feature-icon-wrapper">
+                    <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-7 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
                     </div>
                     <h3>Synchronized Real-Time Lyrics</h3>
-                    <p>Line-by-line synchronized scrolling, word-by-word highlight karaoke mode, translations, and auto-scanning for local .lrc files.</p>
+                    <p>Line-by-line synchronized scrolling, word-by-word karaoke highlight mode, translations, and auto-scanning for local .lrc subtitle files.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon-wrapper">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    </div>
+                    <h3>Smart Library & Folder Explorer</h3>
+                    <p>Scan and index your local device with directory-level blacklist rules, storage filters, custom playlist creation, and tag editing.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
                     </div>
-                    <h3>Material You & Dynamic Theming</h3>
-                    <p>Adapts fluidly to album art palettes and system wallpapers. Experience smooth rounded squircle corners, interactive gesture seekbars, and gesture navigation.</p>
+                    <h3>Material You Dynamic Theming</h3>
+                    <p>Fluidly adapts to album art color palettes and Android system themes. Features modern squircle corners, fluid seekbars, and gesture navigation.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon-wrapper">
+                    <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
                     </div>
                     <h3>100% Private & Ad-Free</h3>
-                    <p>Zero tracking, zero behavioral telemetry, and zero ads. Your music files, tokens, and playback history remain strictly on your device.</p>
+                    <p>Zero advertisements, zero behavioral tracking, and zero telemetry. Your music files, tokens, and playback history remain strictly on your device.</p>
                 </div>
             </div>
         </section>
 
         <!-- Compliance & Legal Documentation -->
-        <section id="legal">
+        <section id="legal" class="legal-section">
             <div class="section-header">
-                <h2>Transparency & Compliance</h2>
+                <h2>Policies & Compliance</h2>
                 <p>Read our policies regarding Google Drive integration, user privacy, and terms of use.</p>
             </div>
 
-            <!-- Google Drive User Data Policy Compliance -->
-            <div id="drive-policy" class="legal-card">
-                <h2>Google Drive API — User Data & Limited Use Policy</h2>
-                <div class="callout-box">
-                    <p>PixelMusic's use and transfer of information received from Google APIs to any other app adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener" style="color: #1d4ed8; text-decoration: underline; font-weight: 700;">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+            <div class="legal-tab-nav">
+                <button class="tab-btn active" data-target="drive-policy">Google Drive Policy</button>
+                <button class="tab-btn" data-target="privacy">Privacy Policy</button>
+                <button class="tab-btn" data-target="terms">Terms of Service</button>
+            </div>
+
+            <!-- Tab 1: Google Drive Policy -->
+            <div id="drive-policy" class="tab-pane active">
+                <div class="legal-card">
+                    <h2>Google Drive API — User Data & Limited Use Policy</h2>
+                    <div class="callout">
+                        <p>PixelMusic's use and transfer of information received from Google APIs to any other app adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener" style="color: #1d4ed8; text-decoration: underline; font-weight: 700;">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+                    </div>
+                    <h3>1. Specific Purpose of Access</h3>
+                    <p>PixelMusic requests the read-only scope (<code>https://www.googleapis.com/auth/drive.readonly</code>) solely to allow users to play and stream their own audio files directly from Google Drive.</p>
+
+                    <h3>2. How Your Data Is Handled</h3>
+                    <ul>
+                        <li><strong>Read-Only File Inspection:</strong> PixelMusic inspects file names and MIME types to locate audio files (.mp3, .flac, .m4a, .wav, .ogg, .opus) and folders in the user's Drive.</li>
+                        <li><strong>No Modifying or Uploading:</strong> PixelMusic never uploads files, modifies content, or deletes files from your Google Drive.</li>
+                        <li><strong>On-Device Token Storage:</strong> Google OAuth tokens are stored locally on your device in secure Android DataStore storage. They are never sent to external servers or third parties.</li>
+                        <li><strong>Direct Streaming:</strong> Audio streaming occurs directly between Google's media servers and the local ExoPlayer engine on your Android device.</li>
+                    </ul>
+
+                    <h3>3. Disconnecting Access</h3>
+                    <p>You can revoke PixelMusic's access to your Google Drive at any time inside the app by tapping <strong>Disconnect</strong> in the Google Drive screen, or via your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style="color: var(--accent);">Google Account Security Settings</a>.</p>
                 </div>
-                <h3>1. Specific Purpose of Access</h3>
-                <p>PixelMusic requests the read-only scope (<code>https://www.googleapis.com/auth/drive.readonly</code>) solely to allow users to play and stream their own audio files directly from Google Drive.</p>
-
-                <h3>2. How Your Data Is Handled</h3>
-                <ul>
-                    <li><strong>Read-Only File Inspection:</strong> PixelMusic inspects file names and MIME types to display audio files (.mp3, .flac, .m4a, .wav, .ogg, .opus) and folders in the user's Drive.</li>
-                    <li><strong>No Modifying or Uploading:</strong> PixelMusic never uploads files, modifies content, or deletes files from your Google Drive.</li>
-                    <li><strong>On-Device Token Storage:</strong> Google OAuth tokens are stored locally on your device in secure Android DataStore storage. They are never sent to external servers or third parties.</li>
-                    <li><strong>Direct Streaming:</strong> Audio streaming occurs directly between Google's media servers and the local ExoPlayer engine on your Android device.</li>
-                </ul>
-
-                <h3>3. Disconnecting Access</h3>
-                <p>You can revoke PixelMusic's access to your Google Drive at any time inside the app by tapping <strong>Disconnect</strong> in the Google Drive screen, or via your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style="color: var(--accent);">Google Account Security Settings</a>.</p>
             </div>
 
-            <!-- Privacy Policy -->
-            <div id="privacy" class="legal-card">
-                <h2>Privacy Policy</h2>
-                <p><em>Effective Date: October 2026</em></p>
-                <p>PixelMusic is developed as an open-source, privacy-first Android application. This policy details how data is handled.</p>
+            <!-- Tab 2: Privacy Policy -->
+            <div id="privacy" class="tab-pane">
+                <div class="legal-card">
+                    <h2>Privacy Policy</h2>
+                    <p><em>Effective Date: October 2026</em></p>
+                    <p>PixelMusic is developed as an open-source, privacy-first Android application. This policy details how data is handled.</p>
 
-                <h3>1. Information Collection</h3>
-                <p>PixelMusic does not collect, sell, or transmit any personally identifiable information. We do not use third-party analytics trackers, advertising identifiers, or behavioral logging tools.</p>
+                    <h3>1. Information Collection</h3>
+                    <p>PixelMusic does not collect, sell, or transmit any personally identifiable information. We do not use third-party analytics trackers, advertising identifiers, or behavioral logging tools.</p>
 
-                <h3>2. Local Device Permissions</h3>
-                <ul>
-                    <li><strong>Audio Files & Media:</strong> Used exclusively to index, sort, and play local music files on your device.</li>
-                    <li><strong>Notifications & Foreground Service:</strong> Used to display persistent playback controls and album artwork while audio is playing.</li>
-                    <li><strong>Internet Permission:</strong> Used solely to stream audio requested by the user from external sources (such as Google Drive or online audio streams).</li>
-                </ul>
+                    <h3>2. Local Device Permissions</h3>
+                    <ul>
+                        <li><strong>Audio Files & Media:</strong> Used exclusively to index, sort, and play local music files on your device.</li>
+                        <li><strong>Notifications & Foreground Service:</strong> Used to display persistent playback controls and album artwork while audio is playing.</li>
+                        <li><strong>Internet Permission:</strong> Used solely to stream audio requested by the user from external sources (such as Google Drive or online audio streams).</li>
+                    </ul>
 
-                <h3>3. Open Source Verification</h3>
-                <p>PixelMusic's complete codebase is publicly accessible and auditable on GitHub at <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener" style="color: var(--accent);">github.com/Saurav-02/PixelMusic</a>.</p>
+                    <h3>3. Open Source Verification</h3>
+                    <p>PixelMusic's complete codebase is publicly accessible and auditable on GitHub at <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener" style="color: var(--accent);">github.com/Saurav-02/PixelMusic</a>.</p>
+                </div>
             </div>
 
-            <!-- Terms of Service -->
-            <div id="terms" class="legal-card">
-                <h2>Terms of Service</h2>
-                <p><em>Effective Date: October 2026</em></p>
+            <!-- Tab 3: Terms of Service -->
+            <div id="terms" class="tab-pane">
+                <div class="legal-card">
+                    <h2>Terms of Service</h2>
+                    <p><em>Effective Date: October 2026</em></p>
 
-                <h3>1. Acceptance of Terms</h3>
-                <p>By downloading, installing, or using PixelMusic, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, please discontinue use of the application.</p>
+                    <h3>1. Acceptance of Terms</h3>
+                    <p>By downloading, installing, or using PixelMusic, you agree to be bound by these Terms of Service. If you disagree with any part of these terms, please discontinue use of the application.</p>
 
-                <h3>2. Software License</h3>
-                <p>PixelMusic is distributed under open-source software licensing. You are granted permission to download, execute, and modify the application for personal use in accordance with the repository's open-source license.</p>
+                    <h3>2. Software License</h3>
+                    <p>PixelMusic is distributed under open-source software licensing. You are granted permission to download, execute, and modify the application for personal use in accordance with the repository's open-source license.</p>
 
-                <h3>3. Third-Party Integrations</h3>
-                <p>When accessing external cloud providers (such as Google Drive), your usage is governed by both these Terms and the terms and policies of the respective service provider.</p>
+                    <h3>3. Third-Party Integrations</h3>
+                    <p>When accessing external cloud providers (such as Google Drive), your usage is governed by both these Terms and the terms and policies of the respective service provider.</p>
 
-                <h3>4. Disclaimer</h3>
-                <p>PixelMusic is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. The maintainers shall not be liable for any damages arising out of the use of this software.</p>
+                    <h3>4. Disclaimer</h3>
+                    <p>PixelMusic is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. The maintainers shall not be liable for any damages arising out of the use of this software.</p>
+                </div>
             </div>
         </section>
+    </main>
 
-        <!-- Footer -->
-        <footer>
+    <!-- Screenshot Lightbox Modal -->
+    <div class="lightbox" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Screenshot preview">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">✕</button>
+        <img src="" alt="Enlarged screenshot preview" class="lightbox-content" id="lightboxImg">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <div class="footer-brand">
-                <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic" style="width: 24px; height: 24px; border-radius: 6px;" onerror="this.style.display='none'">
+                <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic" style="width: 22px; height: 22px; border-radius: 6px;" onerror="this.style.display='none'">
                 <span>PixelMusic Project</span>
             </div>
             <div class="footer-links">
@@ -680,8 +271,10 @@
                 <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">GitHub Repository</a>
             </div>
             <p class="footer-copy">© 2026 PixelMusic Project. Free and open source software.</p>
-        </footer>
-    </div>
+        </div>
+    </footer>
 
+    <!-- Scripts -->
+    <script src="script.js" defer></script>
 </body>
 </html>
