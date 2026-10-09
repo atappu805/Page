@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>PixelMusic — Beautiful, High-Fidelity Music Player for Android</title>
-    <meta name="description" content="PixelMusic is an open-source, privacy-first Android music player featuring Material You design, real-time synchronized lyrics, lossless audio, and Google Drive cloud streaming.">
+    <meta name="description" content="PixelMusic is an open-source, privacy-first Android music player featuring Material You design, real-time synchronized lyrics, lossless audio, and YouTube Music integration via WebView.">
     <!-- Google Search Console Verification Tag -->
     <meta name="google-site-verification" content="PASTE_SEARCH_CONSOLE_CODE_HERE">
 
@@ -30,7 +30,7 @@
                 <ul class="nav-links">
                     <li><a href="#features">Features</a></li>
                     <li><a href="#showcase">Gallery</a></li>
-                    <li><a href="#drive-policy">Google Drive Policy</a></li>
+                    <li><a href="#ytm-policy">YouTube Music Policy</a></li>
                     <li><a href="#privacy">Privacy</a></li>
                     <li><a href="#terms">Terms</a></li>
                 </ul>
@@ -51,7 +51,7 @@
     <div class="mobile-nav" id="mobileNav">
         <a href="#features">Features</a>
         <a href="#showcase">App Gallery</a>
-        <a href="#drive-policy">Google Drive Policy</a>
+        <a href="#ytm-policy">YouTube Music Policy</a>
         <a href="#privacy">Privacy Policy</a>
         <a href="#terms">Terms of Service</a>
         <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">Download Latest APK</a>
@@ -65,7 +65,7 @@
                 <span>Material You & High-Fidelity Audio</span>
             </div>
             <h1>Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
-            <p class="hero-desc">PixelMusic is an open-source, ad-free Android music player engineered for pure audio fidelity. Stream directly from Google Drive, experience synchronized real-time lyrics, and enjoy lossless playback.</p>
+            <p class="hero-desc">PixelMusic is an open-source, ad-free Android music player engineered for pure audio fidelity. Stream directly from YouTube Music via WebView, experience synchronized real-time lyrics, and enjoy lossless playback.</p>
             <div class="hero-actions">
                 <a href="https://github.com/Saurav-02/PixelMusic/releases" class="btn btn-primary" target="_blank" rel="noopener">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
@@ -123,8 +123,8 @@
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
                     </div>
-                    <h3>Google Drive Cloud Streaming</h3>
-                    <p>Stream your personal audio library directly from Google Drive without consuming internal storage. Features automatic chunk caching for instant playback.</p>
+                    <h3>YouTube Music Streaming</h3>
+                    <p>Stream your favorite tracks directly from YouTube Music. Log in securely through a native WebView client to access your library, mixes, and playlists without leaving the app.</p>
                 </div>
 
                 <div class="feature-card">
@@ -173,35 +173,34 @@
         <section id="legal" class="legal-section">
             <div class="section-header">
                 <h2>Policies & Compliance</h2>
-                <p>Read our policies regarding Google Drive integration, user privacy, and terms of use.</p>
+                <p>Read our policies regarding YouTube Music integration, user privacy, and terms of use.</p>
             </div>
 
             <div class="legal-tab-nav">
-                <button class="tab-btn active" data-target="drive-policy">Google Drive Policy</button>
+                <button class="tab-btn active" data-target="ytm-policy">YouTube Music Policy</button>
                 <button class="tab-btn" data-target="privacy">Privacy Policy</button>
                 <button class="tab-btn" data-target="terms">Terms of Service</button>
             </div>
 
-            <!-- Tab 1: Google Drive Policy -->
-            <div id="drive-policy" class="tab-pane active">
+            <!-- Tab 1: YouTube Music Policy -->
+            <div id="ytm-policy" class="tab-pane active">
                 <div class="legal-card">
-                    <h2>Google Drive API — User Data & Limited Use Policy</h2>
+                    <h2>YouTube Music & WebView Policy</h2>
                     <div class="callout">
-                        <p>PixelMusic's use and transfer of information received from Google APIs to any other app adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener" style="color: #1d4ed8; text-decoration: underline; font-weight: 700;">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+                        <p>PixelMusic acts as a client wrapper and utilizes a secure Android WebView to authenticate and stream content directly from YouTube Music.</p>
                     </div>
-                    <h3>1. Specific Purpose of Access</h3>
-                    <p>PixelMusic requests the read-only scope (<code>https://www.googleapis.com/auth/drive.readonly</code>) solely to allow users to play and stream their own audio files directly from Google Drive.</p>
+                    <h3>1. Authentication & Security</h3>
+                    <p>Logins are handled entirely through the native WebView directly connecting to Google/YouTube's official authentication servers. PixelMusic does not intercept, read, store, or transmit your Google or YouTube account credentials.</p>
 
                     <h3>2. How Your Data Is Handled</h3>
                     <ul>
-                        <li><strong>Read-Only File Inspection:</strong> PixelMusic inspects file names and MIME types to locate audio files (.mp3, .flac, .m4a, .wav, .ogg, .opus) and folders in the user's Drive.</li>
-                        <li><strong>No Modifying or Uploading:</strong> PixelMusic never uploads files, modifies content, or deletes files from your Google Drive.</li>
-                        <li><strong>On-Device Token Storage:</strong> Google OAuth tokens are stored locally on your device in secure Android DataStore storage. They are never sent to external servers or third parties.</li>
-                        <li><strong>Direct Streaming:</strong> Audio streaming occurs directly between Google's media servers and the local ExoPlayer engine on your Android device.</li>
+                        <li><strong>Direct Streaming:</strong> Audio streaming occurs directly between YouTube's media servers and your device's native playback engine.</li>
+                        <li><strong>No Cloud Syncing to Third Parties:</strong> Your playback history, liked songs, and preferences remain tied to your YouTube account and are governed by Google's overarching Privacy Policy.</li>
+                        <li><strong>Session Management:</strong> Authentication tokens and cookies are strictly managed by the Android WebView sandbox and can be cleared at any time from the app settings.</li>
                     </ul>
 
                     <h3>3. Disconnecting Access</h3>
-                    <p>You can revoke PixelMusic's access to your Google Drive at any time inside the app by tapping <strong>Disconnect</strong> in the Google Drive screen, or via your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style="color: var(--accent);">Google Account Security Settings</a>.</p>
+                    <p>You can log out of your YouTube Music account at any time by clearing the WebView cookies within PixelMusic's settings, or by managing connected devices via your Google Account Security Settings.</p>
                 </div>
             </div>
 
@@ -219,7 +218,7 @@
                     <ul>
                         <li><strong>Audio Files & Media:</strong> Used exclusively to index, sort, and play local music files on your device.</li>
                         <li><strong>Notifications & Foreground Service:</strong> Used to display persistent playback controls and album artwork while audio is playing.</li>
-                        <li><strong>Internet Permission:</strong> Used solely to stream audio requested by the user from external sources (such as Google Drive or online audio streams).</li>
+                        <li><strong>Internet Permission:</strong> Used solely to stream audio requested by the user from external sources (such as YouTube Music or online audio streams).</li>
                     </ul>
 
                     <h3>3. Open Source Verification</h3>
@@ -240,7 +239,7 @@
                     <p>PixelMusic is distributed under open-source software licensing. You are granted permission to download, execute, and modify the application for personal use in accordance with the repository's open-source license.</p>
 
                     <h3>3. Third-Party Integrations</h3>
-                    <p>When accessing external cloud providers (such as Google Drive), your usage is governed by both these Terms and the terms and policies of the respective service provider.</p>
+                    <p>When accessing external service providers (such as YouTube Music), your usage is governed by both these Terms and the terms and policies of the respective service provider.</p>
 
                     <h3>4. Disclaimer</h3>
                     <p>PixelMusic is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, whether express or implied. The maintainers shall not be liable for any damages arising out of the use of this software.</p>
@@ -265,7 +264,7 @@
             <div class="footer-links">
                 <a href="#features">Features</a>
                 <a href="#showcase">Gallery</a>
-                <a href="#drive-policy">Google Drive Policy</a>
+                <a href="#ytm-policy">YouTube Music Policy</a>
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>
                 <a href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener">GitHub Repository</a>
