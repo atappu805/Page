@@ -285,131 +285,146 @@
 
 /* ==========================================================
    Automatic Dark Theme (Phone or Browser in Dark Mode)
-   - Uses deep dark for background
-   - Uses rich blue shades for other places (accents, buttons,
-     surfaces, badges, glows, borders)
-   - Keeps light theme untouched (same original peach palette)
+   - Pure black background (#000000)
+   - Sleek B/W (Black and White / Monochrome) aesthetic
+   - Vibrant red link accent (#ff5252)
+   - Light theme remains completely untouched
    ========================================================== */
 @media (prefers-color-scheme: dark) {
     :root {
-        /* Deep dark background */
-        --bg: #090e1a;
-        --surface: #0f172a;
-        --surface-hover: #1e293b;
-        --surface-subtle: #172554;
-        --border: #1e293b;
-        --border-hover: #3b82f6;
+        /* Pure black background */
+        --bg: #000000;
+        --surface: #111113;
+        --surface-hover: #1c1c1f;
+        --surface-subtle: #161618;
+        --border: #242428;
+        --border-hover: #3f3f46;
 
-        /* High contrast text */
-        --text-primary: #f8fafc;
-        --text-secondary: #94a3b8;
-        --text-muted: #64748b;
+        /* High-contrast B/W typography */
+        --text-primary: #ffffff;
+        --text-secondary: #a1a1aa;
+        --text-muted: #71717a;
 
-        /* Blue shades palette */
-        --accent: #3b82f6;
-        --accent-hover: #2563eb;
-        --accent-deep: #1d4ed8;
-        --accent-soft: #172554;
-        --accent-on-soft: #93c5fd;
-        --accent-glow: rgba(59, 130, 246, 0.4);
+        /* Monochrome accent palette with Red link accent */
+        --accent: #ffffff;
+        --accent-hover: #e4e4e7;
+        --accent-deep: #27272a;
+        --accent-soft: #18181b;
+        --accent-on-soft: #ffffff;
+        --accent-glow: rgba(255, 255, 255, 0.15);
 
-        --tertiary: #1e293b;
-        --tertiary-deep: #172554;
-        --secondary-soft: #1e293b;
+        --link: #ff5252;
+        --link-hover: #ff7875;
 
-        --bezel: #050811;
-        --bezel-hi: #111a2e;
+        --tertiary: #18181b;
+        --tertiary-deep: #121214;
+        --secondary-soft: #18181b;
 
-        --hi: rgba(147, 197, 253, 0.15);
-        --lo: rgba(0, 0, 0, 0.65);
+        --bezel: #0a0a0c;
+        --bezel-hi: #1f1f23;
 
-        --shadow-sm: 0 2px 0 #070b14, 0 8px 14px -6px rgba(0, 0, 0, 0.6);
-        --shadow-md: 0 3px 0 #05080f, 0 16px 26px -8px rgba(0, 0, 0, 0.7);
-        --shadow-lg: 0 4px 0 #020408, 0 26px 40px -10px rgba(0, 0, 0, 0.85);
+        --hi: rgba(255, 255, 255, 0.1);
+        --lo: rgba(0, 0, 0, 0.8);
 
-        --raised-bg: linear-gradient(180deg, #162035 0%, #0f1728 100%);
-        --raised-inset: inset 0 1px 0 rgba(147, 197, 253, 0.15), inset 0 -1.5px 0 rgba(0, 0, 0, 0.5);
-        --well-bg: linear-gradient(180deg, #090e1a 0%, #0d1526 100%);
-        --well-inset: inset 0 3px 6px rgba(0, 0, 0, 0.6), inset 0 -1px 0 rgba(147, 197, 253, 0.08);
+        --shadow-sm: 0 2px 0 #000000, 0 6px 12px rgba(0, 0, 0, 0.7);
+        --shadow-md: 0 3px 0 #000000, 0 14px 24px -4px rgba(0, 0, 0, 0.85);
+        --shadow-lg: 0 4px 0 #000000, 0 24px 36px -6px rgba(0, 0, 0, 0.95);
+
+        --raised-bg: linear-gradient(180deg, #151518 0%, #0e0e10 100%);
+        --raised-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.6);
+        --well-bg: linear-gradient(180deg, #09090b 0%, #050507 100%);
+        --well-inset: inset 0 2px 5px rgba(0, 0, 0, 0.8), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
     }
 
     body {
-        background-color: var(--bg);
+        background-color: #000000;
         color: var(--text-primary);
         background-image:
-            radial-gradient(60% 50% at 8% 0%, rgba(37, 99, 235, 0.18) 0%, transparent 70%),
-            radial-gradient(50% 45% at 100% 100%, rgba(59, 130, 246, 0.12) 0%, transparent 70%);
+            radial-gradient(60% 50% at 8% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 70%),
+            radial-gradient(50% 45% at 100% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
     }
 
     body::before {
-        opacity: 0.03;
+        opacity: 0.02;
         mix-blend-mode: screen;
     }
 
     /* ---------- Navigation ---------- */
     .navbar {
-        background: linear-gradient(180deg, rgba(15, 23, 42, 0.88), rgba(9, 14, 26, 0.92));
-        border: 1px solid rgba(59, 130, 246, 0.25);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+        background: rgba(10, 10, 12, 0.85);
+        border: 1px solid #242428;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 24px rgba(0, 0, 0, 0.8);
     }
     .brand {
         text-shadow: none;
-        color: var(--text-primary);
+        color: #ffffff;
     }
     .brand-logo {
-        box-shadow: 0 2px 0 #172554, 0 6px 10px -3px rgba(37, 99, 235, 0.5);
+        box-shadow: 0 2px 0 #18181b, 0 6px 12px rgba(0, 0, 0, 0.6);
     }
     .nav-links a {
         color: var(--text-secondary);
     }
     .nav-links a:hover {
-        color: #93c5fd;
-        background: var(--well-bg);
+        color: #ffffff;
+        background: #18181b;
+        box-shadow: none;
     }
     .menu-toggle {
-        border-color: rgba(59, 130, 246, 0.3);
-        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+        background: #141416;
+        border: 1px solid #27272a;
+        color: #ffffff;
+        box-shadow: var(--raised-inset);
     }
     .mobile-nav {
-        background: linear-gradient(180deg, #131c31, #0b1120);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+        background: #0f0f11;
+        border: 1px solid #27272a;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.95);
+    }
+    .mobile-nav a {
+        color: var(--text-primary);
     }
 
-    /* ---------- Buttons ---------- */
+    /* ---------- Buttons (B/W High Contrast) ---------- */
     .btn-primary {
-        background: linear-gradient(180deg, #3b82f6 0%, #2563eb 55%, #1d4ed8 100%);
+        background: linear-gradient(180deg, #ffffff 0%, #eeeeee 100%);
+        color: #000000;
+        text-shadow: none;
         box-shadow:
-            inset 0 1.5px 0 rgba(255, 255, 255, 0.35),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.3),
-            0 4px 0 #172554,
-            0 12px 20px -6px rgba(37, 99, 235, 0.5);
-        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+            inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+            0 4px 0 #333333,
+            0 10px 20px rgba(255, 255, 255, 0.12);
     }
     .btn-primary:hover {
+        background: #ffffff;
+        color: #000000;
         box-shadow:
-            inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.3),
-            0 6px 0 #172554,
-            0 18px 26px -8px rgba(37, 99, 235, 0.65);
+            inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
+            0 6px 0 #333333,
+            0 14px 26px rgba(255, 255, 255, 0.18);
     }
     .btn-primary:active {
         box-shadow:
-            inset 0 3px 6px rgba(0, 0, 0, 0.4),
-            0 0 0 #172554,
-            0 2px 4px -2px rgba(37, 99, 235, 0.5);
+            inset 0 3px 6px rgba(0, 0, 0, 0.25),
+            0 0 0 #333333;
     }
     .btn-secondary {
-        background: var(--raised-bg);
-        color: #93c5fd;
+        background: #151518;
+        color: #ffffff;
         text-shadow: none;
-        border: 1px solid rgba(59, 130, 246, 0.25);
-        box-shadow: var(--raised-inset), 0 4px 0 #070b14, 0 12px 16px -8px rgba(0, 0, 0, 0.5);
+        border: 1px solid #2e2e34;
+        box-shadow: var(--raised-inset), 0 3px 0 #000000;
     }
     .btn-secondary:hover {
+        background: #1e1e22;
         color: #ffffff;
-        border-color: rgba(96, 165, 250, 0.5);
-        box-shadow: var(--raised-inset), 0 6px 0 #070b14, 0 16px 20px -8px rgba(37, 99, 235, 0.35);
+        border-color: #4a4a52;
+        box-shadow: var(--raised-inset), 0 4px 0 #000000;
+    }
+    .btn-secondary:active {
+        background: #0d0d0f;
     }
 
     /* ---------- Typography & Headers ---------- */
@@ -418,7 +433,7 @@
     .section-header h2,
     .feature-card h3 {
         text-shadow: none;
-        color: var(--text-primary);
+        color: #ffffff;
     }
     .hero-desc,
     .section-header p,
@@ -429,23 +444,23 @@
 
     /* ---------- Hero ---------- */
     .hero-pill {
-        background: var(--well-bg);
-        color: #93c5fd;
+        background: #111114;
+        color: #e4e4e7;
         box-shadow: var(--well-inset);
         text-shadow: none;
-        border: 1px solid rgba(59, 130, 246, 0.25);
+        border: 1px solid #27272a;
     }
     .hero-pill svg {
-        background: radial-gradient(circle at 35% 30%, #3b82f6, #1e3a8a 70%);
+        background: #27272a;
         color: #ffffff;
-        box-shadow: 0 0 12px rgba(59, 130, 246, 0.6), inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
     }
     .chip-row li {
-        background: var(--well-bg);
-        color: #93c5fd;
+        background: #111114;
+        color: #d4d4d8;
         box-shadow: var(--well-inset);
         text-shadow: none;
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        border: 1px solid #242428;
     }
 
     /* ---------- Cards & Containers ---------- */
@@ -455,158 +470,179 @@
     .faq details,
     .support-card {
         background: var(--raised-bg);
-        border: 1px solid rgba(59, 130, 246, 0.18);
+        border: 1px solid #242428;
         box-shadow: var(--raised-inset), var(--shadow-md);
     }
     .feature-card:hover,
     .support-card:hover {
-        border-color: rgba(96, 165, 250, 0.4);
+        border-color: #3f3f46;
+        transform: translateY(-4px);
     }
     .feature-icon {
-        background: var(--well-bg);
-        color: #60a5fa;
+        background: #18181b;
+        color: #ffffff;
+        border: 1px solid #2e2e34;
         box-shadow: var(--well-inset);
     }
     .feature-card:hover .feature-icon {
-        background: linear-gradient(180deg, #3b82f6, #1d4ed8);
-        color: #ffffff;
-        box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.45), 0 3px 0 #172554;
+        background: #ffffff;
+        color: #000000;
+        box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.8), 0 3px 0 #27272a;
     }
     .feature-icon svg {
         filter: none;
     }
     .feature-card:hover .feature-icon svg {
-        filter: drop-shadow(0 -1px 0 rgba(0, 0, 0, 0.4));
+        filter: none;
     }
 
     /* ---------- Gallery ---------- */
     .gallery-group h3 {
-        color: #93c5fd;
+        color: #ffffff;
         text-shadow: none;
     }
     .showcase-scroll::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+        background: #3f3f46;
     }
 
     /* ---------- Download center & Assets ---------- */
     .asset-row {
-        background: var(--well-bg);
-        border: 1px solid rgba(59, 130, 246, 0.15);
-    }
-    .asset-name {
-        color: #93c5fd;
-    }
-    .asset-name:hover {
-        color: #ffffff;
+        background: #09090b;
+        border: 1px solid #1f1f23;
     }
     .asset-size {
-        color: #64748b;
+        color: var(--text-muted);
     }
     .hash {
-        color: #60a5fa;
+        color: #a1a1aa;
     }
     .hash-label {
-        color: #94a3b8;
+        color: #71717a;
     }
     .fact {
         background: var(--raised-bg);
-        border: 1px solid rgba(59, 130, 246, 0.18);
-        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+        border: 1px solid #242428;
+        box-shadow: var(--raised-inset), 0 2px 0 #000000;
     }
     .verify {
-        background: var(--well-bg);
-        border: 1px solid rgba(59, 130, 246, 0.15);
+        background: #09090b;
+        border: 1px solid #1f1f23;
     }
     .verify pre {
-        background: #060911;
-        color: #bfdbfe;
-        border: 1px solid #1e293b;
+        background: #000000;
+        color: #e4e4e7;
+        border: 1px solid #27272a;
     }
 
     /* ---------- Legal / Policies ---------- */
     .legal-tab-nav {
-        background: var(--well-bg);
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        background: #09090b;
+        border: 1px solid #242428;
     }
     .tab-btn {
-        background: var(--raised-bg);
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        background: #141416;
+        border: 1px solid #242428;
         color: var(--text-secondary);
         text-shadow: none;
-        box-shadow: var(--raised-inset), 0 3px 0 #070b14;
+        box-shadow: var(--raised-inset), 0 2px 0 #000000;
     }
     .tab-btn:hover {
-        color: #bfdbfe;
+        color: #ffffff;
+        border-color: #3f3f46;
     }
     .tab-btn.active {
-        background: linear-gradient(180deg, #2563eb, #1d4ed8);
-        color: #ffffff;
-        border-color: transparent;
-        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4), 0 0 0 #172554;
+        background: #ffffff;
+        color: #000000;
+        border-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
     }
     .legal-card {
         background:
-            linear-gradient(180deg, rgba(37, 99, 235, 0.08), transparent 90px),
-            linear-gradient(180deg, #131c31, #0b1120);
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        border-top: 6px solid #3b82f6;
+            linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 90px),
+            linear-gradient(180deg, #121215, #0a0a0c);
+        border: 1px solid #242428;
+        border-top: 5px solid #ffffff;
     }
     .legal-card code {
-        background: var(--well-bg);
-        color: #93c5fd;
-        border: 1px solid rgba(59, 130, 246, 0.18);
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+        background: #16161a;
+        color: #e4e4e7;
+        border: 1px solid #27272a;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
     }
     .callout {
-        background: var(--well-bg);
-        border: 1px solid rgba(59, 130, 246, 0.2);
+        background: #0d0d0f;
+        border: 1px solid #242428;
     }
     .callout::before {
-        background: linear-gradient(180deg, #60a5fa, #2563eb, #1e3a8a);
-        box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+        background: #ff5252;
+        box-shadow: 0 0 10px rgba(255, 82, 82, 0.6);
     }
     .callout p {
-        color: #bfdbfe;
+        color: #e4e4e7;
     }
+
+    /* ---------- Links (Red Accent) ---------- */
+    a,
+    .asset-name,
     .callout a,
     .trust-item a,
     .legal-card a,
     .faq a,
-    .faq details[open] summary {
-        color: #60a5fa;
+    .faq details[open] summary,
+    #trustRelease a,
+    #relChangelog {
+        color: #ff5252;
+    }
+    a:hover,
+    .asset-name:hover,
+    .callout a:hover,
+    .trust-item a:hover,
+    .legal-card a:hover,
+    .faq a:hover,
+    #trustRelease a:hover,
+    #relChangelog:hover {
+        color: #ff7875;
+        text-decoration: underline;
     }
 
     /* ---------- Lightbox ---------- */
     .lightbox {
-        background: rgba(4, 8, 18, 0.88);
+        background: rgba(0, 0, 0, 0.95);
     }
     .lightbox-nav,
     .lightbox-close {
-        background: var(--raised-bg);
-        border: 1px solid rgba(59, 130, 246, 0.3);
-        color: var(--text-primary);
-        box-shadow: var(--raised-inset), 0 3px 0 #070b14;
+        background: #151518;
+        border: 1px solid #2e2e34;
+        color: #ffffff;
+        box-shadow: var(--raised-inset), 0 3px 0 #000000;
+    }
+    .lightbox-nav:hover,
+    .lightbox-close:hover {
+        background: #222227;
+        border-color: #52525b;
     }
     .lightbox-caption {
-        color: #bfdbfe;
+        color: #d4d4d8;
     }
 
     /* ---------- Footer ---------- */
     footer {
-        background: var(--well-bg);
-        border: 1px solid rgba(59, 130, 246, 0.15);
+        background: #0a0a0c;
+        border: 1px solid #1f1f23;
     }
     .footer-brand {
         text-shadow: none;
-        color: var(--text-primary);
+        color: #ffffff;
     }
     .footer-links a {
         color: var(--text-secondary);
+        text-decoration: none;
     }
     .footer-links a:hover {
         color: #ffffff;
-        background: var(--raised-bg);
-        box-shadow: var(--raised-inset), 0 2px 0 #070b14;
+        background: #18181b;
+        box-shadow: none;
+        text-decoration: none;
     }
     .footer-copy {
         text-shadow: none;
