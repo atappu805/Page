@@ -282,91 +282,117 @@
 .support-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 6px; }
 .support-card p { color: var(--text-secondary); font-size: 0.92rem; }
 
-/* ---------- Contact ---------- */
+/* ---------- Contact (Compact & Personal) ---------- */
 .contact-section { margin-bottom: 100px; }
-.contact-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 18px;
-}
-.contact-card {
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: var(--text-primary);
-    padding: 24px;
+.contact-compact-card {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 20px 26px;
     border-radius: 28px;
     background: var(--raised-bg);
     border: 1px solid #fff;
     box-shadow: var(--raised-inset), var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
     transition: var(--transition-spring);
 }
-.contact-card:hover {
-    transform: translateY(-5px);
+.contact-compact-card:hover {
+    transform: translateY(-3px);
     box-shadow: var(--raised-inset), var(--shadow-lg);
-    text-decoration: none;
 }
-.contact-header {
+.contact-profile {
     display: flex;
     align-items: center;
-    gap: 14px;
-    margin-bottom: 12px;
-}
-.contact-icon {
-    width: 46px;
-    height: 46px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--well-bg);
-    box-shadow: var(--well-inset);
-    color: var(--accent);
+    gap: 16px;
     flex-shrink: 0;
-    transition: var(--transition);
 }
-.contact-card:hover .contact-icon {
-    background: var(--accent);
-    color: #fff;
-    box-shadow: var(--shadow-sm);
+.contact-avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2.5px solid var(--accent);
+    box-shadow: 0 4px 14px rgba(152, 73, 39, 0.25);
+    transition: transform 0.3s var(--ease);
 }
-.contact-titles {
-    display: flex;
-    flex-direction: column;
+.contact-compact-card:hover .contact-avatar {
+    transform: scale(1.06);
 }
-.contact-platform {
-    font-size: 0.76rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-}
-.contact-card h3 {
+.contact-profile-info h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
-    margin: 0;
+    margin: 0 0 2px 0;
     line-height: 1.25;
 }
-.contact-card p {
-    color: var(--text-secondary);
-    font-size: 0.92rem;
-    margin-bottom: 16px;
-    flex-grow: 1;
+.contact-profile-info p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 0;
 }
-.contact-action {
+.contact-chips {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.contact-chip {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.88rem;
-    font-weight: 800;
-    color: var(--accent);
-    transition: gap 0.2s var(--ease);
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: var(--pill-radius);
+    background: var(--well-bg);
+    box-shadow: var(--well-inset);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: var(--accent-on-soft);
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition);
 }
-.contact-card:hover .contact-action {
-    gap: 10px;
-    color: var(--accent-hover);
+.contact-chip svg {
+    flex-shrink: 0;
+    color: var(--accent);
+    transition: transform 0.2s var(--ease);
+}
+.contact-chip:hover {
+    background: var(--accent);
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.contact-chip:hover svg {
+    color: #ffffff;
+    transform: scale(1.15);
+}
+
+@media (max-width: 680px) {
+    .contact-compact-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 22px 18px;
+        gap: 16px;
+    }
+    .contact-profile {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .contact-chips {
+        justify-content: center;
+        width: 100%;
+    }
+    .contact-chip {
+        flex: 1 1 calc(50% - 10px);
+        justify-content: center;
+    }
 }
 
 .policy-meta { color: var(--text-muted); font-weight: 700; font-size: 0.9rem; margin-bottom: 14px; }
@@ -690,44 +716,45 @@ html.reveal-ready .device-card.reveal-item {
     .trust-item,
     .faq details,
     .support-card,
-    .contact-card {
+    .contact-compact-card {
         background: var(--raised-bg);
         border: 1px solid #242428;
         box-shadow: var(--raised-inset), var(--shadow-md);
     }
     .feature-card:hover,
     .support-card:hover,
-    .contact-card:hover {
+    .contact-compact-card:hover {
         border-color: #3f3f46;
-        transform: translateY(-4px);
+        transform: translateY(-3px);
         text-decoration: none;
     }
-    .contact-card {
-        color: var(--text-primary);
-        text-decoration: none;
+    .contact-avatar {
+        border-color: #ffffff;
+        box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
     }
-    .contact-card h3 {
+    .contact-profile-info h3 {
         color: #ffffff;
     }
-    .contact-platform {
-        color: var(--text-muted);
+    .contact-profile-info p {
+        color: var(--text-secondary);
     }
-    .contact-icon {
-        background: #18181b;
+    .contact-chip {
+        background: #141416;
+        border: 1px solid #27272a;
         color: #ffffff;
-        border: 1px solid #2e2e34;
-        box-shadow: var(--well-inset);
+        box-shadow: var(--raised-inset);
     }
-    .contact-card:hover .contact-icon {
+    .contact-chip svg {
+        color: #a1a1aa;
+    }
+    .contact-chip:hover {
         background: #ffffff;
         color: #000000;
-        box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.8), 0 3px 0 #27272a;
+        border-color: #ffffff;
+        box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
     }
-    .contact-action {
-        color: var(--link);
-    }
-    .contact-card:hover .contact-action {
-        color: var(--link-hover);
+    .contact-chip:hover svg {
+        color: #000000;
     }
     .feature-icon {
         background: #18181b;

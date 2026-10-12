@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
             '.trust-item',
             '.faq details',
             '.support-card',
-            '.contact-card',
+            '.contact-compact-card',
             '.legal-tab-nav',
             '.legal-card'
         ];
