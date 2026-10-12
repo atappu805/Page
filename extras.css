@@ -389,8 +389,111 @@
     .lightbox-nav { width: 42px; height: 42px; }
 }
 
+/* ==========================================================
+   Reactive Ambient Background Canvas
+   ========================================================== */
+.bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.88;
+    transition: opacity 0.5s var(--ease);
+}
+
+/* ==========================================================
+   Smooth Scroll Reveal Animations & Micro-Interactions
+   ========================================================== */
+
+/* Initially hidden only when JS sets reveal-ready to prevent JS-disabled blank content */
+html.reveal-ready .reveal-item {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+    transition:
+        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+
+html.reveal-ready .reveal-item.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Specific component entrance curves */
+html.reveal-ready .hero.reveal-item,
+html.reveal-ready .hero-visual.reveal-item {
+    transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.reveal-ready .section-header.reveal-item,
+html.reveal-ready .showcase-header.reveal-item {
+    transform: translateY(22px);
+    transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.reveal-ready .device-card.reveal-item {
+    transform: translateY(32px) scale(0.96);
+    transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Staggering in grid layouts */
+.features-grid > .reveal-item:nth-child(1),
+.support-grid > .reveal-item:nth-child(1),
+.contact-grid > .reveal-item:nth-child(1),
+.trust-grid > .reveal-item:nth-child(1),
+.faq > .reveal-item:nth-child(1) { transition-delay: 0.04s; }
+
+.features-grid > .reveal-item:nth-child(2),
+.support-grid > .reveal-item:nth-child(2),
+.contact-grid > .reveal-item:nth-child(2),
+.trust-grid > .reveal-item:nth-child(2),
+.faq > .reveal-item:nth-child(2) { transition-delay: 0.11s; }
+
+.features-grid > .reveal-item:nth-child(3),
+.support-grid > .reveal-item:nth-child(3),
+.contact-grid > .reveal-item:nth-child(3),
+.trust-grid > .reveal-item:nth-child(3),
+.faq > .reveal-item:nth-child(3) { transition-delay: 0.18s; }
+
+.features-grid > .reveal-item:nth-child(4),
+.support-grid > .reveal-item:nth-child(4),
+.contact-grid > .reveal-item:nth-child(4),
+.trust-grid > .reveal-item:nth-child(4),
+.faq > .reveal-item:nth-child(4) { transition-delay: 0.25s; }
+
+.features-grid > .reveal-item:nth-child(5),
+.faq > .reveal-item:nth-child(5) { transition-delay: 0.32s; }
+
+.features-grid > .reveal-item:nth-child(6) { transition-delay: 0.39s; }
+
+/* Horizontal gallery scroll cards stagger */
+.gallery-group .device-card:nth-child(1) { transition-delay: 0.04s; }
+.gallery-group .device-card:nth-child(2) { transition-delay: 0.10s; }
+.gallery-group .device-card:nth-child(3) { transition-delay: 0.16s; }
+.gallery-group .device-card:nth-child(4) { transition-delay: 0.22s; }
+.gallery-group .device-card:nth-child(5) { transition-delay: 0.28s; }
+.gallery-group .device-card:nth-child(6) { transition-delay: 0.34s; }
+.gallery-group .device-card:nth-child(7) { transition-delay: 0.40s; }
+
 @media (prefers-reduced-motion: reduce) {
     .lightbox-content, .skip-link { transition: none !important; }
+    html.reveal-ready .reveal-item,
+    html.reveal-ready .reveal-item.is-visible,
+    .bg-canvas {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }
 
 /* ==========================================================
@@ -821,5 +924,9 @@
     .footer-copy {
         text-shadow: none;
         color: var(--text-muted);
+    }
+
+    .bg-canvas {
+        opacity: 0.95;
     }
 }
