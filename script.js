@@ -495,18 +495,18 @@ document.addEventListener('DOMContentLoaded', () => {
         var height = 0;
         var dpr = 1;
 
-        // Precompute grid covering ~75-80% of screen area
+        // Precompute grid starting from behind the address bar and cascading into the viewport
         var cols = 64;
-        var rows = 40;
+        var rows = 44;
         var grid = [];
         for (var c = 0; c < cols; c++) {
             var u = -2.2 + (4.4 * c) / (cols - 1);
             for (var r = 0; r < rows; r++) {
-                var v = 0.85 + (2.95 * r) / (rows - 1);
+                var v = 0.85 + (3.4 * r) / (rows - 1);
                 grid.push({
                     u: u,
                     v: v,
-                    yBase: 0.16 * (3.8 - v) + 0.16 * (u * u)
+                    yBase: 0.20 * (4.25 - v) + 0.16 * (u * u) - 0.05
                 });
             }
         }
@@ -580,10 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.clearRect(0, 0, width, height);
 
-            var fov = Math.min(width, height) * 0.88;
-            var horizonY = height * 0.02;
+            var fov = Math.min(width, height) * 0.95;
+            var horizonY = -height * 0.10; // Positioned above the viewport so horizon begins behind address bar
             var scrollPhase = curScroll * 0.0028;
-            var baseWaveAmp = 0.055 * velocitySurge;
+            var baseWaveAmp = 0.05 * velocitySurge;
 
             var tiltX = mouseX * 0.08;
             var tiltY = mouseY * 0.05;
@@ -602,14 +602,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 var px = width * 0.5 + (u * fov) / v;
                 var py = horizonY + (y3d * fov) / v;
 
-                // Screen boundary culling
-                if (px < -20 || px > width + 20 || py < -20 || py > height + 20) {
+                // Screen boundary culling (renders seamlessly from above top of screen)
+                if (px < -25 || px > width + 25 || py < -30 || py > height + 25) {
                     continue;
                 }
 
                 // Perspective scaling & depth alpha
                 var depthFactor = 1 / Math.pow(v, 1.15);
-                var radius = Math.max(0.9, Math.min(4.6, 13.0 * depthFactor));
+                var radius = Math.max(0.9, Math.min(4.6, 12.5 * depthFactor));
                 var alpha = Math.max(0.12, Math.min(0.85, 0.92 * depthFactor));
 
                 ctx.beginPath();
