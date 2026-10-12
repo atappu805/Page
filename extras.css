@@ -285,9 +285,9 @@
 /* ---------- Contact (Compact & Personal) ---------- */
 .contact-section { margin-bottom: 100px; }
 .contact-compact-card {
-    max-width: 680px;
+    max-width: 760px;
     margin: 0 auto;
-    padding: 20px 26px;
+    padding: 22px 28px;
     border-radius: 28px;
     background: var(--raised-bg);
     border: 1px solid #fff;
@@ -295,7 +295,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 22px;
     transition: var(--transition-spring);
 }
 .contact-compact-card:hover {
@@ -373,7 +373,7 @@
     transform: scale(1.15);
 }
 
-@media (max-width: 680px) {
+@media (max-width: 760px) {
     .contact-compact-card {
         flex-direction: column;
         align-items: center;
@@ -390,7 +390,7 @@
         width: 100%;
     }
     .contact-chip {
-        flex: 1 1 calc(50% - 10px);
+        flex: 1 1 auto;
         justify-content: center;
     }
 }
