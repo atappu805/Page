@@ -495,18 +495,18 @@ document.addEventListener('DOMContentLoaded', () => {
         var height = 0;
         var dpr = 1;
 
-        // Precompute grid in normalized 3D parameter space
-        var cols = 56;
-        var rows = 28;
+        // Precompute grid covering ~75-80% of screen area
+        var cols = 64;
+        var rows = 40;
         var grid = [];
         for (var c = 0; c < cols; c++) {
-            var u = -2.3 + (4.6 * c) / (cols - 1);
+            var u = -2.2 + (4.4 * c) / (cols - 1);
             for (var r = 0; r < rows; r++) {
-                var v = 0.85 + (3.0 * r) / (rows - 1);
+                var v = 0.85 + (2.95 * r) / (rows - 1);
                 grid.push({
                     u: u,
                     v: v,
-                    arch: -0.32 + 0.36 * (u * u) - 0.08 * v
+                    yBase: 0.16 * (3.8 - v) + 0.16 * (u * u)
                 });
             }
         }
@@ -580,10 +580,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             ctx.clearRect(0, 0, width, height);
 
-            var fov = Math.min(width, height) * 0.85;
-            var horizonY = height * 0.08;
-            var scrollPhase = curScroll * 0.0025;
-            var baseWaveAmp = 0.045 * velocitySurge;
+            var fov = Math.min(width, height) * 0.88;
+            var horizonY = height * 0.02;
+            var scrollPhase = curScroll * 0.0028;
+            var baseWaveAmp = 0.055 * velocitySurge;
 
             var tiltX = mouseX * 0.08;
             var tiltY = mouseY * 0.05;
@@ -594,23 +594,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 var v = pt.v;
 
                 // 3D undulating waves (harmonic ripple)
-                var wave1 = Math.sin(u * 3.6 + v * 2.4 + time * 1.4 + scrollPhase) * baseWaveAmp;
-                var wave2 = Math.cos(u * 2.2 - time * 0.9 + scrollPhase * 0.5) * (baseWaveAmp * 0.35);
-                var y3d = pt.arch + wave1 + wave2 + tiltY;
+                var wave1 = Math.sin(u * 3.2 + v * 2.0 + time * 1.3 + scrollPhase) * baseWaveAmp;
+                var wave2 = Math.cos(u * 1.8 - v * 1.3 - time * 0.8 + scrollPhase * 0.5) * (baseWaveAmp * 0.35);
+                var y3d = pt.yBase + wave1 + wave2 + tiltY;
 
                 // 3D Perspective projection
                 var px = width * 0.5 + (u * fov) / v;
                 var py = horizonY + (y3d * fov) / v;
 
                 // Screen boundary culling
-                if (px < -15 || px > width + 15 || py < -15 || py > height + 15) {
+                if (px < -20 || px > width + 20 || py < -20 || py > height + 20) {
                     continue;
                 }
 
                 // Perspective scaling & depth alpha
-                var depthFactor = 1 / Math.pow(v, 1.25);
-                var radius = Math.max(0.9, Math.min(4.5, 13.0 * depthFactor));
-                var alpha = Math.max(0.12, Math.min(0.85, 0.95 * depthFactor));
+                var depthFactor = 1 / Math.pow(v, 1.15);
+                var radius = Math.max(0.9, Math.min(4.6, 13.0 * depthFactor));
+                var alpha = Math.max(0.12, Math.min(0.85, 0.92 * depthFactor));
 
                 ctx.beginPath();
                 ctx.arc(px, py, radius, 0, Math.PI * 2);
