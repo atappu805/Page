@@ -514,24 +514,32 @@ document.addEventListener('DOMContentLoaded', () => {
         var gridLen = grid.length;
 
         function resize() {
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
-            width = window.innerWidth;
-            height = window.innerHeight;
+            var newWidth = window.innerWidth;
+            var newHeight = window.innerHeight;
+            var newDpr = Math.min(window.devicePixelRatio || 1, 2);
+            // Ignore minor height changes on mobile caused by address bar show/hide
+            if (newWidth === width && Math.abs(newHeight - height) < 120 && newDpr === dpr) {
+                return;
+            }
+            width = newWidth;
+            height = newHeight;
+            dpr = newDpr;
             canvas.width = Math.floor(width * dpr);
             canvas.height = Math.floor(height * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         resize();
         window.addEventListener('resize', resize, { passive: true });
 
-        // Scroll tracking
-        var lastScrollY = window.scrollY || 0;
+        // Safe scroll tracking with NaN protection
+        var lastScrollY = window.pageYOffset || window.scrollY || 0;
         var scrollVelocity = 0;
         var smoothVelocity = 0;
 
         window.addEventListener('scroll', function() {
-            var curY = window.scrollY || 0;
+            var curY = window.pageYOffset || window.scrollY || document.documentElement.scrollTop || 0;
+            if (isNaN(curY)) curY = 0;
             var delta = curY - lastScrollY;
+            if (isNaN(delta) || Math.abs(delta) > 500) delta = 0;
             scrollVelocity = delta;
             lastScrollY = curY;
         }, { passive: true });
@@ -555,18 +563,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         var time = 0;
-        var isPageVisible = true;
 
         document.addEventListener('visibilitychange', function() {
-            isPageVisible = !document.hidden;
-            if (isPageVisible) {
-                lastScrollY = window.scrollY || 0;
-                requestAnimationFrame(render);
+            if (!document.hidden) {
+                lastScrollY = window.pageYOffset || window.scrollY || 0;
+                scrollVelocity = 0;
+                smoothVelocity = 0;
             }
         });
 
         function render() {
-            if (!isPageVisible) return;
+            // Ensure velocity numbers are always valid
+            if (isNaN(smoothVelocity)) smoothVelocity = 0;
+            if (isNaN(scrollVelocity)) scrollVelocity = 0;
 
             // Smooth kinetic dampening
             smoothVelocity += (scrollVelocity - smoothVelocity) * 0.1;
@@ -575,11 +584,19 @@ document.addEventListener('DOMContentLoaded', () => {
             mouseX += (targetMouseX - mouseX) * 0.05;
             mouseY += (targetMouseY - mouseY) * 0.05;
 
-            var curScroll = window.scrollY || 0;
+            var curScroll = window.pageYOffset || window.scrollY || 0;
+            if (isNaN(curScroll)) curScroll = 0;
             var velocitySurge = 1 + Math.min(Math.abs(smoothVelocity) * 0.02, 1.6);
-            time += 0.005; // Slower, tranquil particle movement
+            time += 0.005; // Tranquil, smooth particle movement
 
-            ctx.clearRect(0, 0, width, height);
+            // Reliable 100% canvas buffer wipe across all DPRs
+            ctx.save();
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.restore();
+
+            // Set high-DPI transform for drawing
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
             var fov = Math.min(width, height) * 0.95;
             var horizonY = -height * 0.10;
