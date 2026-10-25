@@ -466,7 +466,7 @@ button:focus-visible {
     padding: 0;
     box-shadow: none;
     transition: transform var(--duration-normal) var(--ease-spring);
-    cursor: pointer;
+    cursor: default;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -477,9 +477,7 @@ button:focus-visible {
     display: none;
 }
 
-.device-card:active {
-    transform: scale(0.97);
-}
+/* .device-card is view-only */
 
 .device-card img {
     width: 100%;

@@ -69,13 +69,11 @@
 .hero-phone {
     flex: 0 0 auto;
     width: min(260px, 70vw);
-    cursor: pointer;
+    cursor: default;
     transform: rotate(2deg);
     transition: transform var(--duration-normal) var(--ease-spring);
 }
-.hero-phone:active {
-    transform: rotate(0deg) scale(0.97);
-}
+/* .hero-phone is view-only */
 @media (hover: hover) and (pointer: fine) {
     .hero-phone:hover,
     .hero-phone:nth-child(even):hover {
