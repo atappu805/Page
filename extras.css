@@ -71,11 +71,16 @@
     width: min(260px, 70vw);
     cursor: pointer;
     transform: rotate(2deg);
-    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform var(--duration-normal) var(--ease-spring);
 }
-.hero-phone:hover,
-.hero-phone:nth-child(even):hover {
-    transform: rotate(0deg) translateY(-8px) scale(1.02);
+.hero-phone:active {
+    transform: rotate(0deg) scale(0.97);
+}
+@media (hover: hover) and (pointer: fine) {
+    .hero-phone:hover,
+    .hero-phone:nth-child(even):hover {
+        transform: rotate(0deg) translateY(-6px) scale(1.02);
+    }
 }
 .hero-phone img {
     border-radius: 28px;
@@ -218,8 +223,8 @@
 
 /* ---------- Lightbox nav ---------- */
 .lightbox { flex-direction: column; gap: 14px; }
-.lightbox-content { transition: transform 0.3s var(--ease); cursor: zoom-in; }
-.lightbox-content.zoomed { transform: scale(1.8); cursor: zoom-out; }
+.lightbox-content { cursor: zoom-in; }
+.lightbox-content.zoomed { transform: scale(1.75) !important; cursor: zoom-out; }
 .lightbox-caption {
     color: #ffe9de;
     font-weight: 700;
@@ -232,18 +237,19 @@
     transform: translateY(-50%);
     width: 48px;
     height: 48px;
-    border: 1px solid #fff;
-    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
     background: var(--raised-bg);
     color: var(--text-primary);
     font-size: 1.3rem;
     font-weight: 800;
     cursor: pointer;
-    box-shadow: var(--raised-inset), 0 3px 0 #cc9d86;
+    box-shadow: var(--raised-inset), var(--shadow-sm);
+    transition: transform var(--duration-press) var(--ease-out), background var(--duration-fast) ease;
 }
 .lightbox-nav.prev { left: 14px; }
 .lightbox-nav.next { right: 14px; }
-.lightbox-nav:active { box-shadow: var(--well-inset); }
+.lightbox-nav:active { transform: translateY(-50%) scale(0.92); box-shadow: var(--well-inset); }
 
 /* ---------- FAQ ---------- */
 .faq-section { margin-bottom: 100px; }
@@ -254,9 +260,18 @@
     border: 1px solid #fff;
     box-shadow: var(--raised-inset), var(--shadow-sm);
     padding: 4px 22px;
+    transition: box-shadow var(--duration-fast) var(--ease-out);
 }
-.faq summary { cursor: pointer; font-weight: 800; padding: 16px 0; }
+.faq summary { cursor: pointer; font-weight: 800; padding: 16px 0; transition: color 0.15s ease; }
+.faq summary:active { transform: scale(0.99); }
 .faq details[open] summary { color: var(--accent); }
+.faq details > *:not(summary) {
+    animation: faqFade 0.18s var(--ease-out);
+}
+@keyframes faqFade {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 .faq p, .faq li { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 12px; }
 .faq ol, .faq ul { padding-left: 22px; }
 
@@ -276,9 +291,12 @@
     background: var(--raised-bg);
     border: 1px solid #fff;
     box-shadow: var(--raised-inset), var(--shadow-md);
-    transition: var(--transition-spring);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
-.support-card:hover { transform: translateY(-5px); box-shadow: var(--raised-inset), var(--shadow-lg); }
+.support-card:active { transform: scale(0.985); box-shadow: var(--raised-inset), var(--shadow-sm); }
+@media (hover: hover) and (pointer: fine) {
+    .support-card:hover { transform: translateY(-4px); box-shadow: var(--raised-inset), var(--shadow-lg); }
+}
 .support-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 6px; }
 .support-card p { color: var(--text-secondary); font-size: 0.92rem; }
 
@@ -296,11 +314,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 22px;
-    transition: var(--transition-spring);
-}
-.contact-compact-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--raised-inset), var(--shadow-lg);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 .contact-profile {
     display: flex;
@@ -315,10 +329,16 @@
     object-fit: cover;
     border: 2.5px solid var(--accent);
     box-shadow: 0 4px 14px rgba(152, 73, 39, 0.25);
-    transition: transform 0.3s var(--ease);
+    transition: transform var(--duration-fast) var(--ease-out);
 }
-.contact-compact-card:hover .contact-avatar {
-    transform: scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+    .contact-compact-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--raised-inset), var(--shadow-lg);
+    }
+    .contact-compact-card:hover .contact-avatar {
+        transform: scale(1.05);
+    }
 }
 .contact-profile-info h3 {
     font-family: 'Space Grotesk', sans-serif;
@@ -354,23 +374,28 @@
     font-size: 0.85rem;
     font-weight: 700;
     text-decoration: none;
-    transition: var(--transition);
+    transition: transform var(--duration-press) var(--ease-out), background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
 }
 .contact-chip svg {
     flex-shrink: 0;
     color: var(--accent);
-    transition: transform 0.2s var(--ease);
+    transition: transform 0.15s var(--ease-out);
 }
-.contact-chip:hover {
-    background: var(--accent);
-    color: #ffffff;
-    box-shadow: var(--shadow-sm);
-    transform: translateY(-2px);
-    text-decoration: none;
+.contact-chip:active {
+    transform: scale(0.96);
 }
-.contact-chip:hover svg {
-    color: #ffffff;
-    transform: scale(1.15);
+@media (hover: hover) and (pointer: fine) {
+    .contact-chip:hover {
+        background: var(--accent);
+        color: #ffffff;
+        box-shadow: var(--shadow-sm);
+        transform: translateY(-1.5px);
+        text-decoration: none;
+    }
+    .contact-chip:hover svg {
+        color: #ffffff;
+        transform: scale(1.1);
+    }
 }
 
 @media (max-width: 760px) {
@@ -437,79 +462,79 @@
 /* Initially hidden only when JS sets reveal-ready to prevent JS-disabled blank content */
 html.reveal-ready .reveal-item {
     opacity: 0;
-    transform: translateY(28px) scale(0.98);
+    transform: translateY(16px);
     transition:
-        opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.28s var(--ease-out),
+        transform 0.32s var(--ease-out);
     will-change: opacity, transform;
 }
 
 html.reveal-ready .reveal-item.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 /* Specific component entrance curves */
 html.reveal-ready .hero.reveal-item,
 html.reveal-ready .hero-visual.reveal-item {
     transition:
-        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.32s var(--ease-out),
+        transform 0.36s var(--ease-out);
 }
 
 html.reveal-ready .section-header.reveal-item,
 html.reveal-ready .showcase-header.reveal-item {
-    transform: translateY(22px);
+    transform: translateY(14px);
     transition:
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.26s var(--ease-out),
+        transform 0.28s var(--ease-out);
 }
 
 html.reveal-ready .device-card.reveal-item {
-    transform: translateY(32px) scale(0.96);
+    transform: translateY(18px);
     transition:
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity 0.28s var(--ease-out),
+        transform 0.32s var(--ease-out);
 }
 
-/* Staggering in grid layouts */
+/* Staggering in grid layouts: 35ms increments */
 .features-grid > .reveal-item:nth-child(1),
 .support-grid > .reveal-item:nth-child(1),
 .contact-grid > .reveal-item:nth-child(1),
 .trust-grid > .reveal-item:nth-child(1),
-.faq > .reveal-item:nth-child(1) { transition-delay: 0.04s; }
+.faq > .reveal-item:nth-child(1) { transition-delay: 0.02s; }
 
 .features-grid > .reveal-item:nth-child(2),
 .support-grid > .reveal-item:nth-child(2),
 .contact-grid > .reveal-item:nth-child(2),
 .trust-grid > .reveal-item:nth-child(2),
-.faq > .reveal-item:nth-child(2) { transition-delay: 0.11s; }
+.faq > .reveal-item:nth-child(2) { transition-delay: 0.055s; }
 
 .features-grid > .reveal-item:nth-child(3),
 .support-grid > .reveal-item:nth-child(3),
 .contact-grid > .reveal-item:nth-child(3),
 .trust-grid > .reveal-item:nth-child(3),
-.faq > .reveal-item:nth-child(3) { transition-delay: 0.18s; }
+.faq > .reveal-item:nth-child(3) { transition-delay: 0.09s; }
 
 .features-grid > .reveal-item:nth-child(4),
 .support-grid > .reveal-item:nth-child(4),
 .contact-grid > .reveal-item:nth-child(4),
 .trust-grid > .reveal-item:nth-child(4),
-.faq > .reveal-item:nth-child(4) { transition-delay: 0.25s; }
+.faq > .reveal-item:nth-child(4) { transition-delay: 0.125s; }
 
 .features-grid > .reveal-item:nth-child(5),
-.faq > .reveal-item:nth-child(5) { transition-delay: 0.32s; }
+.faq > .reveal-item:nth-child(5) { transition-delay: 0.16s; }
 
-.features-grid > .reveal-item:nth-child(6) { transition-delay: 0.39s; }
+.features-grid > .reveal-item:nth-child(6) { transition-delay: 0.195s; }
 
-/* Horizontal gallery scroll cards stagger */
-.gallery-group .device-card:nth-child(1) { transition-delay: 0.04s; }
-.gallery-group .device-card:nth-child(2) { transition-delay: 0.10s; }
-.gallery-group .device-card:nth-child(3) { transition-delay: 0.16s; }
-.gallery-group .device-card:nth-child(4) { transition-delay: 0.22s; }
-.gallery-group .device-card:nth-child(5) { transition-delay: 0.28s; }
-.gallery-group .device-card:nth-child(6) { transition-delay: 0.34s; }
-.gallery-group .device-card:nth-child(7) { transition-delay: 0.40s; }
+/* Horizontal gallery scroll cards stagger: 35ms increments */
+.gallery-group .device-card:nth-child(1) { transition-delay: 0.02s; }
+.gallery-group .device-card:nth-child(2) { transition-delay: 0.055s; }
+.gallery-group .device-card:nth-child(3) { transition-delay: 0.09s; }
+.gallery-group .device-card:nth-child(4) { transition-delay: 0.125s; }
+.gallery-group .device-card:nth-child(5) { transition-delay: 0.16s; }
+.gallery-group .device-card:nth-child(6) { transition-delay: 0.195s; }
+.gallery-group .device-card:nth-child(7) { transition-delay: 0.23s; }
 
 @media (prefers-reduced-motion: reduce) {
     .lightbox-content, .skip-link { transition: none !important; }
@@ -565,9 +590,9 @@ html.reveal-ready .device-card.reveal-item {
         --hi: rgba(255, 255, 255, 0.1);
         --lo: rgba(0, 0, 0, 0.8);
 
-        --shadow-sm: 0 2px 0 #000000, 0 6px 12px rgba(0, 0, 0, 0.7);
-        --shadow-md: 0 3px 0 #000000, 0 14px 24px -4px rgba(0, 0, 0, 0.85);
-        --shadow-lg: 0 4px 0 #000000, 0 24px 36px -6px rgba(0, 0, 0, 0.95);
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.8);
+        --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.06) inset, 0 12px 28px -4px rgba(0, 0, 0, 0.9);
+        --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.1) inset, 0 24px 44px -6px rgba(0, 0, 0, 0.95);
 
         --raised-bg: linear-gradient(180deg, #151518 0%, #0e0e10 100%);
         --raised-inset: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -1px 0 rgba(0, 0, 0, 0.6);
@@ -634,28 +659,25 @@ html.reveal-ready .device-card.reveal-item {
         color: #000000 !important;
         text-shadow: none !important;
         box-shadow:
-            inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-            0 4px 0 #333333,
-            0 10px 20px rgba(255, 255, 255, 0.12);
+            inset 0 1px 0 rgba(255, 255, 255, 0.9),
+            0 8px 18px rgba(255, 255, 255, 0.12);
     }
-    .btn-primary:hover,
-    a.btn-primary:hover,
-    .mobile-nav a.btn-primary:hover,
-    .mobile-nav .btn-primary:hover,
-    #relPrimary:hover {
-        background: #ffffff !important;
-        color: #000000 !important;
-        box-shadow:
-            inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
-            inset 0 -2px 0 rgba(0, 0, 0, 0.15),
-            0 6px 0 #333333,
-            0 14px 26px rgba(255, 255, 255, 0.18);
+    @media (hover: hover) and (pointer: fine) {
+        .btn-primary:hover,
+        a.btn-primary:hover,
+        .mobile-nav a.btn-primary:hover,
+        .mobile-nav .btn-primary:hover,
+        #relPrimary:hover {
+            background: #ffffff !important;
+            color: #000000 !important;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 1),
+                0 12px 24px rgba(255, 255, 255, 0.18);
+        }
     }
     .btn-primary:active {
-        box-shadow:
-            inset 0 3px 6px rgba(0, 0, 0, 0.25),
-            0 0 0 #333333;
+        transform: scale(0.97) !important;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25) !important;
     }
     .btn-secondary {
         background: #151518;
