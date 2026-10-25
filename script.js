@@ -16,6 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuToggle.setAttribute('aria-expanded', 'false');
             });
         });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+            if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !menuToggle.contains(e.target)) {
+                mobileNav.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
+                mobileNav.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 
     // 2. Interactive Legal Tabs (Clean URL - No #terms or #ytm-policy in address bar)
@@ -100,10 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (direction && !isTransitioning) {
             isTransitioning = true;
-            const outOffset = direction === 'next' ? -22 : 22;
-            lightboxImg.style.transition = 'opacity 0.16s ease, transform 0.16s ease';
+            const outOffset = direction === 'next' ? -18 : 18;
+            lightboxImg.style.transition = 'opacity 0.14s cubic-bezier(0.23, 1, 0.32, 1), transform 0.14s cubic-bezier(0.23, 1, 0.32, 1)';
             lightboxImg.style.opacity = '0';
-            lightboxImg.style.transform = 'translateX(' + outOffset + 'px) scale(0.96)';
+            lightboxImg.style.transform = 'translateX(' + outOffset + 'px) scale(0.97)';
 
             setTimeout(() => {
                 lightboxImg.src = img.src;
@@ -113,23 +129,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     lightboxCaption.textContent = caption ? caption.textContent.trim() : (img ? img.alt : '');
                 }
 
-                const inOffset = direction === 'next' ? 22 : -22;
+                const inOffset = direction === 'next' ? 18 : -18;
                 lightboxImg.style.transition = 'none';
-                lightboxImg.style.transform = 'translateX(' + inOffset + 'px) scale(0.96)';
+                lightboxImg.style.transform = 'translateX(' + inOffset + 'px) scale(0.97)';
 
-                // Force reflow
-                void lightboxImg.offsetWidth;
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        lightboxImg.style.transition = 'opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.22s cubic-bezier(0.25, 1, 0.5, 1)';
+                        lightboxImg.style.opacity = '1';
+                        lightboxImg.style.transform = 'translateX(0) scale(1)';
 
-                lightboxImg.style.transition = 'opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.26s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                lightboxImg.style.opacity = '1';
-                lightboxImg.style.transform = 'translateX(0) scale(1)';
-
-                setTimeout(() => {
-                    isTransitioning = false;
-                    lightboxImg.style.transition = '';
-                    lightboxImg.style.transform = '';
-                }, 260);
-            }, 160);
+                        setTimeout(() => {
+                            isTransitioning = false;
+                            lightboxImg.style.transition = '';
+                            lightboxImg.style.transform = '';
+                        }, 220);
+                    });
+                });
+            }, 140);
         } else {
             lightboxImg.src = img.src;
             lightboxImg.alt = img.alt || '';
@@ -495,9 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
         var height = 0;
         var dpr = 1;
 
-        // Precompute grid confined to upper ~30% screen height with fine particles
-        var cols = 72;
-        var rows = 44;
+        // Precompute grid confined to upper ~30% screen height (optimized for mobile/desktop performance)
+        var isMobile = (window.innerWidth || 800) < 768;
+        var cols = isMobile ? 38 : 54;
+        var rows = isMobile ? 24 : 34;
         var grid = [];
         for (var c = 0; c < cols; c++) {
             var u = -2.2 + (4.4 * c) / (cols - 1);
@@ -563,6 +581,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         var time = 0;
+        var isCanvasVisible = true;
+        var heroElement = document.querySelector('#top') || document.querySelector('.hero-grid') || document.querySelector('.hero');
+        if ('IntersectionObserver' in window && heroElement) {
+            var canvasObserver = new IntersectionObserver(function(entries) {
+                isCanvasVisible = entries[0].isIntersecting;
+            }, { root: null, rootMargin: '120px 0px 120px 0px', threshold: 0.01 });
+            canvasObserver.observe(heroElement);
+        }
 
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
@@ -573,6 +599,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         function render() {
+            if (!isCanvasVisible) {
+                requestAnimationFrame(render);
+                return;
+            }
             // Ensure velocity numbers are always valid
             if (isNaN(smoothVelocity)) smoothVelocity = 0;
             if (isNaN(scrollVelocity)) scrollVelocity = 0;
