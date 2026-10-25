@@ -39,20 +39,29 @@
     --hi: rgba(255, 255, 255, 0.95);
     --lo: rgba(152, 73, 39, 0.14);
 
-    --shadow-sm: 0 2px 0 #e6bbaa, 0 8px 14px -6px rgba(152, 73, 39, 0.22);
-    --shadow-md: 0 3px 0 #d9ac98, 0 16px 26px -8px rgba(152, 73, 39, 0.3);
-    --shadow-lg: 0 4px 0 #cc9d86, 0 26px 40px -10px rgba(152, 73, 39, 0.38);
+    /* Refined Shadows & Elevation: Material 3 Tonal Glow meets Apple Specular Rim */
+    --shadow-sm: 0 1px 2px rgba(152, 73, 39, 0.08), 0 4px 12px -2px rgba(152, 73, 39, 0.12);
+    --shadow-md: 0 0 0 1px rgba(255, 255, 255, 0.9) inset, 0 8px 24px -4px rgba(152, 73, 39, 0.14);
+    --shadow-lg: 0 0 0 1px rgba(255, 255, 255, 0.95) inset, 0 20px 40px -8px rgba(152, 73, 39, 0.2);
 
-    --raised-bg: linear-gradient(180deg, #ffffff 0%, #fff2ec 100%);
-    --raised-inset: inset 0 1.5px 0 var(--hi), inset 0 -2px 0 var(--lo);
-    --well-bg: linear-gradient(180deg, #f2c7b8 0%, #ffd6c9 100%);
-    --well-inset: inset 0 3px 6px rgba(152, 73, 39, 0.28), inset 0 -1px 0 var(--hi);
+    --raised-bg: linear-gradient(180deg, #ffffff 0%, #fff6f2 100%);
+    --raised-inset: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 0 rgba(152, 73, 39, 0.06);
+    --well-bg: linear-gradient(180deg, #f7d2c4 0%, #ffd6c9 100%);
+    --well-inset: inset 0 2px 4px rgba(152, 73, 39, 0.16), inset 0 -1px 0 rgba(255, 255, 255, 0.75);
 
-    /* Motion */
-    --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --transition: all 0.35s var(--ease);
-    --transition-spring: all 0.45s var(--spring);
+    /* Motion System (Material You Expressive × Apple Fluidity) */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-spring: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+    --duration-press: 120ms;
+    --duration-fast: 160ms;
+    --duration-normal: 220ms;
+    --duration-drawer: 280ms;
+
+    --transition: transform var(--duration-normal) var(--ease-out), opacity var(--duration-normal) var(--ease-out);
+    --transition-spring: transform var(--duration-normal) var(--ease-spring);
 }
 
 * {
@@ -128,11 +137,12 @@ button:focus-visible {
     align-items: center;
     justify-content: space-between;
     border-radius: var(--pill-radius);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 236, 217, 0.85));
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    box-shadow: var(--raised-inset), var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.7);
+    background: rgba(255, 245, 240, 0.78);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: var(--raised-inset), var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .brand {
@@ -172,13 +182,19 @@ button:focus-visible {
     font-weight: 700;
     padding: 8px 14px;
     border-radius: var(--pill-radius);
-    transition: var(--transition-spring);
+    transition: color var(--duration-fast) ease, background var(--duration-fast) ease, transform var(--duration-press) var(--ease-out);
 }
 
-.nav-links a:hover {
-    color: var(--accent-on-soft);
-    background: var(--well-bg);
-    box-shadow: var(--well-inset);
+.nav-links a:active {
+    transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .nav-links a:hover {
+        color: var(--accent-on-soft);
+        background: var(--well-bg);
+        box-shadow: var(--well-inset);
+    }
 }
 
 .nav-actions {
@@ -197,13 +213,12 @@ button:focus-visible {
     padding: 10px;
     cursor: pointer;
     border-radius: 16px;
-    box-shadow: var(--raised-inset), 0 2px 0 #e6bbaa;
-    transition: var(--transition-spring);
+    box-shadow: var(--raised-inset), var(--shadow-sm);
+    transition: transform var(--duration-press) var(--ease-out), box-shadow var(--duration-fast) ease;
 }
 
 .menu-toggle:active {
-    transform: translateY(2px);
-    border-radius: 22px;
+    transform: scale(0.94);
     box-shadow: var(--well-inset);
 }
 
@@ -214,30 +229,32 @@ button:focus-visible {
 }
 
 .mobile-nav {
-    display: none;
+    display: flex;
     position: fixed;
     top: 80px;
     left: 12px;
     right: 12px;
-    background: linear-gradient(180deg, #ffffff, #fff2ec);
-    border: 1px solid #fff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 242, 236, 0.96));
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
     border-radius: var(--card-radius-lg);
     padding: 18px 20px 20px;
     box-shadow: var(--raised-inset), var(--shadow-lg);
     z-index: 999;
     flex-direction: column;
     gap: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.96) translateY(-8px);
+    transform-origin: top right;
+    transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .mobile-nav.open {
-    display: flex;
-    animation: drawerIn 0.45s var(--spring);
-    transform-origin: top right;
-}
-
-@keyframes drawerIn {
-    from { opacity: 0; transform: scale(0.9) translateY(-10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(0);
 }
 
 .mobile-nav a {
@@ -272,7 +289,7 @@ button:focus-visible {
     letter-spacing: 0.01em;
     border-radius: var(--pill-radius);
     text-decoration: none;
-    transition: var(--transition-spring);
+    transition: transform var(--duration-press) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), background 0.2s ease;
     cursor: pointer;
     border: none;
     white-space: nowrap;
@@ -280,51 +297,45 @@ button:focus-visible {
 
 .btn-primary {
     color: #ffffff;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.28);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.22);
     background: linear-gradient(180deg, #b55d36 0%, var(--accent) 55%, var(--accent-hover) 100%);
     box-shadow:
         inset 0 1.5px 0 rgba(255, 255, 255, 0.45),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.12),
-        0 4px 0 var(--accent-deep),
-        0 12px 18px -6px var(--accent-glow);
-}
-
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow:
-        inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.12),
-        0 6px 0 var(--accent-deep),
-        0 18px 24px -8px var(--accent-glow);
+        0 8px 18px -4px var(--accent-glow);
 }
 
 .btn-primary:active {
-    transform: translateY(4px);
-    border-radius: 18px;
+    transform: scale(0.97);
     box-shadow:
-        inset 0 3px 6px rgba(0, 0, 0, 0.3),
-        0 0 0 var(--accent-deep),
-        0 2px 4px -2px var(--accent-glow);
+        inset 0 2px 4px rgba(0, 0, 0, 0.25),
+        0 2px 6px -2px var(--accent-glow);
 }
 
 .btn-secondary {
     background: var(--raised-bg);
     color: var(--text-primary);
-    text-shadow: 0 1px 0 #fff;
+    text-shadow: none;
     border: 1px solid #fff;
-    box-shadow: var(--raised-inset), 0 4px 0 #d9ac98, 0 12px 16px -8px rgba(152, 73, 39, 0.3);
-}
-
-.btn-secondary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--raised-inset), 0 6px 0 #d9ac98, 0 16px 20px -8px rgba(152, 73, 39, 0.35);
+    box-shadow: var(--raised-inset), var(--shadow-sm);
 }
 
 .btn-secondary:active {
-    transform: translateY(4px);
-    border-radius: 18px;
+    transform: scale(0.97);
     background: var(--well-bg);
     box-shadow: var(--well-inset);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+        transform: translateY(-1.5px);
+        box-shadow:
+            inset 0 1.5px 0 rgba(255, 255, 255, 0.5),
+            0 14px 24px -6px var(--accent-glow);
+    }
+    .btn-secondary:hover {
+        transform: translateY(-1.5px);
+        box-shadow: var(--raised-inset), var(--shadow-md);
+    }
 }
 
 /* ==================== HERO ==================== */
@@ -359,14 +370,15 @@ button:focus-visible {
 }
 
 .hero h1 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: clamp(2.5rem, 7vw, 4.9rem);
     font-weight: 700;
-    letter-spacing: -0.045em;
-    line-height: 1.04;
+    letter-spacing: -0.04em;
+    line-height: 1.06;
     margin-bottom: 22px;
     color: var(--text-primary);
-    text-shadow: 0 2px 0 #fff, 0 -1px 0 rgba(152, 73, 39, 0.18);
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 .hero-desc {
@@ -374,7 +386,9 @@ button:focus-visible {
     color: var(--text-secondary);
     max-width: 640px;
     margin: 0 auto 36px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+    text-shadow: none;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
 }
 
 .hero-actions {
@@ -397,12 +411,13 @@ button:focus-visible {
 }
 
 .showcase-header h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
     letter-spacing: -0.035em;
     margin-bottom: 8px;
-    text-shadow: 0 2px 0 #fff;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 .showcase-header p {
@@ -450,7 +465,7 @@ button:focus-visible {
     border-radius: 26px;
     padding: 0;
     box-shadow: none;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform var(--duration-normal) var(--ease-spring);
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -460,14 +475,6 @@ button:focus-visible {
 
 .device-card::before {
     display: none;
-}
-
-.device-card:hover {
-    transform: translateY(-10px) scale(1.02);
-}
-
-.device-card:nth-child(even):hover {
-    transform: translateY(-10px) scale(1.02);
 }
 
 .device-card:active {
@@ -482,16 +489,9 @@ button:focus-visible {
     background-color: var(--surface);
     border: 1.5px solid rgba(255, 255, 255, 0.9);
     box-shadow:
-        0 3px 0 rgba(152, 73, 39, 0.15),
-        0 14px 28px -6px rgba(152, 73, 39, 0.28);
-    transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.3s ease;
-}
-
-.device-card:hover img {
-    border-color: #ffffff;
-    box-shadow:
-        0 6px 0 rgba(152, 73, 39, 0.22),
-        0 22px 38px -8px rgba(152, 73, 39, 0.38);
+        0 2px 4px rgba(152, 73, 39, 0.08),
+        0 12px 24px -6px rgba(152, 73, 39, 0.22);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out), border-color var(--duration-fast) ease;
 }
 
 .device-caption {
@@ -501,13 +501,24 @@ button:focus-visible {
     font-weight: 700;
     color: var(--text-primary);
     letter-spacing: -0.01em;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-    transition: color 0.3s ease, transform 0.3s ease;
+    text-shadow: none;
+    transition: color var(--duration-fast) ease, transform var(--duration-fast) ease;
 }
 
-.device-card:hover .device-caption {
-    color: var(--accent);
-    transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+    .device-card:hover {
+        transform: translateY(-8px) scale(1.02);
+    }
+    .device-card:hover img {
+        border-color: #ffffff;
+        box-shadow:
+            0 4px 8px rgba(152, 73, 39, 0.12),
+            0 18px 32px -6px rgba(152, 73, 39, 0.28);
+    }
+    .device-card:hover .device-caption {
+        color: var(--accent);
+        transform: translateY(-2px);
+    }
 }
 
 /* ==================== FEATURES ==================== */
@@ -517,12 +528,13 @@ button:focus-visible {
 }
 
 .section-header h2 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: clamp(1.9rem, 4vw, 2.7rem);
     font-weight: 700;
     letter-spacing: -0.035em;
     margin-bottom: 10px;
-    text-shadow: 0 2px 0 #fff;
+    text-shadow: none;
+    -webkit-font-smoothing: antialiased;
 }
 
 .section-header p {
@@ -541,24 +553,19 @@ button:focus-visible {
 
 .feature-card {
     background: var(--raised-bg);
-    border: 1px solid #fff;
+    border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: var(--card-radius);
     padding: 30px;
     box-shadow: var(--raised-inset), var(--shadow-md);
-    transition: var(--transition-spring);
+    transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .feature-card:nth-child(3n + 1) { border-radius: 44px 16px 44px 16px; }
 .feature-card:nth-child(3n + 2) { border-radius: 16px 44px 16px 44px; }
 .feature-card:nth-child(3n)     { border-radius: 36px; }
 
-.feature-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--raised-inset), var(--shadow-lg);
-}
-
 .feature-card:active {
-    transform: translateY(2px);
+    transform: scale(0.985);
     box-shadow: var(--raised-inset), var(--shadow-sm);
 }
 
@@ -573,7 +580,7 @@ button:focus-visible {
     justify-content: center;
     margin-bottom: 20px;
     box-shadow: var(--well-inset);
-    transition: var(--transition-spring);
+    transition: transform var(--duration-fast) var(--ease-spring), color var(--duration-fast) ease, background var(--duration-fast) ease;
 }
 
 .feature-card:nth-child(6n + 1) .feature-icon { border-radius: 50%; }
@@ -583,11 +590,17 @@ button:focus-visible {
 .feature-card:nth-child(6n + 5) .feature-icon { border-radius: 30px 10px 30px 10px; }
 .feature-card:nth-child(6n)     .feature-icon { border-radius: 50% 50% 14px 14px; }
 
-.feature-card:hover .feature-icon {
-    color: #fff;
-    background: linear-gradient(180deg, #b55d36, var(--accent));
-    box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.45), 0 3px 0 var(--accent-deep);
-    transform: rotate(-6deg) scale(1.06);
+@media (hover: hover) and (pointer: fine) {
+    .feature-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--raised-inset), var(--shadow-lg);
+    }
+    .feature-card:hover .feature-icon {
+        color: #fff;
+        background: linear-gradient(180deg, #b55d36, var(--accent));
+        box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.45);
+        transform: rotate(-4deg) scale(1.05);
+    }
 }
 
 .feature-icon svg {
@@ -646,42 +659,42 @@ button:focus-visible {
     font-size: 0.88rem;
     font-weight: 800;
     cursor: pointer;
-    text-shadow: 0 1px 0 #fff;
-    box-shadow: var(--raised-inset), 0 3px 0 #d9ac98;
-    transition: var(--transition-spring);
-}
-
-.tab-btn:hover {
-    transform: translateY(-1px);
-    color: var(--accent-on-soft);
+    text-shadow: none;
+    box-shadow: var(--raised-inset), var(--shadow-sm);
+    transition: transform var(--duration-press) var(--ease-out), color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .tab-btn:active {
-    transform: translateY(3px);
-    border-radius: 16px;
+    transform: scale(0.96);
 }
 
 .tab-btn.active {
     background: linear-gradient(180deg, var(--accent-hover), var(--accent));
     color: #ffffff;
     border-color: transparent;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-    transform: translateY(3px);
-    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.35), 0 0 0 var(--accent-deep);
+    text-shadow: none;
+    transform: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 8px rgba(152, 73, 39, 0.28);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .tab-btn:not(.active):hover {
+        transform: translateY(-1px);
+        color: var(--accent-on-soft);
+    }
 }
 
 .tab-pane {
     display: none;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--duration-fast) var(--ease-out), transform var(--duration-fast) var(--ease-out);
 }
 
 .tab-pane.active {
     display: block;
-    animation: sheetIn 0.5s var(--spring);
-}
-
-@keyframes sheetIn {
-    from { opacity: 0; transform: translateY(14px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .legal-card {
@@ -774,20 +787,24 @@ button:focus-visible {
 
 /* ==================== LIGHTBOX ==================== */
 .lightbox {
-    display: none;
+    display: flex;
     position: fixed;
     inset: 0;
-    background: rgba(43, 19, 9, 0.82);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: rgba(43, 19, 9, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: 2000;
     align-items: center;
     justify-content: center;
     padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-fast) var(--ease-out);
 }
 
 .lightbox.active {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .lightbox-content {
@@ -798,11 +815,14 @@ button:focus-visible {
     padding: 0;
     border-radius: 26px;
     background: transparent;
-    border: 1.5px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-        0 4px 0 rgba(0, 0, 0, 0.4),
-        0 28px 60px rgba(0, 0, 0, 0.75);
-    animation: scaleUp 0.45s var(--spring);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+    transform: scale(0.96);
+    transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
 }
 
 .lightbox-close {
@@ -811,8 +831,8 @@ button:focus-visible {
     right: 22px;
     width: 48px;
     height: 48px;
-    border: 1px solid #fff;
-    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
     background: var(--raised-bg);
     color: var(--text-primary);
     font-size: 1rem;
@@ -821,22 +841,13 @@ button:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--raised-inset), 0 3px 0 #cc9d86;
-    transition: var(--transition-spring);
-}
-
-.lightbox-close:hover {
-    border-radius: 50%;
+    box-shadow: var(--raised-inset), var(--shadow-sm);
+    transition: transform var(--duration-press) var(--ease-out), box-shadow var(--duration-fast) ease;
 }
 
 .lightbox-close:active {
-    transform: translateY(3px);
+    transform: scale(0.93);
     box-shadow: var(--well-inset);
-}
-
-@keyframes scaleUp {
-    from { transform: scale(0.85); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
 }
 
 /* ==================== FOOTER ==================== */
@@ -954,13 +965,17 @@ footer {
 /* ==================== REDUCED MOTION ==================== */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
+        animation-duration: 0.15s !important;
+        transition-duration: 0.15s !important;
         scroll-behavior: auto !important;
     }
-    .device-card:hover,
-    .device-card:nth-child(even):hover,
-    .feature-card:hover {
-        transform: none;
+    .device-card,
+    .feature-card,
+    .btn,
+    .hero-phone,
+    .reveal-item,
+    .mobile-nav,
+    .lightbox-content {
+        transform: none !important;
     }
 }
