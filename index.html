@@ -41,7 +41,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="extras.css">
@@ -96,10 +96,6 @@
         <!-- Hero -->
         <div class="hero-grid">
             <section class="hero" aria-labelledby="hero-title">
-                <div class="hero-pill">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-                    <span>Open source · Material You</span>
-                </div>
                 <h1 id="hero-title">Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
                 <p class="hero-desc">PixelMusic is a free, open-source Android music player. Play your local library, follow synchronized lyrics, and open YouTube Music inside the app through WebView.</p>
                 <div class="hero-actions">
@@ -230,50 +226,50 @@
             </div>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                        <h3>YouTube Music via WebView</h3>
                     </div>
-                    <h3>YouTube Music via WebView</h3>
                     <p>Sign in to YouTube Music inside the app to reach your library, mixes and playlists. Sign-in and activity are handled by Google.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        <h3>Local High-Fidelity Playback</h3>
                     </div>
-                    <h3>Local High-Fidelity Playback</h3>
                     <p>Plays FLAC, WAV, ALAC, Opus, AAC and MP3 files with gapless transitions and configurable audio offload.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-7 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm-7 13c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>
+                        <h3>Synchronized Lyrics</h3>
                     </div>
-                    <h3>Synchronized Lyrics</h3>
                     <p>Line-by-line scrolling, word-by-word highlight mode, translations, and automatic detection of local .lrc files.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg>
+                        <h3>Library &amp; Folder Explorer</h3>
                     </div>
-                    <h3>Library &amp; Folder Explorer</h3>
                     <p>Index your device with folder blacklist rules and storage filters, build playlists, and edit tags.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <h3>Material You Theming</h3>
                     </div>
-                    <h3>Material You Theming</h3>
                     <p>Colors adapt to album art and the Android system theme, with squircle corners, fluid seekbars and gesture navigation.</p>
                 </div>
 
                 <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    <div class="feature-head">
+                        <svg class="feature-glyph" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                        <h3>Ad-Free &amp; Open Source</h3>
                     </div>
-                    <h3>Ad-Free &amp; Open Source</h3>
                     <p>PixelMusic shows no ads, and its full source is public so you can inspect what it does. Your local library stays on your device.</p>
                 </div>
             </div>
@@ -462,9 +458,9 @@
                 <div class="legal-card">
                     <h2>YouTube Music &amp; WebView Policy</h2>
                     <p class="policy-meta">Version 1.1 · Effective October 9, 2026</p>
-                    <div class="callout">
+                    <aside class="callout">
                         <p>PixelMusic opens YouTube Music in an Android WebView. When you sign in, browse or play content, that activity is handled by Google under Google's terms and privacy policies.</p>
-                    </div>
+                    </aside>
                     <h3>1. Sign-in</h3>
                     <p>Sign-in happens on the YouTube Music website shown inside PixelMusic's WebView, and Google processes your authentication. PixelMusic does not provide its own Google password form.</p>
 
