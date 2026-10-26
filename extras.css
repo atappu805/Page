@@ -84,8 +84,8 @@
     border-radius: 28px;
     border: 2px solid rgba(255, 255, 255, 0.95);
     box-shadow:
-        0 4px 0 rgba(152, 73, 39, 0.16),
-        0 24px 44px -10px rgba(152, 73, 39, 0.35);
+        0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 16px 36px -8px rgba(0, 0, 0, 0.22);
 }
 
 /* ---------- Download center ---------- */
@@ -107,7 +107,7 @@
     margin-bottom: 22px;
 }
 .release-version {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.7rem;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -118,10 +118,10 @@
 .asset-row {
     display: grid;
     gap: 6px;
-    padding: 16px 18px;
-    border-radius: 22px;
-    background: var(--well-bg);
-    box-shadow: var(--well-inset);
+    padding: 14px 18px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: transparent;
 }
 .asset-top {
     display: flex;
@@ -148,15 +148,14 @@
 }
 .fact {
     padding: 14px 18px;
-    border-radius: 20px;
-    background: var(--raised-bg);
-    border: 1px solid #fff;
-    box-shadow: var(--raised-inset), 0 2px 0 #e6bbaa;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: transparent;
 }
 .fact dt { font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 .fact dd { font-weight: 700; word-break: break-word; }
 
-.whatsnew h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 8px; }
+.whatsnew h3 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; margin-bottom: 8px; }
 .whatsnew ul { padding-left: 22px; margin-bottom: 12px; color: var(--text-secondary); }
 .whatsnew li { margin-bottom: 4px; }
 .whatsnew li::marker { color: var(--accent); }
@@ -165,10 +164,8 @@
 
 .verify {
     margin-top: 26px;
-    border-radius: 22px;
-    background: var(--well-bg);
-    box-shadow: var(--well-inset);
-    padding: 6px 20px;
+    padding: 16px 4px 0;
+    border-top: 1px solid var(--border);
 }
 .verify summary { cursor: pointer; font-weight: 800; padding: 12px 0; }
 .verify p, .verify li { color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 8px; }
@@ -196,14 +193,14 @@
     border: 1px solid #fff;
     box-shadow: var(--raised-inset), var(--shadow-sm);
 }
-.trust-item h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1rem; margin-bottom: 6px; }
+.trust-item h3 { font-family: 'Outfit', sans-serif; font-size: 1rem; margin-bottom: 6px; }
 .trust-item p { color: var(--text-secondary); font-size: 0.92rem; }
 .trust-item a, .legal-card a, .faq a { color: var(--accent); font-weight: 700; }
 
 /* ---------- Grouped gallery ---------- */
 .gallery-group { margin-bottom: 8px; }
 .gallery-group h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.15rem;
     margin: 18px 10px 0;
     color: var(--accent-on-soft);
@@ -295,7 +292,7 @@
 @media (hover: hover) and (pointer: fine) {
     .support-card:hover { transform: translateY(-4px); box-shadow: var(--raised-inset), var(--shadow-lg); }
 }
-.support-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; margin-bottom: 6px; }
+.support-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.1rem; margin-bottom: 6px; }
 .support-card p { color: var(--text-secondary); font-size: 0.92rem; }
 
 /* ---------- Contact (Compact & Personal) ---------- */
@@ -325,8 +322,8 @@
     height: 58px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2.5px solid var(--accent);
-    box-shadow: 0 4px 14px rgba(152, 73, 39, 0.25);
+    border: 2px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     transition: transform var(--duration-fast) var(--ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
@@ -339,7 +336,7 @@
     }
 }
 .contact-profile-info h3 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--text-primary);
@@ -564,8 +561,8 @@ html.reveal-ready .device-card.reveal-item {
 
         /* High-contrast B/W typography */
         --text-primary: #ffffff;
-        --text-secondary: #a1a1aa;
-        --text-muted: #71717a;
+        --text-secondary: #d4d4d8;
+        --text-muted: #a1a1aa;
 
         /* Monochrome accent palette with Red link accent */
         --accent: #ffffff;
@@ -573,10 +570,10 @@ html.reveal-ready .device-card.reveal-item {
         --accent-deep: #27272a;
         --accent-soft: #18181b;
         --accent-on-soft: #ffffff;
-        --accent-glow: rgba(255, 255, 255, 0.15);
+        --accent-glow: rgba(255, 255, 255, 0.12);
 
-        --link: #ff5252;
-        --link-hover: #ff7875;
+        --link: #ff6b6b;
+        --dark-link-hover: #ff8a80;
 
         --tertiary: #18181b;
         --tertiary-deep: #121214;
@@ -682,13 +679,13 @@ html.reveal-ready .device-card.reveal-item {
         color: #ffffff;
         text-shadow: none;
         border: 1px solid #2e2e34;
-        box-shadow: var(--raised-inset), 0 3px 0 #000000;
+        box-shadow: var(--raised-inset), 0 2px 6px rgba(0, 0, 0, 0.6);
     }
     .btn-secondary:hover {
         background: #1e1e22;
         color: #ffffff;
         border-color: #4a4a52;
-        box-shadow: var(--raised-inset), 0 4px 0 #000000;
+        box-shadow: var(--raised-inset), 0 4px 12px rgba(0, 0, 0, 0.7);
     }
     .btn-secondary:active {
         background: #0d0d0f;
@@ -720,7 +717,7 @@ html.reveal-ready .device-card.reveal-item {
     .hero-pill svg {
         background: #27272a;
         color: #ffffff;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
     .chip-row li {
         background: #111114;
@@ -811,11 +808,11 @@ html.reveal-ready .device-card.reveal-item {
     .device-card img {
         background-color: #0f0f12;
         border: 1.5px solid #27272a;
-        box-shadow: 0 4px 0 #000000, 0 16px 30px -6px rgba(0, 0, 0, 0.9);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 16px 32px -4px rgba(0, 0, 0, 0.9);
     }
     .device-card:hover img {
         border-color: #52525b;
-        box-shadow: 0 6px 0 #000000, 0 24px 40px -6px rgba(0, 0, 0, 0.95);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 24px 44px -4px rgba(0, 0, 0, 0.95);
     }
     .device-caption {
         color: #e4e4e7;
@@ -826,31 +823,33 @@ html.reveal-ready .device-card.reveal-item {
     }
     .hero-phone img {
         border-color: #27272a;
-        box-shadow: 0 4px 0 #000000, 0 24px 48px rgba(0, 0, 0, 0.95);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 20px 48px -4px rgba(0, 0, 0, 0.95);
     }
 
     /* ---------- Download center & Assets ---------- */
     .asset-row {
-        background: #09090b;
-        border: 1px solid #1f1f23;
+        background: transparent;
+        border: 1px solid #242428;
     }
     .asset-size {
         color: var(--text-muted);
     }
     .hash {
-        color: #a1a1aa;
+        color: #e4e4e7;
     }
     .hash-label {
-        color: #71717a;
+        color: #a1a1aa;
     }
     .fact {
-        background: var(--raised-bg);
+        background: transparent;
         border: 1px solid #242428;
-        box-shadow: var(--raised-inset), 0 2px 0 #000000;
+        box-shadow: none;
     }
     .verify {
-        background: #09090b;
-        border: 1px solid #1f1f23;
+        background: transparent;
+        border: none;
+        border-top: 1px solid #242428;
+        padding: 16px 4px 0;
     }
     .verify pre {
         background: #000000;
@@ -885,7 +884,6 @@ html.reveal-ready .device-card.reveal-item {
             linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 90px),
             linear-gradient(180deg, #121215, #0a0a0c);
         border: 1px solid #242428;
-        border-top: 5px solid #ffffff;
     }
     .legal-card code {
         background: #16161a;
@@ -896,10 +894,6 @@ html.reveal-ready .device-card.reveal-item {
     .callout {
         background: #0d0d0f;
         border: 1px solid #242428;
-    }
-    .callout::before {
-        background: #ff5252;
-        box-shadow: 0 0 10px rgba(255, 82, 82, 0.6);
     }
     .callout p {
         color: #e4e4e7;
@@ -913,19 +907,16 @@ html.reveal-ready .device-card.reveal-item {
     .legal-card a,
     .faq a,
     .faq details[open] summary,
-    #trustRelease a,
-    #relChangelog {
-        color: #ff5252;
+    #trustRelease a {
+        color: var(--link);
     }
-    a:hover,
     .asset-name:hover,
     .callout a:hover,
     .trust-item a:hover,
     .legal-card a:hover,
     .faq a:hover,
-    #trustRelease a:hover,
-    #relChangelog:hover {
-        color: #ff7875;
+    #trustRelease a:hover {
+        color: var(--link-hover);
         text-decoration: underline;
     }
 
@@ -938,7 +929,7 @@ html.reveal-ready .device-card.reveal-item {
         background: #151518;
         border: 1px solid #2e2e34;
         color: #ffffff;
-        box-shadow: var(--raised-inset), 0 3px 0 #000000;
+        box-shadow: var(--raised-inset), 0 2px 6px rgba(0, 0, 0, 0.6);
     }
     .lightbox-nav:hover,
     .lightbox-close:hover {
