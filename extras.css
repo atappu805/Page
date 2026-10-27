@@ -59,9 +59,11 @@
         grid-template-columns: repeat(2, 1fr);
     }
     #features,
-    .download-section,
-    .showcase-container {
+    .download-section {
         padding: 44px 32px;
+    }
+    .showcase-container {
+        padding: 28px 20px;
     }
     .nav-links {
         display: none;
@@ -102,9 +104,15 @@
     }
     #features,
     .download-section,
-    .showcase-container,
     .legal-card {
         padding: 32px 22px;
+    }
+    .showcase-container {
+        padding: 22px 14px;
+        border-radius: 18px;
+    }
+    .device-card {
+        flex: 0 0 185px;
     }
     .contact-compact-card {
         flex-direction: column;
@@ -194,13 +202,13 @@ html.reveal-ready .device-card.is-visible img {
 }
 
 html.reveal-ready .device-card:nth-child(3n + 1).is-visible img {
-    transform: rotate(-1deg) scale(1) translateY(0);
+    transform: rotate(-0.8deg) scale(1) translateY(0);
 }
 html.reveal-ready .device-card:nth-child(3n + 2).is-visible img {
     transform: rotate(0.8deg) scale(1) translateY(0);
 }
 html.reveal-ready .device-card:nth-child(3n).is-visible img {
-    transform: rotate(-0.6deg) scale(1) translateY(0);
+    transform: rotate(-0.5deg) scale(1) translateY(0);
 }
 
 /* ==================== REDUCED MOTION ==================== */
