@@ -6,8 +6,8 @@
     <title>PixelMusic — Open-Source Music Player for Android</title>
     <meta name="description" content="PixelMusic is a free, open-source Android music player with Material You design, synchronized lyrics, local library support and YouTube Music access through WebView.">
     <link rel="canonical" href="https://pixelmusic.pages.dev/">
-    <meta name="theme-color" content="#FFD6C9" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#f7f2e7" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1e1d1b" media="(prefers-color-scheme: dark)">
     <!-- Add your Search Console verification tag here once you have the real code:
          <meta name="google-site-verification" content="YOUR_REAL_CODE"> -->
 
@@ -41,7 +41,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Kalam:wght@400;700&family=Patrick+Hand&family=Permanent+Marker&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="extras.css">
@@ -97,6 +97,9 @@
         <div class="hero-grid">
             <section class="hero" aria-labelledby="hero-title">
                 <h1 id="hero-title">Pure Sound. Clean Aesthetics.<br>Your Music, Everywhere.</h1>
+                <svg class="hero-underline" viewBox="0 0 400 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M4 8.5C90 3 230 3 396 7.5" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
                 <p class="hero-desc">PixelMusic is a free, open-source Android music player. Play your local library, follow synchronized lyrics, and open YouTube Music inside the app through WebView.</p>
                 <div class="hero-actions">
                     <a href="#download" class="btn btn-primary">
@@ -104,6 +107,12 @@
                         Download APK
                     </a>
                     <a href="#features" class="btn btn-secondary">Explore Features</a>
+                    <div class="sketch-arrow-wrapper" aria-hidden="true">
+                        <svg class="sketch-arrow-svg" viewBox="0 0 50 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 14C16 10 28 8 44 24M44 24L34 24M44 24L41 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>latest release</span>
+                    </div>
                 </div>
                 <ul class="chip-row" aria-label="Highlights">
                     <li>Local Music</li>
@@ -114,6 +123,7 @@
 
             <div class="hero-visual">
                 <div class="device-card hero-phone">
+                    <span class="tape" aria-hidden="true"></span>
                     <img src="./IMG_20261002_115841.jpg" alt="PixelMusic Now Playing screen" width="720" height="1560" fetchpriority="high">
                     <div class="device-caption">Now Playing</div>
                 </div>
@@ -537,6 +547,11 @@
     </main>
 
     <!-- Screenshot viewer (disabled) -->
+
+        <!-- Concluding Statement (Sketch Spec) -->
+        <div class="sheet-conclusion">
+            <p class="red-statement">Your music belongs to you. No ads, no trackers, pure sound.</p>
+        </div>
 
     <footer>
         <div class="container">

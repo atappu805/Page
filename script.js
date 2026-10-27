@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 6. Interactive 3D Curved Particle Canopy (Reacts to Scroll & Theme)
     function initReactiveBackground() {
         var canvas = document.getElementById('bgCanvas');
-        if (!canvas) return;
+        if (!canvas || window.getComputedStyle(canvas).display === 'none') return;
         var ctx = canvas.getContext('2d');
         if (!ctx) return;
 
