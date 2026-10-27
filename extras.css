@@ -1,44 +1,41 @@
 /* ==========================================================
-   PixelMusic — extras.css (Sketch Design System)
-   Grid layouts, responsive breakpoints (680px, 1050px),
-   accessibility skip-link, drawn brackets, and dark drafting board.
+   PixelMusic — extras.css (Organic Design System)
+   Split opening layout, 1000px & 700px responsive rules,
+   reduced-motion compliance, and dark earth mode.
    ========================================================== */
 
-/* Header-safe anchors */
 [id] { scroll-margin-top: 96px; }
 
 /* Skip Link */
 .skip-link {
     position: absolute;
-    left: 14px;
+    left: 16px;
     top: -60px;
     z-index: 3000;
-    padding: 8px 18px;
+    padding: 10px 20px;
     border-radius: var(--dp-radius-control);
-    background: var(--dp-color-accent);
-    color: #ffffff;
-    font-family: var(--dp-typography-display-face);
-    font-size: 1.1rem;
-    font-weight: 700;
+    background-color: var(--dp-color-primary);
+    color: var(--dp-color-surface);
+    font-family: var(--dp-typography-reading);
+    font-size: var(--dp-typography-control);
+    font-weight: 600;
     text-decoration: none;
-    border: var(--dp-border-fine-stroke) solid var(--dp-color-ink);
-    box-shadow: var(--shadow-pencil);
-    transition: top var(--dp-motion-control) ease;
+    transition: top var(--dp-motion-interaction);
 }
 
 .skip-link:focus {
-    top: 14px;
-    outline: 2px dashed var(--dp-color-annotation) !important;
+    top: 16px;
+    outline: 2px solid var(--dp-color-field) !important;
     outline-offset: 4px !important;
 }
 
-/* ==================== HERO GRID LAYOUT ==================== */
+/* ==================== GENEROUS SPLIT OPENING ==================== */
 .hero-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
-    gap: 36px;
-    padding: 24px 0 60px;
+    gap: 56px;
+    padding: 36px 0 84px;
 }
 
 .hero-grid .hero {
@@ -46,112 +43,135 @@
     padding: 0;
 }
 
-.hero-grid .hero-desc {
-    margin-left: 0;
-    margin-right: 0;
-}
-
-.hero-grid .hero-actions {
-    justify-content: flex-start;
-    margin-bottom: 24px;
-}
-
-/* Full split opening at 1050px as per Sketch spec */
-@media (min-width: 1050px) {
+/* ==================== RESPONSIVE BEHAVIOR (Organic Spec) ==================== */
+/* At 1000px, tighten the major splits and spacing */
+@media (max-width: 1000px) {
     .hero-grid {
-        grid-template-columns: 1.15fr 0.85fr;
-        gap: 48px;
-        padding: 40px 0 76px;
+        gap: 32px;
+        padding: 24px 0 64px;
+    }
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 24px;
+    }
+    .trust-grid,
+    .support-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #features,
+    .download-section,
+    .showcase-container {
+        padding: 44px 32px;
+    }
+    .nav-links {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
     }
 }
 
-@media (max-width: 1049px) and (min-width: 681px) {
+/* At 700px, stack the opening, reading sections, images, steps, quotes, and comparison contents.
+   Facts remain in two columns; footer links in two columns. */
+@media (max-width: 700px) {
+    .container {
+        padding: 0 18px;
+    }
     .hero-grid {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 36px;
+        padding: 16px 0 56px;
     }
-    .hero-grid .hero {
-        text-align: center;
-    }
-    .hero-grid .hero-desc {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .hero-grid .hero-actions {
-        justify-content: center;
+    .hero-actions .btn {
+        width: 100%;
     }
     .chip-row {
-        justify-content: center;
-    }
-}
-
-/* Drawn bracket utility for facts / highlights */
-.bracket-box {
-    position: relative;
-    padding: 12px 18px;
-    border-left: 3px solid var(--dp-color-line);
-    border-right: 3px solid var(--dp-color-line);
-    border-radius: 6px;
-    margin: 16px 0;
-}
-
-/* ==================== RESPONSIVE RULES (Sketch Spec) ==================== */
-@media (min-width: 680px) and (max-width: 1049px) {
-    .features-grid {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        padding: 18px 20px;
+        gap: 12px;
+    }
+    .features-grid,
+    .support-grid {
+        grid-template-columns: 1fr;
     }
     .trust-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
     }
-    .support-grid {
+    #features,
+    .download-section,
+    .showcase-container,
+    .legal-card {
+        padding: 32px 22px;
+    }
+    .contact-compact-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 26px 22px;
+    }
+    .contact-chips {
+        justify-content: flex-start;
+        width: 100%;
+    }
+    .legal-tab-nav {
+        flex-direction: column;
+    }
+    .tab-btn {
+        width: 100%;
+        text-align: left;
+    }
+    .faq details[open] {
+        margin: 8px 0;
+        padding: 10px 16px 16px;
+    }
+    .footer-links {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
+        gap: 10px 16px;
+        text-align: left;
+        max-width: 420px;
+        margin: 0 auto 24px;
     }
 }
 
-@media (min-width: 1050px) {
-    .features-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .trust-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-    .support-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
-}
-
-/* ==================== SCROLL REVEAL (Keeps sketches still) ==================== */
+/* ==================== SCROLL REVEAL (Keeps organic forms still) ==================== */
 html.reveal-ready .reveal-item {
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--dp-motion-interaction);
 }
 
 html.reveal-ready .reveal-item.is-visible {
     opacity: 1;
 }
 
-/* ==================== DARK DRAFTING BOARD ==================== */
+/* ==================== REDUCED MOTION ==================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+    .btn:active,
+    .support-card:active,
+    .menu-toggle:active {
+        transform: none !important;
+    }
+}
+
+/* ==================== DARK PEAT & EARTH MODE ==================== */
 @media (prefers-color-scheme: dark) {
     :root {
-        --dp-color-ground: #1e1d1b;
-        --dp-color-ink: #f5eedf;
-        --dp-color-ink-muted: #c7bfb0;
-        --dp-color-line: #4e4a42;
-        --dp-color-accent: #e56555;
-        --dp-color-annotation: #89b0d6;
-        --dp-color-highlight: #463b1e;
-        --dp-color-scrap: #282623;
-
-        --bg: var(--dp-color-ground);
-        --surface: var(--dp-color-scrap);
-        --text-primary: var(--dp-color-ink);
-        --text-secondary: var(--dp-color-ink-muted);
-        --border: var(--dp-color-line);
-
-        --shadow-pencil: 3px 3px 0 #0f0e0d;
-        --shadow-pencil-sm: 2px 2px 0 #0f0e0d;
-        --shadow-line: 3px 3px 0 #38342e;
-        --shadow-line-sm: 2px 2px 0 #38342e;
+        --dp-color-ground: #1c1915;
+        --dp-color-surface: #26221d;
+        --dp-color-ink: #eee6d6;
+        --dp-color-ink-muted: #c2b8a6;
+        --dp-color-primary: #3b4a32;
+        --dp-color-field: #5e3f31;
+        --dp-color-art-accent: #ad7d62;
+        --dp-color-surface-muted: #332e27;
+        --dp-color-highlight: #b9b28b;
     }
 
     body::before {
@@ -159,31 +179,22 @@ html.reveal-ready .reveal-item.is-visible {
         mix-blend-mode: screen;
     }
 
-    .navbar {
-        background: rgba(40, 38, 35, 0.94);
+    a {
+        color: var(--dp-color-highlight);
     }
 
-    .tape {
-        background: rgba(65, 60, 52, 0.85);
-        border-left-color: rgba(140, 130, 115, 0.4);
-        border-right-color: rgba(140, 130, 115, 0.4);
+    a:hover {
+        color: var(--dp-color-art-accent);
     }
 
-    .callout {
-        border-left-color: var(--dp-color-accent);
+    .btn-primary {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915 !important;
+        border-color: var(--dp-color-highlight);
     }
 
-    .callout p {
-        color: var(--dp-color-ink);
-    }
-
-    .verify pre {
-        background: #111110;
-        color: #f5eedf;
-        border-color: #38342e;
-    }
-
-    .asset-row {
-        background: rgba(30, 29, 27, 0.6);
+    .btn-primary:hover {
+        background-color: #cfc8a3;
+        color: #1c1915 !important;
     }
 }
