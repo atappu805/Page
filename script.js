@@ -329,21 +329,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.documentElement.classList.add('reveal-ready');
 
-        var observer = new IntersectionObserver(function(entries, obs) {
+        // Observer that toggles visibility everytime element enters or leaves viewport (scrolling up or down)
+        var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                    obs.unobserve(entry.target);
+                } else {
+                    entry.target.classList.remove('is-visible');
                 }
             });
         }, {
             root: null,
-            rootMargin: '0px 0px -40px 0px',
-            threshold: 0.08
+            rootMargin: '0px 0px -20px 0px',
+            threshold: 0.05
         });
 
         targets.forEach(function(el) {
             observer.observe(el);
+        });
+
+        // Observe horizontal scrolling inside showcase gallery groups
+        var scrollContainers = document.querySelectorAll('.showcase-scroll');
+        scrollContainers.forEach(function(container) {
+            var cards = container.querySelectorAll('.device-card');
+            var hObserver = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                root: container,
+                threshold: 0.1
+            });
+            cards.forEach(function(card) {
+                hObserver.observe(card);
+            });
         });
     }
 
