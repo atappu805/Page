@@ -103,6 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const relNotesList = document.getElementById('relNotesList');
     const relChangelog = document.getElementById('relChangelog');
     const trustRelease = document.getElementById('trustRelease');
+    const trustReleaseMeta = document.getElementById('trustReleaseMeta');
+    const trustReleaseBtn = document.getElementById('trustReleaseBtn');
 
     function formatBytes(bytes) {
         if (!bytes || bytes <= 0) return '0 B';
@@ -223,7 +225,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // 6. Trust Section latest release link
-            if (trustRelease) {
+            if (trustReleaseMeta) {
+                trustReleaseMeta.textContent = (tagName ? tagName + ' · ' : '') + 'Verified build' + (publishedDate ? ' (' + publishedDate + ').' : '.');
+            }
+            if (trustReleaseBtn) {
+                trustReleaseBtn.href = htmlUrl;
+                if (tagName) trustReleaseBtn.textContent = 'View ' + tagName;
+            } else if (trustRelease) {
                 trustRelease.innerHTML = '<a href="' + htmlUrl + '" target="_blank" rel="noopener">' + escapeHtml(tagName || releaseTitle) + (publishedDate ? ' (' + publishedDate + ')' : '') + '</a>';
             }
 
