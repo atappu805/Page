@@ -80,8 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // On page load or refresh: if a policy hash exists, open the tab and scroll to it,
-    // then immediately strip the hash so the user has the clear URL (https://pixelmusic.pages.dev)
+    // On page load or refresh: if a policy hash exists, open the tab and scroll to it
     const initialHash = window.location.hash.replace('#', '');
     if (['ytm-policy', 'privacy', 'terms'].includes(initialHash)) {
         switchTab(initialHash);
@@ -92,9 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     cleanUrlHash();
 
-    // 3. Showcase Gallery (View-only cards; tap to enlarge disabled)
-
-    // 4. Live GitHub Releases Loader
+    // 3. Live GitHub Releases Loader
     const relVersion = document.getElementById('relVersion');
     const relMeta = document.getElementById('relMeta');
     const relPrimary = document.getElementById('relPrimary');
@@ -168,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let res = await fetch('https://api.github.com/repos/' + repo + '/releases/latest', fetchOpts);
 
-            // If 404 (e.g. only pre-releases exist), fall back to list of releases
             if (!res.ok) {
                 res = await fetch('https://api.github.com/repos/' + repo + '/releases?per_page=1', fetchOpts);
             }
@@ -192,13 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const htmlUrl = release.html_url || releasesPageUrl;
             const assets = release.assets || [];
 
-            // 1. Release Title
             relVersion.textContent = releaseTitle;
 
-            // 2. Find APK asset (prefer .apk)
             const apkAsset = assets.find(a => a.name && a.name.toLowerCase().endsWith('.apk')) || assets[0];
 
-            // 3. Metadata
             const metaParts = [];
             if (publishedDate) metaParts.push('Released on ' + publishedDate);
             if (tagName && releaseTitle !== tagName) metaParts.push(tagName);
@@ -207,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 relMeta.textContent = metaParts.join(' · ');
             }
 
-            // 4. Primary CTA button
             if (relPrimary) {
                 if (apkAsset && apkAsset.browser_download_url) {
                     relPrimary.href = apkAsset.browser_download_url;
@@ -219,12 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 5. Changelog links
             if (relChangelog) {
                 relChangelog.href = htmlUrl;
             }
 
-            // 6. Trust Section latest release link
             if (trustReleaseMeta) {
                 trustReleaseMeta.textContent = (tagName ? tagName + ' · ' : '') + 'Verified build' + (publishedDate ? ' (' + publishedDate + ').' : '.');
             }
@@ -235,7 +225,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 trustRelease.innerHTML = '<a href="' + htmlUrl + '" target="_blank" rel="noopener">' + escapeHtml(tagName || releaseTitle) + (publishedDate ? ' (' + publishedDate + ')' : '') + '</a>';
             }
 
-            // 7. Assets list
             if (relAssets) {
                 if (assets.length > 0) {
                     const releaseBody = release.body || '';
@@ -258,7 +247,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // 8. Release Notes / Changelog preview
             if (relNotes && relNotesList && release.body) {
                 const lines = release.body
                     .split(/\r?\n/)
@@ -281,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (timeoutId) clearTimeout(timeoutId);
             console.warn('Could not load latest GitHub release live:', err);
 
-            // Graceful fallback so the UI is never stuck on "Loading latest release…"
             if (relVersion) {
                 relVersion.textContent = 'PixelMusic Releases';
             }
@@ -307,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadLatestRelease();
 
-    // 5. Scroll-Triggered Reveal System
+    // 4. Scroll-Triggered Reveal System
     function initScrollReveal() {
         if (!('IntersectionObserver' in window)) return;
 
@@ -316,8 +303,9 @@ document.addEventListener('DOMContentLoaded', () => {
             '.hero-visual',
             '.section-header',
             '.showcase-header',
-            '.gallery-group',
-            '.device-card',
+            '.m3-carousel-actions',
+            '.m3-filter-bar',
+            '.m3-carousel-card',
             '.feature-card',
             '.download-card',
             '.trust-item',
@@ -337,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.documentElement.classList.add('reveal-ready');
 
-        // Observer that toggles visibility everytime element enters or leaves viewport (scrolling up or down)
         var observer = new IntersectionObserver(function(entries) {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
@@ -355,211 +342,256 @@ document.addEventListener('DOMContentLoaded', () => {
         targets.forEach(function(el) {
             observer.observe(el);
         });
-
-        // Observe horizontal scrolling inside showcase gallery groups
-        var scrollContainers = document.querySelectorAll('.showcase-scroll');
-        scrollContainers.forEach(function(container) {
-            var cards = container.querySelectorAll('.device-card');
-            var hObserver = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    } else {
-                        entry.target.classList.remove('is-visible');
-                    }
-                });
-            }, {
-                root: container,
-                threshold: 0.1
-            });
-            cards.forEach(function(card) {
-                hObserver.observe(card);
-            });
-        });
     }
 
     initScrollReveal();
 
-    // 6. Interactive 3D Curved Particle Canopy (Reacts to Scroll & Theme)
-    function initReactiveBackground() {
-        var canvas = document.getElementById('bgCanvas');
-        if (!canvas || window.getComputedStyle(canvas).display === 'none') return;
-        var ctx = canvas.getContext('2d');
-        if (!ctx) return;
+    // ==========================================================
+    // 5. Material Design 3 Expressive Carousel & Reactive Shapes
+    // ==========================================================
+    function initMaterialYouCarousel() {
+        const viewport = document.getElementById('carouselViewport');
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('carouselPrevBtn');
+        const nextBtn = document.getElementById('carouselNextBtn');
+        const filterChips = document.querySelectorAll('.m3-filter-chip');
+        const dotsContainer = document.getElementById('carouselDots');
+        const counterText = document.getElementById('carouselCounterText');
+        const currentTitle = document.getElementById('carouselCurrentTitle');
+        const showcaseShapes = document.querySelectorAll('.m3-carousel-bg-shapes .m3-reactive-shape');
 
-        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (prefersReducedMotion) return;
+        if (!viewport || !track) return;
 
-        var width = 0;
-        var height = 0;
-        var dpr = 1;
+        const allCards = Array.from(track.querySelectorAll('.m3-carousel-card'));
+        let visibleCards = [...allCards];
+        let activeIndex = 0;
 
-        // Precompute grid confined to upper ~30% screen height (optimized for mobile/desktop performance)
-        var isMobile = (window.innerWidth || 800) < 768;
-        var cols = isMobile ? 38 : 54;
-        var rows = isMobile ? 24 : 34;
-        var grid = [];
-        for (var c = 0; c < cols; c++) {
-            var u = -2.2 + (4.4 * c) / (cols - 1);
-            for (var r = 0; r < rows; r++) {
-                var v = 0.85 + (3.35 * r) / (rows - 1);
-                grid.push({
-                    u: u,
-                    v: v,
-                    // Calibrated so apex reaches ~30% of screen height, emerging from behind address bar
-                    yNorm: 0.20 + 0.040 * (4.2 - v) + 0.038 * (u * u)
+        // A. Build Dynamic Material You Expanding Pill Pagination
+        function renderDots() {
+            if (!dotsContainer) return;
+            dotsContainer.innerHTML = '';
+            visibleCards.forEach((card, i) => {
+                const dot = document.createElement('button');
+                dot.className = 'm3-dot' + (i === activeIndex ? ' active' : '');
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-label', 'Screen ' + (i + 1) + ' of ' + visibleCards.length + ': ' + (card.dataset.title || 'Screenshot'));
+                dot.setAttribute('aria-selected', i === activeIndex ? 'true' : 'false');
+                dot.addEventListener('click', () => {
+                    scrollToCardIndex(i);
+                });
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        // B. Scroll to Card by index
+        function scrollToCardIndex(index) {
+            if (index < 0) index = 0;
+            if (index >= visibleCards.length) index = visibleCards.length - 1;
+            const targetCard = visibleCards[index];
+            if (!targetCard) return;
+
+            const cardLeft = targetCard.offsetLeft;
+            const cardWidth = targetCard.offsetWidth;
+            const viewportWidth = viewport.offsetWidth;
+            const targetScroll = cardLeft - (viewportWidth - cardWidth) / 2;
+
+            viewport.scrollTo({
+                left: Math.max(0, targetScroll),
+                behavior: 'smooth'
+            });
+        }
+
+        // C. Update Active Card & Status Display
+        function updateActiveCard() {
+            const viewportCenter = viewport.scrollLeft + viewport.offsetWidth / 2;
+            let closestIndex = 0;
+            let minDistance = Infinity;
+
+            visibleCards.forEach((card, i) => {
+                const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+                const distance = Math.abs(viewportCenter - cardCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestIndex = i;
+                }
+            });
+
+            activeIndex = closestIndex;
+
+            allCards.forEach(c => c.classList.remove('is-active-card'));
+            const currentCard = visibleCards[activeIndex];
+            if (currentCard) {
+                currentCard.classList.add('is-active-card');
+                if (counterText) {
+                    const numStr = (activeIndex + 1 < 10 ? '0' : '') + (activeIndex + 1);
+                    const totalStr = (visibleCards.length < 10 ? '0' : '') + visibleCards.length;
+                    counterText.textContent = numStr + ' / ' + totalStr;
+                }
+                if (currentTitle) {
+                    currentTitle.textContent = currentCard.dataset.title || '';
+                }
+            }
+
+            if (dotsContainer) {
+                const dots = dotsContainer.querySelectorAll('.m3-dot');
+                dots.forEach((dot, i) => {
+                    const isActive = i === activeIndex;
+                    dot.classList.toggle('active', isActive);
+                    dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
                 });
             }
         }
-        var gridLen = grid.length;
 
-        function resize() {
-            var newWidth = window.innerWidth;
-            var newHeight = window.innerHeight;
-            var newDpr = Math.min(window.devicePixelRatio || 1, 2);
-            // Ignore minor height changes on mobile caused by address bar show/hide
-            if (newWidth === width && Math.abs(newHeight - height) < 120 && newDpr === dpr) {
-                return;
-            }
-            width = newWidth;
-            height = newHeight;
-            dpr = newDpr;
-            canvas.width = Math.floor(width * dpr);
-            canvas.height = Math.floor(height * dpr);
-        }
-        resize();
-        window.addEventListener('resize', resize, { passive: true });
+        // D. Category Filtering
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const filter = chip.dataset.filter || 'all';
 
-        // Safe scroll tracking with NaN protection
-        var lastScrollY = window.pageYOffset || window.scrollY || 0;
-        var scrollVelocity = 0;
-        var smoothVelocity = 0;
+                filterChips.forEach(c => {
+                    const isActive = c === chip;
+                    c.classList.toggle('active', isActive);
+                    c.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                });
 
-        window.addEventListener('scroll', function() {
-            var curY = window.pageYOffset || window.scrollY || document.documentElement.scrollTop || 0;
-            if (isNaN(curY)) curY = 0;
-            var delta = curY - lastScrollY;
-            if (isNaN(delta) || Math.abs(delta) > 500) delta = 0;
-            scrollVelocity = delta;
-            lastScrollY = curY;
-        }, { passive: true });
+                allCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('filtered-out');
+                    } else {
+                        card.classList.add('filtered-out');
+                    }
+                });
 
-        // Mouse tracking for subtle 3D perspective parallax
-        var mouseX = 0;
-        var mouseY = 0;
-        var targetMouseX = 0;
-        var targetMouseY = 0;
-
-        window.addEventListener('mousemove', function(e) {
-            targetMouseX = (e.clientX / Math.max(1, width) - 0.5) * 2;
-            targetMouseY = (e.clientY / Math.max(1, height) - 0.5) * 2;
-        }, { passive: true });
-
-        // Theme tracking
-        var darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        var isDark = darkModeQuery.matches;
-        darkModeQuery.addEventListener('change', function(e) {
-            isDark = e.matches;
+                visibleCards = allCards.filter(c => !c.classList.contains('filtered-out'));
+                activeIndex = 0;
+                renderDots();
+                scrollToCardIndex(0);
+                updateActiveCard();
+            });
         });
 
-        var time = 0;
-        var isCanvasVisible = true;
-        var heroElement = document.querySelector('#top') || document.querySelector('.hero-grid') || document.querySelector('.hero');
-        if ('IntersectionObserver' in window && heroElement) {
-            var canvasObserver = new IntersectionObserver(function(entries) {
-                isCanvasVisible = entries[0].isIntersecting;
-            }, { root: null, rootMargin: '120px 0px 120px 0px', threshold: 0.01 });
-            canvasObserver.observe(heroElement);
+        // E. Prev & Next FAB Click Handlers
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                const prevIndex = Math.max(0, activeIndex - 1);
+                scrollToCardIndex(prevIndex);
+            });
         }
 
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                lastScrollY = window.pageYOffset || window.scrollY || 0;
-                scrollVelocity = 0;
-                smoothVelocity = 0;
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                const nextIndex = Math.min(visibleCards.length - 1, activeIndex + 1);
+                scrollToCardIndex(nextIndex);
+            });
+        }
+
+        // F. Keyboard Arrow Navigation
+        viewport.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                scrollToCardIndex(Math.max(0, activeIndex - 1));
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                scrollToCardIndex(Math.min(visibleCards.length - 1, activeIndex + 1));
             }
         });
 
-        function render() {
-            if (!isCanvasVisible) {
-                requestAnimationFrame(render);
-                return;
+        // G. Mouse Drag to Scroll
+        let isDown = false;
+        let startX = 0;
+        let scrollStart = 0;
+
+        viewport.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - viewport.offsetLeft;
+            scrollStart = viewport.scrollLeft;
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isDown) {
+                isDown = false;
+                updateActiveCard();
             }
-            // Ensure velocity numbers are always valid
-            if (isNaN(smoothVelocity)) smoothVelocity = 0;
-            if (isNaN(scrollVelocity)) scrollVelocity = 0;
+        });
 
-            // Smooth kinetic dampening
-            smoothVelocity += (scrollVelocity - smoothVelocity) * 0.1;
-            scrollVelocity *= 0.88;
+        viewport.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - viewport.offsetLeft;
+            const walk = (x - startX) * 1.6;
+            viewport.scrollLeft = scrollStart - walk;
+        });
 
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
+        // H. REACTIVE SHOWCASE SHAPES: Glide left/right and rotate on carousel browsing
+        let ticking = false;
+        viewport.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrollLeft = viewport.scrollLeft;
 
-            var curScroll = window.pageYOffset || window.scrollY || 0;
-            if (isNaN(curScroll)) curScroll = 0;
-            var velocitySurge = 1 + Math.min(Math.abs(smoothVelocity) * 0.02, 1.6);
-            time += 0.005; // Tranquil, smooth particle movement
+                    showcaseShapes.forEach(shape => {
+                        const pX = parseFloat(shape.dataset.parallaxX || '0.25');
+                        const pRot = parseFloat(shape.dataset.rot || '0.15');
+                        const xOffset = scrollLeft * pX;
+                        const rotOffset = scrollLeft * pRot;
+                        shape.style.transform = 'translate3d(' + xOffset.toFixed(1) + 'px, 0, 0) rotate(' + rotOffset.toFixed(1) + 'deg)';
+                    });
 
-            // Reliable 100% canvas buffer wipe across all DPRs
-            ctx.save();
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.restore();
-
-            // Set high-DPI transform for drawing
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-            var fov = Math.min(width, height) * 0.95;
-            var horizonY = -height * 0.10;
-            var scrollPhase = curScroll * 0.0018;
-            var baseWaveAmp = 0.012 * velocitySurge;
-
-            var tiltX = mouseX * 0.05;
-            var tiltY = mouseY * 0.02;
-
-            for (var i = 0; i < gridLen; i++) {
-                var pt = grid[i];
-                var u = pt.u + tiltX;
-                var v = pt.v;
-
-                // 3D undulating waves (slow, soothing harmonic ripple)
-                var wave1 = Math.sin(u * 3.0 + v * 1.8 + time * 0.7 + scrollPhase) * baseWaveAmp;
-                var wave2 = Math.cos(u * 1.6 - v * 1.2 - time * 0.4 + scrollPhase * 0.5) * (baseWaveAmp * 0.4);
-                var y3d = pt.yNorm + wave1 + wave2 + (tiltY * 0.03);
-
-                // 3D Perspective projection (proportional to viewport height)
-                var px = width * 0.5 + (u * fov) / v;
-                var py = horizonY + (y3d * height) / v;
-
-                // Screen boundary culling
-                if (px < -20 || px > width + 20 || py < -30 || py > height + 20) {
-                    continue;
-                }
-
-                // Fine, smaller particles
-                var depthFactor = 1 / Math.pow(v, 1.15);
-                var radius = Math.max(0.6, Math.min(2.2, 5.2 * depthFactor));
-                var alpha = Math.max(0.12, Math.min(0.85, 0.92 * depthFactor));
-
-                ctx.beginPath();
-                ctx.arc(px, py, radius, 0, Math.PI * 2);
-
-                if (isDark) {
-                    // Ice blue / cyan glow from video demo
-                    ctx.fillStyle = 'rgba(135, 206, 250, ' + alpha + ')';
-                } else {
-                    // Warm terracotta / bronze for light theme
-                    ctx.fillStyle = 'rgba(152, 73, 39, ' + (alpha * 0.75) + ')';
-                }
-                ctx.fill();
+                    updateActiveCard();
+                    ticking = false;
+                });
+                ticking = true;
             }
+        }, { passive: true });
 
-            requestAnimationFrame(render);
-        }
-
-        render();
+        // Initialize
+        renderDots();
+        updateActiveCard();
     }
 
-    initReactiveBackground();
+    initMaterialYouCarousel();
+
+    // ==========================================================
+    // 6. Page-wide Reactive Background Shapes (Spinning on Scroll)
+    // ==========================================================
+    function initPageReactiveShapes() {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
+
+        const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape');
+        if (!pageShapes.length) return;
+
+        let lastScrollY = window.pageYOffset || window.scrollY || 0;
+        let smoothScrollY = lastScrollY;
+        let isTicking = false;
+
+        function updateShapes() {
+            const currentY = window.pageYOffset || window.scrollY || 0;
+            smoothScrollY += (currentY - smoothScrollY) * 0.12;
+
+            pageShapes.forEach(shape => {
+                const pRot = parseFloat(shape.dataset.rot || '0.18');
+                const pY = parseFloat(shape.dataset.parallaxY || '0.12');
+                const rot = (smoothScrollY * pRot) % 360;
+                const transY = (smoothScrollY * pY);
+                shape.style.transform = 'translate3d(0, ' + transY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+            });
+
+            if (Math.abs(currentY - smoothScrollY) > 0.5) {
+                requestAnimationFrame(updateShapes);
+            } else {
+                isTicking = false;
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!isTicking) {
+                isTicking = true;
+                requestAnimationFrame(updateShapes);
+            }
+        }, { passive: true });
+
+        updateShapes();
+    }
+
+    initPageReactiveShapes();
 });
