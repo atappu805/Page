@@ -595,11 +595,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const closingTop = closingContainer.offsetTop;
                 const closingHeight = closingContainer.offsetHeight || 90;
 
-                // Vertical distance from closing slot up to the Contact section
-                const travelDistanceY = Math.max(320, (closingTop - contactTop) - 110);
+                // Vertical distance from closing slot up to the center of Contact section
+                const contactCenterDoc = contactTop + (contactSection.offsetHeight || 380) * 0.42;
+                const closingCenterDoc = closingTop + closingHeight * 0.5;
+                const travelDistanceY = Math.max(300, closingCenterDoc - contactCenterDoc);
 
                 // Scroll window: starts as Contact enters view, reaches 1.0 as user reaches bottom
-                const startScroll = Math.max(0, contactTop - vh * 0.65);
+                const startScroll = Math.max(0, contactTop - vh * 0.70);
                 const endScroll = Math.max(
                     startScroll + 220,
                     Math.min(maxScroll - 16, (closingTop + closingHeight * 0.5) - vh * 0.68)
@@ -608,8 +610,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rawT = (smoothScrollY - startScroll) / Math.max(1, endScroll - startScroll);
                 const t = Math.max(0, Math.min(1, rawT));
 
-                // 1. Center Cookie: large in background at Contact (t=0), spins & shrinks down to small slot (t=1)
-                const maxScale = vw < 700 ? 5.6 : 7.2;
+                // 1. Center Cookie: significantly larger in background at Contact (t=0), spins & shrinks down to small slot (t=1)
+                const maxScale = vw < 700 ? 13.2 : 16.5;
                 const cookieScale = 1 + (1 - t) * (maxScale - 1);
                 const cookieY = -(1 - t) * travelDistanceY;
                 const cookieRot = (1 - t) * 540;
