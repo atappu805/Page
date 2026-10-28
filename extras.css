@@ -104,6 +104,18 @@ html, body {
         min-height: 430px;
         padding: 12px;
     }
+    .section-shape-mark {
+        width: 30px;
+        height: 30px;
+    }
+    .feature-shape-badge {
+        width: 48px;
+        height: 48px;
+    }
+    .feature-shape-badge .feature-glyph {
+        width: 21px;
+        height: 21px;
+    }
     .hero-phone {
         max-width: 210px;
     }

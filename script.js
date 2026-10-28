@@ -552,6 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape');
         const sectionMarks = document.querySelectorAll('.section-shape-mark');
+        const featureBadges = document.querySelectorAll('.feature-shape-badge > .m3-shape-svg');
+        const chipIcons = document.querySelectorAll('.chip-shape-icon, .m3-filter-chip .chip-shape');
         const contactSection = document.getElementById('contact');
         const closingContainer = document.getElementById('closingOrganic');
         const closingTriangle = document.getElementById('closingTriangle');
@@ -565,18 +567,34 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentY = window.pageYOffset || window.scrollY || 0;
             smoothScrollY += (currentY - smoothScrollY) * 0.16;
 
+            // Faster, energetic rotation for background shapes
             pageShapes.forEach(shape => {
-                const pRot = parseFloat(shape.dataset.rot || '0.10');
+                const pRot = parseFloat(shape.dataset.rot || '0.10') * 2.8;
                 const pY = parseFloat(shape.dataset.parallaxY || '0.05');
                 const rot = (smoothScrollY * pRot) % 360;
                 const rawY = Math.sin(smoothScrollY * 0.003) * 24 * (pY >= 0 ? 1 : -1);
                 shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
             });
 
+            // Section marks: 5x faster rotation (0.68) with alternating directions
             sectionMarks.forEach((mark, idx) => {
                 const dir = idx % 2 === 0 ? 1 : -1;
-                const rot = (smoothScrollY * 0.12 * dir) % 360;
+                const rot = (smoothScrollY * 0.68 * dir) % 360;
                 mark.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
+            });
+
+            // Feature shape badges: active fast spin (0.58) as user scrolls down/up
+            featureBadges.forEach((badge, idx) => {
+                const dir = idx % 2 === 0 ? 1 : -1;
+                const rot = (smoothScrollY * 0.58 * dir) % 360;
+                badge.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
+            });
+
+            // Highlight chips & filter chips: lively spin on scroll
+            chipIcons.forEach((chipIcon, idx) => {
+                const dir = idx % 2 === 0 ? 1 : -1;
+                const rot = (smoothScrollY * 0.52 * dir) % 360;
+                chipIcon.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
             // Closing 3 Shapes Choreography: (Triangle, Cookie, Star)
