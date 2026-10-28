@@ -552,19 +552,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape');
         const sectionMarks = document.querySelectorAll('.section-shape-mark');
+        const contactSection = document.getElementById('contact');
+        const closingContainer = document.getElementById('closingOrganic');
+        const closingTriangle = document.getElementById('closingTriangle');
+        const closingCookie = document.getElementById('closingCookie');
+        const closingStar = document.getElementById('closingStar');
 
         let smoothScrollY = window.pageYOffset || window.scrollY || 0;
         let isTicking = false;
 
         function updateShapes() {
             const currentY = window.pageYOffset || window.scrollY || 0;
-            smoothScrollY += (currentY - smoothScrollY) * 0.14;
+            smoothScrollY += (currentY - smoothScrollY) * 0.16;
 
             pageShapes.forEach(shape => {
                 const pRot = parseFloat(shape.dataset.rot || '0.10');
                 const pY = parseFloat(shape.dataset.parallaxY || '0.05');
                 const rot = (smoothScrollY * pRot) % 360;
-                // Bound vertical offset to +/- 24px so shapes stay anchored in their section
                 const rawY = Math.sin(smoothScrollY * 0.003) * 24 * (pY >= 0 ? 1 : -1);
                 shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
             });
@@ -575,19 +579,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 mark.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
-            if (Math.abs(currentY - smoothScrollY) > 0.5) {
+            // Closing 3 Shapes Choreography: (Triangle, Cookie, Star)
+            // Cookie starts large in the background at Contact area, spins & shrinks/grows on scroll down/up,
+            // and docks at its small position at the bottom while Triangle and Star rise up from down below.
+            if (contactSection && closingContainer && closingCookie && closingTriangle && closingStar) {
+                const vh = window.innerHeight || 800;
+                const vw = window.innerWidth || 400;
+                const docHeight = Math.max(
+                    document.body.scrollHeight || 0,
+                    document.documentElement.scrollHeight || 0
+                );
+                const maxScroll = Math.max(1, docHeight - vh);
+
+                const contactTop = contactSection.offsetTop;
+                const closingTop = closingContainer.offsetTop;
+                const closingHeight = closingContainer.offsetHeight || 90;
+
+                // Vertical distance from closing slot up to the Contact section
+                const travelDistanceY = Math.max(320, (closingTop - contactTop) - 110);
+
+                // Scroll window: starts as Contact enters view, reaches 1.0 as user reaches bottom
+                const startScroll = Math.max(0, contactTop - vh * 0.65);
+                const endScroll = Math.max(
+                    startScroll + 220,
+                    Math.min(maxScroll - 16, (closingTop + closingHeight * 0.5) - vh * 0.68)
+                );
+
+                const rawT = (smoothScrollY - startScroll) / Math.max(1, endScroll - startScroll);
+                const t = Math.max(0, Math.min(1, rawT));
+
+                // 1. Center Cookie: large in background at Contact (t=0), spins & shrinks down to small slot (t=1)
+                const maxScale = vw < 700 ? 5.6 : 7.2;
+                const cookieScale = 1 + (1 - t) * (maxScale - 1);
+                const cookieY = -(1 - t) * travelDistanceY;
+                const cookieRot = (1 - t) * 540;
+                // Soft background opacity while behind Contact/Policies cards, solid 1.0 when docked at bottom
+                const cookieOpacity = t < 0.72
+                    ? (0.16 + (t / 0.72) * 0.22)
+                    : (0.38 + ((t - 0.72) / 0.28) * 0.62);
+
+                closingCookie.style.transform =
+                    'translate3d(0, ' + cookieY.toFixed(1) + 'px, 0) scale(' + cookieScale.toFixed(3) + ') rotate(' + cookieRot.toFixed(1) + 'deg)';
+                closingCookie.style.opacity = cookieOpacity.toFixed(3);
+
+                // 2. Left Triangle & Right Star: rise up from down below as Cookie docks near the bottom
+                const u = Math.max(0, Math.min(1, (t - 0.42) / 0.58));
+                const easeU = 1 - Math.pow(1 - u, 3);
+
+                const triY = (1 - easeU) * 145;
+                const triX = -(1 - easeU) * 24;
+                const triScale = 0.42 + 0.58 * easeU;
+                const triRot = -6 - (1 - easeU) * 135;
+
+                closingTriangle.style.transform =
+                    'translate3d(' + triX.toFixed(1) + 'px, ' + triY.toFixed(1) + 'px, 0) scale(' + triScale.toFixed(3) + ') rotate(' + triRot.toFixed(1) + 'deg)';
+                closingTriangle.style.opacity = easeU.toFixed(3);
+
+                const starY = (1 - easeU) * 160;
+                const starX = (1 - easeU) * 24;
+                const starScale = 0.42 + 0.58 * easeU;
+                const starRot = 8 + (1 - easeU) * 150;
+
+                closingStar.style.transform =
+                    'translate3d(' + starX.toFixed(1) + 'px, ' + starY.toFixed(1) + 'px, 0) scale(' + starScale.toFixed(3) + ') rotate(' + starRot.toFixed(1) + 'deg)';
+                closingStar.style.opacity = easeU.toFixed(3);
+            }
+
+            if (Math.abs(currentY - smoothScrollY) > 0.4) {
                 requestAnimationFrame(updateShapes);
             } else {
                 isTicking = false;
             }
         }
 
-        window.addEventListener('scroll', () => {
+        function requestShapeUpdate() {
             if (!isTicking) {
                 isTicking = true;
                 requestAnimationFrame(updateShapes);
             }
-        }, { passive: true });
+        }
+
+        window.addEventListener('scroll', requestShapeUpdate, { passive: true });
+        window.addEventListener('resize', requestShapeUpdate, { passive: true });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => setTimeout(requestShapeUpdate, 50));
+        });
 
         updateShapes();
     }

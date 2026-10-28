@@ -215,8 +215,10 @@ html.reveal-ready .reveal-item.is-visible {
     .support-card:active,
     .menu-toggle:active,
     .m3-reactive-shape,
-    .section-shape-mark {
+    .section-shape-mark,
+    .closing-shape-svg {
         transform: none !important;
+        opacity: 1 !important;
     }
 }
 
@@ -315,5 +317,14 @@ html.reveal-ready .reveal-item.is-visible {
 
     .mark-primary {
         color: var(--dp-color-highlight);
+    }
+
+    .contact-compact-card,
+    .legal-card {
+        background-color: rgba(38, 34, 29, 0.84);
+    }
+
+    .closing-shape-svg.shape-moss {
+        color: var(--dp-color-primary);
     }
 }

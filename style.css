@@ -857,7 +857,8 @@ a:hover {
     max-width: 860px;
     margin: 0 auto;
     padding: 32px 36px;
-    background-color: var(--dp-color-surface);
+    background-color: rgba(245, 237, 223, 0.84);
+    backdrop-filter: blur(3px);
     border: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
     border-radius: var(--radius-sheet-a);
     display: flex;
@@ -916,7 +917,7 @@ a:hover {
 }
 
 .contact-chip svg {
-    color: var(--dp-color-primary);
+    color: currentColor;
 }
 
 .contact-chip:hover {
@@ -977,7 +978,8 @@ a:hover {
 }
 
 .legal-card {
-    background-color: var(--dp-color-surface);
+    background-color: rgba(245, 237, 223, 0.84);
+    backdrop-filter: blur(3px);
     border: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
     border-radius: var(--radius-sheet-a);
     padding: 44px;
@@ -1033,12 +1035,15 @@ a:hover {
 
 /* ==================== CLOSING SHAPES & STONE FOOTER ==================== */
 .closing-organic {
+    position: relative;
+    z-index: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
-    gap: 18px;
-    padding: 20px 0 36px;
+    align-items: center;
+    gap: 24px;
+    padding: 26px 0 42px;
     pointer-events: none;
+    overflow: visible;
 }
 
 footer {
@@ -1625,25 +1630,27 @@ footer {
     height: 20px;
 }
 
-/* Closing Expressive SVG Shapes above Footer */
+/* Closing Expressive SVG Shapes above Footer: Triangle (left), Cookie (center), Star (right) */
 .closing-shape-svg {
     display: inline-block;
-}
-.closing-shape-svg.shape-moss {
-    width: 54px;
-    height: 54px;
-    color: var(--dp-color-primary);
-    transform: rotate(-6deg);
-}
-.closing-shape-svg.shape-terracotta {
-    width: 64px;
-    height: 64px;
-    color: var(--dp-color-art-accent);
-    transform: rotate(8deg);
+    will-change: transform, opacity;
+    transform-origin: center center;
 }
 .closing-shape-svg.shape-grass {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
     color: var(--dp-color-highlight);
-    transform: rotate(-4deg);
+    transform: rotate(-6deg);
+}
+.closing-shape-svg.shape-moss {
+    width: 58px;
+    height: 58px;
+    color: var(--dp-color-primary);
+    transform: rotate(0deg);
+}
+.closing-shape-svg.shape-terracotta {
+    width: 56px;
+    height: 56px;
+    color: var(--dp-color-art-accent);
+    transform: rotate(8deg);
 }
