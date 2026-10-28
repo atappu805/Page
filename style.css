@@ -295,26 +295,82 @@ a:hover {
 }
 
 .menu-toggle {
+    position: relative;
     display: none;
-    background: var(--dp-color-surface-muted);
-    border: var(--dp-border-hairline) solid var(--dp-color-highlight);
-    color: var(--dp-color-ink);
-    width: 44px;
-    height: 44px;
-    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    background: transparent;
+    border: none;
     cursor: pointer;
+    overflow: visible;
+    color: var(--dp-color-ink);
     border-radius: var(--dp-radius-control);
-    transition: background-color var(--dp-motion-interaction), transform var(--dp-motion-interaction);
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .menu-toggle:active {
-    transform: scale(0.96);
+    transform: scale(0.92);
 }
 
-.menu-toggle svg {
-    width: 22px;
-    height: 22px;
+.menu-toggle-shape {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: var(--dp-color-surface-muted);
+    filter: drop-shadow(0 2px 5px rgba(41, 37, 29, 0.08));
+    will-change: transform;
+    transform-origin: center center;
+    transition: fill 0.3s ease;
+}
+
+.menu-toggle:hover .menu-toggle-shape {
+    fill: rgba(185, 178, 139, 0.45);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-shape {
+    fill: var(--dp-color-primary);
+}
+
+.menu-toggle-icon {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4.5px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.menu-toggle-icon .bar {
     display: block;
+    width: 18px;
+    height: 2px;
+    background-color: var(--dp-color-ink);
+    border-radius: 9999px;
+    transform-origin: center center;
+    transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1), opacity 0.2s ease, background-color 0.25s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .bar-top {
+    transform: translateY(6.5px) rotate(45deg);
+    background-color: var(--dp-color-surface);
+}
+
+.menu-toggle[aria-expanded="true"] .bar-mid {
+    opacity: 0;
+    transform: scaleX(0);
+}
+
+.menu-toggle[aria-expanded="true"] .bar-bot {
+    transform: translateY(-6.5px) rotate(-45deg);
+    background-color: var(--dp-color-surface);
 }
 
 .mobile-nav {

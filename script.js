@@ -559,6 +559,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const closingTriangle = document.getElementById('closingTriangle');
         const closingCookie = document.getElementById('closingCookie');
         const closingStar = document.getElementById('closingStar');
+        const menuMorphPath = document.getElementById('menuToggleMorphPath');
+        const menuToggleSvg = document.querySelector('.menu-toggle-shape');
+
+        const MORPH_SHAPES = [
+            [89.0, 50.0, 89.0, 61.8, 89.1, 73.8, 81.5, 81.5, 73.8, 89.1, 61.8, 89.0, 50.0, 89.0, 38.2, 89.0, 26.2, 89.1, 18.5, 81.5, 10.9, 73.8, 11.0, 61.8, 11.0, 50.0, 11.0, 38.2, 10.9, 26.2, 18.5, 18.5, 26.2, 10.9, 38.2, 11.0, 50.0, 11.0, 61.8, 11.0, 73.8, 10.9, 81.5, 18.5, 89.1, 26.2, 89.0, 38.2, 89.0, 50.0],
+            [94.2, 50.0, 94.2, 64.5, 91.5, 71.0, 81.3, 81.3, 71.0, 91.5, 64.5, 94.2, 50.0, 94.2, 35.5, 94.2, 29.0, 91.5, 18.7, 81.3, 8.5, 71.0, 5.8, 64.5, 5.8, 50.0, 5.8, 35.5, 8.5, 29.0, 18.7, 18.7, 29.0, 8.5, 35.5, 5.8, 50.0, 5.8, 64.5, 5.8, 71.0, 8.5, 81.3, 18.7, 91.5, 29.0, 94.2, 35.5, 94.2, 50.0],
+            [95.0, 50.0, 95.0, 66.5, 69.4, 58.8, 64.1, 64.1, 58.8, 69.4, 66.5, 95.0, 50.0, 95.0, 33.5, 95.0, 41.2, 69.4, 35.9, 64.1, 30.6, 58.8, 5.0, 66.5, 5.0, 50.0, 5.0, 33.5, 30.6, 41.2, 35.9, 35.9, 41.2, 30.6, 33.5, 5.0, 50.0, 5.0, 66.5, 5.0, 58.8, 30.6, 64.1, 35.9, 69.4, 41.2, 95.0, 33.5, 95.0, 50.0],
+            [92.0, 50.0, 92.0, 61.1, 87.5, 71.8, 79.7, 79.7, 71.8, 87.5, 61.1, 92.0, 50.0, 92.0, 38.9, 92.0, 28.2, 87.5, 20.3, 79.7, 12.5, 71.8, 8.0, 61.1, 8.0, 50.0, 8.0, 38.9, 12.5, 28.2, 20.3, 20.3, 28.2, 12.5, 38.9, 8.0, 50.0, 8.0, 61.1, 8.0, 71.8, 12.5, 79.7, 20.3, 87.5, 28.2, 92.0, 38.9, 92.0, 50.0]
+        ];
+
+        function getMorphSvgPath(coords) {
+            let d = 'M ' + coords[0].toFixed(1) + ' ' + coords[1].toFixed(1);
+            for (let i = 2; i < coords.length; i += 6) {
+                d += ' C ' + coords[i].toFixed(1) + ' ' + coords[i+1].toFixed(1) + ', '
+                           + coords[i+2].toFixed(1) + ' ' + coords[i+3].toFixed(1) + ', '
+                           + coords[i+4].toFixed(1) + ' ' + coords[i+5].toFixed(1);
+            }
+            return d + ' Z';
+        }
 
         let smoothScrollY = window.pageYOffset || window.scrollY || 0;
         let isTicking = false;
@@ -596,6 +615,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 const rot = (smoothScrollY * 0.52 * dir) % 360;
                 chipIcon.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
+
+            // Floating Pill Menu Toggle: Material You shape morphing & gentle rotation on scroll
+            if (menuMorphPath) {
+                const docHeight = Math.max(
+                    document.body.scrollHeight || 0,
+                    document.documentElement.scrollHeight || 0
+                );
+                const vh = window.innerHeight || 800;
+                const maxScroll = Math.max(1, docHeight - vh);
+                const scrollProgress = Math.min(1, Math.max(0, smoothScrollY / maxScroll));
+
+                const scaled = scrollProgress * (MORPH_SHAPES.length - 1);
+                const idxA = Math.floor(scaled);
+                const idxB = Math.min(MORPH_SHAPES.length - 1, idxA + 1);
+                const blend = scaled - idxA;
+
+                const shapeA = MORPH_SHAPES[idxA];
+                const shapeB = MORPH_SHAPES[idxB];
+                const currentCoords = [];
+                for (let i = 0; i < shapeA.length; i++) {
+                    currentCoords.push(shapeA[i] + (shapeB[i] - shapeA[i]) * blend);
+                }
+
+                menuMorphPath.setAttribute('d', getMorphSvgPath(currentCoords));
+
+                if (menuToggleSvg) {
+                    const btnRot = (smoothScrollY * 0.45) % 360;
+                    menuToggleSvg.style.transform = 'rotate(' + btnRot.toFixed(1) + 'deg)';
+                }
+            }
 
             // Closing 3 Shapes Choreography: (Triangle, Cookie, Star)
             // Cookie starts large in the background at Contact area, spins & shrinks/grows on scroll down/up,

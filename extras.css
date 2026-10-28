@@ -77,7 +77,7 @@ html, body {
         display: none;
     }
     .menu-toggle {
-        display: block;
+        display: inline-flex;
     }
 }
 
@@ -230,6 +230,7 @@ html.reveal-ready .reveal-item.is-visible {
     .btn:active,
     .support-card:active,
     .menu-toggle:active,
+    .menu-toggle-shape,
     .m3-reactive-shape,
     .section-shape-mark,
     .closing-shape-svg {
