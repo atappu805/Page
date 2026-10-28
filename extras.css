@@ -336,6 +336,47 @@ html.reveal-ready .reveal-item.is-visible {
         color: var(--dp-color-highlight);
     }
 
+    .btn-secondary,
+    .trust-btn {
+        background-color: var(--dp-color-surface);
+        color: var(--dp-color-ink) !important;
+        border-color: var(--dp-color-surface-muted);
+    }
+
+    .btn-secondary:hover,
+    .trust-btn:hover {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915 !important;
+        border-color: var(--dp-color-highlight);
+    }
+
+    .contact-chip.chip-primary,
+    .contact-chip:nth-child(1) {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915 !important;
+    }
+    .contact-chip.chip-field,
+    .contact-chip:nth-child(2) {
+        background-color: var(--dp-color-field);
+        color: #eee6d6 !important;
+    }
+    .contact-chip.chip-accent,
+    .contact-chip:nth-child(3) {
+        background-color: var(--dp-color-art-accent);
+        color: #1c1915 !important;
+    }
+    .contact-chip.chip-highlight,
+    .contact-chip:nth-child(4) {
+        background-color: #3e382f;
+        color: var(--dp-color-highlight) !important;
+        border-color: var(--dp-color-highlight);
+    }
+    .contact-chip.chip-collab,
+    .contact-chip:nth-child(5) {
+        background-color: var(--dp-color-primary);
+        color: #eee6d6 !important;
+    }
+
     .contact-compact-card,
     .legal-card {
         background-color: rgba(38, 34, 29, 0.84);

@@ -201,23 +201,80 @@ a:hover {
 }
 
 .btn-primary:active {
-    transform: scale(0.97);
+    transform: scale(0.93);
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background-color: var(--dp-color-surface-muted);
     color: var(--dp-color-ink) !important;
-    border: var(--dp-border-hairline) solid var(--dp-color-ink-muted);
+    border: var(--dp-border-hairline) solid var(--dp-color-highlight);
 }
 
 .btn-secondary:hover {
-    background-color: var(--dp-color-surface-muted);
-    color: var(--dp-color-ink) !important;
+    background-color: var(--dp-color-field);
+    color: var(--dp-color-surface) !important;
+    border-color: var(--dp-color-field);
     text-decoration: none;
+    box-shadow: 0 4px 12px rgba(41, 37, 29, 0.16);
 }
 
 .btn-secondary:active {
-    transform: scale(0.97);
+    transform: scale(0.93);
+}
+
+/* ==================== UNIVERSAL TAP SHAPE MORPHING ==================== */
+.btn,
+.trust-btn,
+.contact-chip,
+.tab-btn,
+.m3-filter-chip,
+.m3-carousel-fab,
+.support-card {
+    will-change: transform, border-radius;
+    transition: background-color var(--dp-motion-interaction),
+                color var(--dp-motion-interaction),
+                border-color var(--dp-motion-interaction),
+                transform 0.18s cubic-bezier(0.2, 0, 0, 1),
+                border-radius 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow var(--dp-motion-interaction);
+}
+
+.btn:active,
+.trust-btn:active,
+.contact-chip:active,
+.tab-btn:active,
+.m3-filter-chip:active,
+.m3-carousel-fab:active {
+    transform: scale(0.93) !important;
+    border-radius: 46px 14px 44px 16px / 16px 44px 14px 46px !important;
+    transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1), border-radius 0.14s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.support-card:active {
+    transform: scale(0.97) !important;
+    border-radius: 42px 24px 46px 22px / 24px 46px 20px 42px !important;
+    transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1), border-radius 0.14s cubic-bezier(0.2, 0, 0, 1) !important;
+}
+
+.shape-morph-tap {
+    animation: m3ButtonMorphTap 0.46s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+}
+
+@keyframes m3ButtonMorphTap {
+    0% {
+        transform: scale(1);
+    }
+    28% {
+        transform: scale(0.92);
+        border-radius: 48px 12px 46px 14px / 14px 48px 12px 46px;
+    }
+    64% {
+        transform: scale(1.03);
+        border-radius: 14px 46px 16px 48px / 46px 14px 48px 14px;
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* ==================== NAVBAR ==================== */
@@ -606,12 +663,13 @@ a:hover {
 }
 
 .download-section .btn-secondary {
-    border-color: rgba(245, 237, 223, 0.4);
+    background-color: rgba(245, 237, 223, 0.14);
+    border-color: rgba(245, 237, 223, 0.38);
     color: var(--dp-color-surface) !important;
 }
 
 .download-section .btn-secondary:hover {
-    background-color: rgba(245, 237, 223, 0.12);
+    background-color: rgba(245, 237, 223, 0.26);
     color: var(--dp-color-surface) !important;
 }
 
@@ -772,15 +830,15 @@ a:hover {
 
 .trust-btn {
     align-self: flex-start;
-    padding: 8px 18px;
+    padding: 9px 20px;
     font-size: var(--dp-typography-control);
     font-weight: 600;
     border-radius: var(--dp-radius-control);
-    background-color: transparent;
-    border: var(--dp-border-hairline) solid var(--dp-color-ink-muted);
+    background-color: var(--dp-color-surface-muted);
+    border: var(--dp-border-hairline) solid var(--dp-color-highlight);
     color: var(--dp-color-ink) !important;
     text-decoration: none !important;
-    transition: background-color var(--dp-motion-interaction), border-color var(--dp-motion-interaction), color var(--dp-motion-interaction), transform var(--dp-motion-interaction);
+    box-shadow: 0 1px 3px rgba(41, 37, 29, 0.08);
 }
 
 .trust-btn:hover {
@@ -788,10 +846,7 @@ a:hover {
     border-color: var(--dp-color-primary);
     color: var(--dp-color-surface) !important;
     text-decoration: none !important;
-}
-
-.trust-btn:active {
-    transform: scale(0.97);
+    box-shadow: 0 3px 8px rgba(41, 37, 29, 0.16);
 }
 
 /* ==================== FAQ / RULED DISCLOSURE ROWS ==================== */
@@ -964,29 +1019,56 @@ a:hover {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 9px 16px;
+    padding: 10px 18px;
     border-radius: var(--dp-radius-control);
-    background-color: var(--dp-color-ground);
-    border: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
-    color: var(--dp-color-ink);
     font-size: var(--dp-typography-caption);
-    font-weight: 500;
-    text-decoration: none;
-    transition: background-color var(--dp-motion-interaction), color var(--dp-motion-interaction);
+    font-weight: 600;
+    text-decoration: none !important;
+    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(41, 37, 29, 0.10);
+    border: var(--dp-border-hairline) solid transparent;
 }
 
 .contact-chip svg {
     color: currentColor;
+    flex-shrink: 0;
+}
+
+/* Material You Expressive Tonal Palettes for Contact Buttons */
+.contact-chip.chip-primary,
+.contact-chip:nth-child(1) {
+    background-color: var(--dp-color-primary);
+    color: var(--dp-color-surface) !important;
+}
+
+.contact-chip.chip-field,
+.contact-chip:nth-child(2) {
+    background-color: var(--dp-color-field);
+    color: var(--dp-color-surface) !important;
+}
+
+.contact-chip.chip-accent,
+.contact-chip:nth-child(3) {
+    background-color: var(--dp-color-art-accent);
+    color: var(--dp-color-surface) !important;
+}
+
+.contact-chip.chip-highlight,
+.contact-chip:nth-child(4) {
+    background-color: var(--dp-color-highlight);
+    color: var(--dp-color-ink) !important;
+}
+
+.contact-chip.chip-collab,
+.contact-chip:nth-child(5) {
+    background-color: #44563a;
+    color: var(--dp-color-surface) !important;
 }
 
 .contact-chip:hover {
-    background-color: var(--dp-color-primary);
-    color: var(--dp-color-surface);
-    text-decoration: none;
-}
-
-.contact-chip:hover svg {
-    color: var(--dp-color-surface);
+    filter: brightness(1.12);
+    box-shadow: 0 4px 12px rgba(41, 37, 29, 0.18);
+    text-decoration: none !important;
 }
 
 /* ==================== POLICIES / LEGAL ==================== */

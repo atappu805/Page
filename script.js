@@ -738,4 +738,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initPageReactiveShapes();
+
+    // Universal Material You Shape Morphing on Button Taps
+    function initButtonShapeMorph() {
+        const btnSelector = '.btn, .trust-btn, .contact-chip, .tab-btn, .m3-filter-chip, .support-card, .m3-carousel-fab, .asset-name';
+
+        document.addEventListener('pointerdown', (e) => {
+            const targetBtn = e.target.closest(btnSelector);
+            if (!targetBtn) return;
+
+            targetBtn.classList.remove('shape-morph-tap');
+            void targetBtn.offsetWidth;
+            targetBtn.classList.add('shape-morph-tap');
+
+            setTimeout(() => {
+                targetBtn.classList.remove('shape-morph-tap');
+            }, 470);
+        }, { passive: true });
+    }
+
+    initButtonShapeMorph();
 });
