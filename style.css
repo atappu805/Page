@@ -51,6 +51,8 @@ html {
     scroll-behavior: smooth;
     font-size: var(--dp-typography-body);
     background-color: var(--dp-color-ground);
+    overflow-x: clip;
+    max-width: 100vw;
 }
 
 body {
@@ -59,7 +61,8 @@ body {
     line-height: var(--dp-typography-reading-leading);
     background-color: var(--dp-color-ground);
     color: var(--dp-color-ink);
-    overflow-x: hidden;
+    overflow-x: clip;
+    max-width: 100vw;
     padding-top: 92px;
     position: relative;
     -webkit-font-smoothing: antialiased;
@@ -1628,6 +1631,27 @@ footer {
 .m3-carousel-fab svg {
     width: 20px;
     height: 20px;
+}
+
+/* Independent Slot for Center Cookie (Guarantees layout footprint is strictly 58px and never affects siblings or page width) */
+.closing-shape-slot {
+    position: relative;
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closing-shape-slot #closingCookie {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 58px;
+    margin: 0;
+    pointer-events: none;
 }
 
 /* Closing Expressive SVG Shapes above Footer: Triangle (left), Cookie (center), Star (right) */
