@@ -126,7 +126,7 @@ h1, h2, h3, h4, .release-version {
 }
 
 h1 {
-    font-size: clamp(2.875rem, 5.8vw, 4.375rem); /* 46px to 70px opening scale */
+    font-size: clamp(2.875rem, 5.8vw, 4.375rem);
     line-height: 1.06;
     letter-spacing: -0.03em;
 }
@@ -376,7 +376,6 @@ a:hover {
     margin-bottom: 34px;
 }
 
-/* Pale facts tray overlapping the opening's base with asymmetric curves */
 .chip-row {
     display: inline-flex;
     flex-wrap: wrap;
@@ -400,98 +399,6 @@ a:hover {
     gap: 8px;
 }
 
-.chip-row li::before {
-    content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: var(--dp-color-art-accent);
-    border-radius: 60% 40% 55% 45% / 45% 60% 40% 55%;
-}
-
-.chip-row li:nth-child(2)::before {
-    background-color: var(--dp-color-primary);
-}
-
-.chip-row li:nth-child(3)::before {
-    background-color: var(--dp-color-field);
-}
-
-/* Loose arrangement of flat organic forms behind hero visual */
-.hero-visual {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
-}
-
-.organic-cluster {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.organic-shape {
-    position: absolute;
-    display: block;
-}
-
-.organic-shape.shape-clay {
-    width: 240px;
-    height: 280px;
-    background-color: var(--dp-color-field);
-    border-radius: 62% 38% 46% 54% / 54% 48% 52% 46%;
-    top: 6%;
-    left: 8%;
-    transform: rotate(-8deg);
-    opacity: 0.92;
-}
-
-.organic-shape.shape-grass {
-    width: 210px;
-    height: 220px;
-    background-color: var(--dp-color-highlight);
-    border-radius: 44% 56% 58% 42% / 48% 42% 58% 52%;
-    bottom: 8%;
-    right: 6%;
-    transform: rotate(11deg);
-}
-
-.organic-shape.shape-terracotta {
-    width: 140px;
-    height: 130px;
-    background-color: var(--dp-color-art-accent);
-    border-radius: 52% 48% 38% 62% / 58% 44% 56% 42%;
-    top: 14%;
-    right: 12%;
-    transform: rotate(6deg);
-}
-
-.hero-phone {
-    position: relative;
-    z-index: 1;
-    max-width: 260px;
-    width: 100%;
-    background: transparent;
-    padding: 0;
-    border: none;
-    transform: rotate(1.5deg);
-}
-
-.hero-phone img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 28px;
-    border: 1px solid rgba(41, 37, 29, 0.15);
-    box-shadow:
-        0 2px 4px rgba(41, 37, 29, 0.06),
-        0 18px 36px -6px rgba(41, 37, 29, 0.2);
-    filter: sepia(0.08) saturate(0.92) contrast(0.99);
-}
-
 .hero-phone .device-caption {
     margin-top: 12px;
     text-align: center;
@@ -499,18 +406,10 @@ a:hover {
     font-size: var(--dp-typography-caption);
     font-weight: 500;
     color: var(--dp-color-ink-muted);
-    transform: rotate(-1.5deg);
+    transform: rotate(-1.2deg);
 }
 
-/* ==================== SHOWCASE / SUBDUED PHOTOGRAPHY ==================== */
-.showcase-container {
-    margin-bottom: 84px;
-    padding: 34px 26px;
-    background-color: var(--dp-color-surface);
-    border-radius: 24px;
-    border: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
-}
-
+/* ==================== SECTION HEADERS ==================== */
 .showcase-header, .section-header {
     margin-bottom: 34px;
 }
@@ -522,71 +421,6 @@ a:hover {
 .showcase-header p, .section-header p {
     font-size: var(--dp-typography-reading-small);
     color: var(--dp-color-ink-muted);
-}
-
-.gallery-group {
-    margin-bottom: 32px;
-}
-
-.gallery-group:last-child {
-    margin-bottom: 0;
-}
-
-.gallery-group h3 {
-    font-family: var(--dp-typography-display);
-    font-size: 1.3rem;
-    color: var(--dp-color-ink);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
-}
-
-.showcase-scroll {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 8px 4px 18px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-    scrollbar-color: var(--dp-color-art-accent) transparent;
-}
-
-.device-card {
-    position: relative;
-    flex: 0 0 210px;
-    scroll-snap-align: start;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.device-card img {
-    width: 100%;
-    height: auto;
-    display: block;
-    background: transparent;
-    padding: 0;
-    border: 1px solid rgba(41, 37, 29, 0.12);
-    border-radius: 20px;
-    box-shadow: 0 4px 14px rgba(41, 37, 29, 0.08), 0 1px 3px rgba(41, 37, 29, 0.04);
-    filter: sepia(0.08) saturate(0.92) contrast(0.99);
-    transition: filter var(--dp-motion-interaction), box-shadow var(--dp-motion-interaction);
-}
-
-.device-card:nth-child(3n + 1) img {
-    transform: rotate(-0.8deg);
-}
-.device-card:nth-child(3n + 2) img {
-    transform: rotate(0.8deg);
-}
-.device-card:nth-child(3n) img {
-    transform: rotate(-0.5deg);
-}
-
-.device-card:hover img {
-    filter: sepia(0.06) saturate(0.95) contrast(1);
 }
 
 .device-caption {
@@ -1207,34 +1041,6 @@ a:hover {
     pointer-events: none;
 }
 
-.closing-shape {
-    display: inline-block;
-}
-
-.closing-shape.shape-moss {
-    width: 68px;
-    height: 46px;
-    background-color: var(--dp-color-primary);
-    border-radius: 58% 42% 48% 52% / 46% 56% 44% 54%;
-    transform: rotate(-4deg);
-}
-
-.closing-shape.shape-terracotta {
-    width: 92px;
-    height: 58px;
-    background-color: var(--dp-color-art-accent);
-    border-radius: 44% 56% 52% 48% / 54% 42% 58% 46%;
-    transform: rotate(3deg);
-}
-
-.closing-shape.shape-grass {
-    width: 60px;
-    height: 42px;
-    background-color: var(--dp-color-highlight);
-    border-radius: 52% 48% 42% 58% / 48% 54% 46% 52%;
-    transform: rotate(-6deg);
-}
-
 footer {
     margin: 0 20px 24px;
     padding: 48px 28px;
@@ -1293,82 +1099,169 @@ footer {
 }
 
 /* ==========================================================
-   Material Design 3 Expressive Shapes & Carousel System
-   Circle, Oval, Star, Cookies, Rounded Rectangle, Rounded Triangle
+   Material You Expressive Shapes & Frameless Carousel System
    ========================================================== */
 
 .m3-shape-svg {
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
     width: 100%;
     height: 100%;
 }
 
-/* ==================== M3 SECTION MARKERS ==================== */
-.m3-section-marker {
+/* Hero Highlight Chips with Expressive Shape Icons */
+.chip-shape-icon {
+    display: inline-flex;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--dp-color-art-accent);
+}
+.chip-row li:nth-child(2) .chip-shape-icon {
+    color: var(--dp-color-primary);
+}
+.chip-row li:nth-child(3) .chip-shape-icon {
+    color: var(--dp-color-field);
+}
+
+/* Hero Phone Exact 9:20 Screen Ratio */
+.hero-phone {
+    position: relative;
+    z-index: 2;
+    max-width: 245px;
+    width: 100%;
+    background: transparent;
+    padding: 0;
+    border: none;
+    transform: rotate(1.2deg);
+}
+
+.hero-phone img {
+    width: 100%;
+    aspect-ratio: 9 / 20;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 26px;
+    border: 1px solid rgba(41, 37, 29, 0.16);
+    box-shadow:
+        0 4px 10px rgba(41, 37, 29, 0.08),
+        0 20px 40px -8px rgba(41, 37, 29, 0.22);
+    filter: none;
+}
+
+/* Hero Expressive Shapes Cluster (Replaces old CSS blobs cleanly) */
+.hero-visual {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.organic-cluster {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
+}
+
+.hero-shape-cookie {
+    position: absolute;
+    width: 230px;
+    height: 230px;
+    color: var(--dp-color-field);
+    top: 6%;
+    left: calc(50% - 175px);
+    opacity: 0.88;
+}
+
+.hero-shape-squircle {
+    position: absolute;
+    width: 205px;
+    height: 205px;
+    color: var(--dp-color-highlight);
+    bottom: 8%;
+    right: calc(50% - 170px);
+    opacity: 0.90;
+}
+
+.hero-shape-star {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    color: var(--dp-color-art-accent);
+    top: 10%;
+    right: calc(50% - 165px);
+    opacity: 0.92;
+}
+
+/* Inline Section Heading Shape Marks */
+.section-header h2,
+.showcase-header h2 {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 7px 18px 7px 10px;
-    border-radius: 9999px;
-    background-color: var(--dp-color-surface);
-    border: 1px solid var(--dp-color-surface-muted);
-    margin-bottom: 18px;
-    box-shadow: 0 2px 6px rgba(41, 37, 29, 0.05);
-    transition: transform 0.24s cubic-bezier(0.2, 0, 0, 1), background-color 0.24s ease, border-color 0.24s ease;
+    gap: 12px;
 }
 
-.m3-section-marker:hover {
-    transform: translateY(-2px);
-    background-color: var(--dp-color-highlight);
-    border-color: var(--dp-color-art-accent);
-}
-
-.m3-marker-icon {
+.section-shape-mark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: var(--dp-color-primary);
+    width: 26px;
+    height: 26px;
     flex-shrink: 0;
+    will-change: transform;
 }
 
-.marker-cookie .m3-marker-icon { color: var(--dp-color-art-accent); }
-.marker-star .m3-marker-icon, .marker-star8 .m3-marker-icon { color: var(--dp-color-primary); }
-.marker-triangle .m3-marker-icon { color: var(--dp-color-field); }
-.marker-oval .m3-marker-icon { color: var(--dp-color-highlight); }
-.marker-circle .m3-marker-icon { color: var(--dp-color-primary); }
-.marker-squircle .m3-marker-icon { color: var(--dp-color-field); }
+.mark-cookie { color: var(--dp-color-field); }
+.mark-primary { color: var(--dp-color-primary); }
+.mark-accent { color: var(--dp-color-art-accent); }
+.mark-light { color: var(--dp-color-highlight); }
 
-.m3-marker-text {
-    font-family: var(--dp-typography-reading);
-    font-size: var(--dp-typography-caption);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--dp-color-ink);
+/* Feature Component Expressive Shape Badges */
+.feature-shape-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    color: rgba(245, 237, 223, 0.16);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
 }
 
-/* For dark or tinted section backgrounds */
-#features .m3-section-marker,
-#download .m3-section-marker {
-    background-color: rgba(245, 237, 223, 0.12);
-    border-color: rgba(245, 237, 223, 0.25);
+.feature-card:hover .feature-shape-badge {
+    transform: rotate(15deg) scale(1.08);
+    color: rgba(185, 178, 139, 0.28);
 }
-#features .m3-section-marker .m3-marker-text,
-#download .m3-section-marker .m3-marker-text {
-    color: var(--dp-color-surface);
+
+.feature-shape-badge > .m3-shape-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
 }
-#features .m3-section-marker .m3-marker-icon,
-#download .m3-section-marker .m3-marker-icon {
+
+.feature-shape-badge .feature-glyph {
+    position: relative;
+    z-index: 1;
+    width: 20px;
+    height: 20px;
     color: var(--dp-color-highlight);
 }
 
-/* ==================== BIG REACTIVE BACKGROUND SHAPES ==================== */
+/* ==================== CONTAINED SECTION BACKGROUND SHAPES ==================== */
 .m3-section-with-shapes {
     position: relative;
     overflow: hidden;
+}
+
+.m3-section-with-shapes > *:not(.m3-section-bg-shapes):not(.m3-carousel-bg-shapes) {
+    position: relative;
+    z-index: 2;
 }
 
 .m3-section-bg-shapes,
@@ -1385,290 +1278,152 @@ footer {
     display: block;
     pointer-events: none;
     will-change: transform;
-    transition: opacity 0.4s ease;
 }
 
-/* Hero Background Shapes */
-.shape-hero-star {
-    width: 260px;
-    height: 260px;
-    color: var(--dp-color-art-accent);
-    opacity: 0.16;
-    top: -30px;
-    right: -20px;
-}
-.shape-hero-cookie {
-    width: 280px;
-    height: 280px;
-    color: var(--dp-color-primary);
-    opacity: 0.14;
-    bottom: -40px;
-    left: -40px;
-}
-.shape-hero-triangle {
-    width: 180px;
-    height: 180px;
-    color: var(--dp-color-highlight);
-    opacity: 0.22;
-    top: 30%;
-    left: 45%;
-}
-
-/* Showcase Section Background Shapes */
+/* Showcase Corner Shapes (subtle, anchored away from text) */
 .shape-showcase-cookie {
-    width: 440px;
-    height: 440px;
-    color: var(--dp-color-art-accent);
-    opacity: 0.13;
-    top: -80px;
-    right: -80px;
-}
-.shape-showcase-star {
-    width: 380px;
-    height: 380px;
-    color: var(--dp-color-highlight);
-    opacity: 0.16;
-    bottom: -60px;
-    left: -80px;
-}
-.shape-showcase-triangle {
     width: 320px;
     height: 320px;
-    color: var(--dp-color-primary);
-    opacity: 0.12;
-    top: 25%;
-    right: 22%;
-}
-.shape-showcase-oval {
-    width: 400px;
-    height: 240px;
-    color: var(--dp-color-field);
+    color: var(--dp-color-art-accent);
     opacity: 0.10;
-    bottom: 60px;
-    right: 35%;
+    top: -90px;
+    right: -70px;
 }
-.shape-showcase-squircle {
+
+.shape-showcase-star {
+    width: 280px;
+    height: 280px;
+    color: var(--dp-color-highlight);
+    opacity: 0.14;
+    bottom: -80px;
+    left: -70px;
+}
+
+.shape-showcase-triangle {
+    width: 220px;
+    height: 220px;
+    color: var(--dp-color-primary);
+    opacity: 0.07;
+    bottom: 18%;
+    right: -50px;
+}
+
+/* Features Corner Shapes */
+.shape-features-triangle {
     width: 300px;
     height: 300px;
-    color: var(--dp-color-surface-muted);
-    opacity: 0.25;
-    top: 20%;
-    left: 20%;
+    color: rgba(245, 237, 223, 0.06);
+    top: -80px;
+    right: -60px;
 }
 
-/* Features Section Background Shapes */
-.shape-features-triangle {
-    width: 380px;
-    height: 380px;
-    color: rgba(245, 237, 223, 0.08);
-    top: -50px;
-    right: -40px;
-}
-.shape-features-squircle {
-    width: 340px;
-    height: 340px;
-    color: rgba(185, 178, 139, 0.10);
-    bottom: -40px;
-    left: -30px;
+.shape-features-cookie {
+    width: 280px;
+    height: 280px;
+    color: rgba(185, 178, 139, 0.08);
+    bottom: -80px;
+    left: -60px;
 }
 
-/* Download Section Background Shapes */
+/* Download Corner Shapes */
 .shape-download-oval {
-    width: 420px;
+    width: 320px;
+    height: 220px;
+    color: rgba(245, 237, 223, 0.06);
+    top: -60px;
+    right: -60px;
+}
+
+.shape-download-star {
+    width: 260px;
     height: 260px;
-    color: rgba(245, 237, 223, 0.08);
-    top: -40px;
+    color: rgba(185, 178, 139, 0.08);
+    bottom: -70px;
     left: -50px;
 }
-.shape-download-star {
-    width: 360px;
-    height: 360px;
-    color: rgba(185, 178, 139, 0.12);
-    bottom: -50px;
-    right: -30px;
-}
 
-/* Trust & Support Background Shapes */
-.shape-trust-star8 {
-    width: 360px;
-    height: 360px;
-    color: var(--dp-color-art-accent);
-    opacity: 0.12;
-    top: -40px;
-    right: -30px;
-}
-.shape-support-cookie {
-    width: 380px;
-    height: 380px;
-    color: var(--dp-color-highlight);
-    opacity: 0.15;
-    bottom: -40px;
-    left: -30px;
-}
-
-/* ==================== BIG MATERIAL YOU CAROUSEL ==================== */
+/* ==================== MATERIAL YOU FRAMELESS CAROUSEL ==================== */
 .m3-carousel-section {
     position: relative;
-    padding: 44px 36px 40px;
-    border-radius: 44px 32px 48px 36px / 36px 48px 32px 44px;
+    overflow: hidden;
+    padding: 40px 32px 34px;
+    border-radius: var(--radius-sheet-a);
     background-color: var(--dp-color-surface);
     border: var(--dp-border-hairline) solid var(--dp-color-surface-muted);
-    box-shadow: 0 4px 24px rgba(41, 37, 29, 0.05);
     margin-bottom: 92px;
 }
 
-.m3-carousel-section .showcase-header {
+.showcase-top-row {
     position: relative;
     z-index: 2;
-    margin-bottom: 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
 }
 
-/* Material 3 Segmented Filter Chips */
+.showcase-top-row .showcase-header {
+    margin-bottom: 0;
+}
+
+/* Category Filter Chips */
 .m3-filter-bar {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
-    margin-bottom: 28px;
-    position: relative;
-    z-index: 2;
 }
 
 .m3-filter-chip {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
+    gap: 7px;
+    padding: 8px 15px;
     border-radius: 9999px;
     background-color: var(--dp-color-ground);
     border: 1px solid var(--dp-color-surface-muted);
     color: var(--dp-color-ink-muted);
     font-family: var(--dp-typography-reading);
-    font-size: var(--dp-typography-control);
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.24s cubic-bezier(0.2, 0, 0, 1);
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
 .m3-filter-chip:hover {
     background-color: var(--dp-color-surface-muted);
     color: var(--dp-color-ink);
-    transform: translateY(-1px);
 }
 
 .m3-filter-chip.active {
     background-color: var(--dp-color-primary);
     color: var(--dp-color-surface) !important;
     border-color: var(--dp-color-primary);
-    box-shadow: 0 4px 14px rgba(53, 66, 45, 0.22);
-}
-
-.m3-filter-chip.active .chip-shape {
-    color: var(--dp-color-highlight);
 }
 
 .chip-shape {
-    display: inline-flex;
-    width: 16px;
-    height: 16px;
-    color: var(--dp-color-art-accent);
-}
-
-/* Carousel Actions Header (Status & Nav Buttons) */
-.m3-carousel-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-bottom: 22px;
-    position: relative;
-    z-index: 2;
-    flex-wrap: wrap;
-}
-
-.m3-carousel-status {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.m3-status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 9999px;
-    background-color: var(--dp-color-ground);
-    border: 1px solid var(--dp-color-surface-muted);
-    font-family: ui-monospace, 'SF Mono', monospace;
-    font-size: var(--dp-typography-caption);
-    font-weight: 700;
-    color: var(--dp-color-ink);
-}
-
-.m3-status-icon {
     display: inline-flex;
     width: 14px;
     height: 14px;
     color: var(--dp-color-art-accent);
 }
 
-.m3-status-title {
-    font-family: var(--dp-typography-display);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--dp-color-ink);
+.m3-filter-chip.active .chip-shape {
+    color: var(--dp-color-highlight);
 }
 
-.m3-carousel-nav-buttons {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.m3-carousel-fab {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background-color: var(--dp-color-ground);
-    border: 1px solid var(--dp-color-surface-muted);
-    color: var(--dp-color-ink);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(41, 37, 29, 0.08);
-    transition: all 0.24s cubic-bezier(0.2, 0, 0, 1);
-}
-
-.m3-carousel-fab:hover {
-    background-color: var(--dp-color-primary);
-    color: var(--dp-color-surface);
-    border-color: var(--dp-color-primary);
-    transform: scale(1.06);
-    box-shadow: 0 6px 18px rgba(53, 66, 45, 0.25);
-}
-
-.m3-carousel-fab:active {
-    transform: scale(0.92);
-}
-
-.m3-carousel-fab svg {
-    width: 22px;
-    height: 22px;
-}
-
-/* Viewport & Horizontal Track */
+/* Carousel Viewport & Track */
 .m3-carousel-viewport {
+    position: relative;
+    z-index: 2;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    position: relative;
-    z-index: 2;
-    padding: 12px 6px 28px;
-    margin: 0 -6px;
+    padding: 14px 8px 18px;
+    margin: 0 -8px;
     cursor: grab;
     outline: none;
 }
@@ -1683,167 +1438,129 @@ footer {
 
 .m3-carousel-track {
     display: flex;
-    gap: 26px;
-    align-items: stretch;
-    width: max-content;
+    gap: 22px;
+    align-items: flex-start;
 }
 
-/* Big Material You Carousel Cards */
-.m3-carousel-card {
-    flex: 0 0 clamp(290px, 28vw, 340px);
+/* Frameless Screenshot Items (NO outer card boxes or dark phone shells) */
+.m3-carousel-item {
+    flex: 0 0 232px;
     scroll-snap-align: center;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    background-color: var(--dp-color-ground);
-    border: 1px solid var(--dp-color-surface-muted);
-    border-radius: 36px 36px 28px 28px;
-    padding: 16px;
-    box-shadow: 0 6px 20px rgba(41, 37, 29, 0.08);
-    transition: transform 0.35s cubic-bezier(0.2, 0, 0, 1),
-                box-shadow 0.35s cubic-bezier(0.2, 0, 0, 1),
-                border-color 0.35s ease,
-                opacity 0.35s ease;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: none;
+    padding: 0;
     user-select: none;
+    cursor: pointer;
+    opacity: 0.85;
+    transform: scale(0.94);
+    transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.36s ease;
 }
 
-.m3-carousel-card:hover {
-    transform: translateY(-6px) scale(1.015);
-    box-shadow: 0 16px 36px rgba(41, 37, 29, 0.14);
-    border-color: var(--dp-color-art-accent);
+.m3-carousel-item.is-active-card,
+.m3-carousel-item:hover {
+    opacity: 1;
+    transform: scale(1);
 }
 
-.m3-carousel-card.is-active-card {
-    border-color: var(--dp-color-primary);
-    box-shadow: 0 14px 32px rgba(53, 66, 45, 0.18);
-}
-
-.m3-carousel-card.filtered-out {
+.m3-carousel-item.filtered-out {
     display: none !important;
 }
 
-.m3-phone-shell {
-    position: relative;
-    border-radius: 28px;
-    overflow: hidden;
-    background: #151310;
-    border: 1px solid rgba(41, 37, 29, 0.22);
-    box-shadow: 0 10px 26px -4px rgba(41, 37, 29, 0.25);
-}
-
-.m3-phone-top-notch {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 3px 12px;
-    background: rgba(0, 0, 0, 0.68);
-    backdrop-filter: blur(8px);
-    border-radius: 20px;
-    pointer-events: none;
-}
-
-.notch-speaker {
-    width: 24px;
-    height: 3px;
-    border-radius: 2px;
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.notch-camera {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #000;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.m3-card-badge {
-    position: absolute;
-    top: 26px;
-    left: 14px;
-    z-index: 9;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 10px;
-    border-radius: 9999px;
-    background: rgba(0, 0, 0, 0.62);
-    backdrop-filter: blur(8px);
-    color: #fff;
-    font-family: var(--dp-typography-reading);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #80e27e;
-}
-
-.m3-screen-wrapper img {
+.m3-carousel-item img {
     width: 100%;
+    aspect-ratio: 9 / 20;
     height: auto;
-    display: block;
     object-fit: cover;
-    border-radius: 26px;
-    filter: contrast(1.02);
-}
-
-.m3-card-meta {
-    padding: 4px 6px 6px;
-}
-
-.m3-card-cat-label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--dp-color-art-accent);
     display: block;
-    margin-bottom: 3px;
+    background: transparent;
+    padding: 0;
+    border-radius: 22px;
+    border: 1px solid rgba(41, 37, 29, 0.14);
+    box-shadow:
+        0 8px 22px -6px rgba(41, 37, 29, 0.15),
+        0 2px 6px rgba(41, 37, 29, 0.06);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+    -webkit-user-drag: none;
 }
 
-.m3-card-title {
-    font-family: var(--dp-typography-display);
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: var(--dp-color-ink);
-    margin-bottom: 6px;
-    line-height: 1.22;
+.m3-carousel-item:hover img {
+    transform: translateY(-4px);
+    box-shadow:
+        0 14px 28px -6px rgba(41, 37, 29, 0.22),
+        0 4px 10px rgba(41, 37, 29, 0.08);
+    border-color: var(--dp-color-art-accent);
 }
 
-.m3-card-desc {
+.m3-carousel-item.is-active-card img {
+    border-color: rgba(53, 66, 45, 0.45);
+    box-shadow:
+        0 12px 28px -6px rgba(41, 37, 29, 0.20),
+        0 3px 8px rgba(41, 37, 29, 0.08);
+}
+
+.m3-carousel-item .device-caption {
+    text-align: center;
     font-family: var(--dp-typography-reading);
     font-size: var(--dp-typography-caption);
-    line-height: 1.5;
+    font-weight: 600;
     color: var(--dp-color-ink-muted);
-    margin-bottom: 0;
+    line-height: 1.3;
+    transition: color 0.25s ease;
 }
 
-/* Material You Dynamic Pill Pagination */
-.m3-carousel-pagination-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 18px;
+.m3-carousel-item.is-active-card .device-caption {
+    color: var(--dp-color-ink);
+}
+
+/* Carousel Compact Footer Bar */
+.m3-carousel-footer {
     position: relative;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 16px;
+    border-top: 1px solid var(--dp-color-surface-muted);
+    flex-wrap: wrap;
+}
+
+.m3-carousel-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.m3-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 11px;
+    border-radius: 9999px;
+    background-color: var(--dp-color-ground);
+    border: 1px solid var(--dp-color-surface-muted);
+    font-family: ui-monospace, 'SF Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dp-color-ink);
+}
+
+.m3-status-title {
+    font-family: var(--dp-typography-reading);
+    font-size: var(--dp-typography-control);
+    font-weight: 600;
+    color: var(--dp-color-ink);
 }
 
 .m3-carousel-dots {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
+    gap: 6px;
+    padding: 6px 12px;
     background-color: var(--dp-color-ground);
     border: 1px solid var(--dp-color-surface-muted);
     border-radius: 9999px;
@@ -1852,20 +1569,19 @@ footer {
 }
 
 .m3-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 4px;
     background-color: var(--dp-color-surface-muted);
     border: none;
     cursor: pointer;
     padding: 0;
-    transition: width 0.3s cubic-bezier(0.2, 0, 0, 1),
-                background-color 0.3s ease,
-                border-radius 0.3s ease;
+    flex-shrink: 0;
+    transition: width 0.28s cubic-bezier(0.2, 0, 0, 1), background-color 0.28s ease;
 }
 
 .m3-dot.active {
-    width: 28px;
+    width: 24px;
     background-color: var(--dp-color-primary);
     border-radius: 9999px;
 }
@@ -1874,30 +1590,60 @@ footer {
     background-color: var(--dp-color-art-accent);
 }
 
-/* Responsive Rules for Carousel */
-@media (max-width: 900px) {
-    .m3-carousel-section {
-        padding: 32px 20px 28px;
-        border-radius: 32px;
-    }
-    .m3-carousel-card {
-        flex: 0 0 280px;
-    }
+.m3-carousel-nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-@media (max-width: 600px) {
-    .m3-carousel-section {
-        padding: 24px 14px 22px;
-        border-radius: 26px;
-    }
-    .m3-carousel-card {
-        flex: 0 0 255px;
-    }
-    .m3-status-title {
-        display: none;
-    }
-    .m3-filter-chip {
-        padding: 8px 14px;
-        font-size: 13px;
-    }
+.m3-carousel-fab {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--dp-color-ground);
+    border: 1px solid var(--dp-color-surface-muted);
+    color: var(--dp-color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.m3-carousel-fab:hover {
+    background-color: var(--dp-color-primary);
+    color: var(--dp-color-surface);
+    border-color: var(--dp-color-primary);
+}
+
+.m3-carousel-fab:active {
+    transform: scale(0.94);
+}
+
+.m3-carousel-fab svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Closing Expressive SVG Shapes above Footer */
+.closing-shape-svg {
+    display: inline-block;
+}
+.closing-shape-svg.shape-moss {
+    width: 54px;
+    height: 54px;
+    color: var(--dp-color-primary);
+    transform: rotate(-6deg);
+}
+.closing-shape-svg.shape-terracotta {
+    width: 64px;
+    height: 64px;
+    color: var(--dp-color-art-accent);
+    transform: rotate(8deg);
+}
+.closing-shape-svg.shape-grass {
+    width: 50px;
+    height: 50px;
+    color: var(--dp-color-highlight);
+    transform: rotate(-4deg);
 }

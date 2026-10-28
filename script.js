@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             menuToggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Close mobile menu when clicking any link
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileNav.classList.remove('open');
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Close on click outside
         document.addEventListener('click', (e) => {
             if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !menuToggle.contains(e.target)) {
                 mobileNav.classList.remove('open');
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
                 mobileNav.classList.remove('open');
@@ -34,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Interactive Legal Tabs (Clean URL - No #terms or #ytm-policy in address bar)
+    // 2. Interactive Legal Tabs (Clean URL)
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Clean any hash from address bar so URL remains clear (https://pixelmusic.pages.dev)
     function cleanUrlHash() {
         if (window.location.hash && history.replaceState) {
             history.replaceState(null, '', window.location.pathname + window.location.search);
@@ -66,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Intercept footer/policy links to #ytm-policy, #privacy, #terms without adding hash to URL
     document.querySelectorAll('a[href="#ytm-policy"], a[href="#privacy"], a[href="#terms"]').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -80,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // On page load or refresh: if a policy hash exists, open the tab and scroll to it
     const initialHash = window.location.hash.replace('#', '');
     if (['ytm-policy', 'privacy', 'terms'].includes(initialHash)) {
         switchTab(initialHash);
@@ -294,18 +288,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadLatestRelease();
 
-    // 4. Scroll-Triggered Reveal System
+    // 4. Scroll-Triggered Reveal System (Excludes horizontal carousel items so they never hide)
     function initScrollReveal() {
         if (!('IntersectionObserver' in window)) return;
 
         var selectors = [
             '.hero',
             '.hero-visual',
+            '.showcase-container',
             '.section-header',
-            '.showcase-header',
-            '.m3-carousel-actions',
-            '.m3-filter-bar',
-            '.m3-carousel-card',
             '.feature-card',
             '.download-card',
             '.trust-item',
@@ -329,13 +320,11 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
-                } else {
-                    entry.target.classList.remove('is-visible');
                 }
             });
         }, {
             root: null,
-            rootMargin: '0px 0px -20px 0px',
+            rootMargin: '0px 0px -15px 0px',
             threshold: 0.05
         });
 
@@ -347,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollReveal();
 
     // ==========================================================
-    // 5. Material Design 3 Expressive Carousel & Reactive Shapes
+    // 5. Material You Frameless Carousel & Bounded Shape Motion
     // ==========================================================
     function initMaterialYouCarousel() {
         const viewport = document.getElementById('carouselViewport');
@@ -362,11 +351,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!viewport || !track) return;
 
-        const allCards = Array.from(track.querySelectorAll('.m3-carousel-card'));
+        const allCards = Array.from(track.querySelectorAll('.m3-carousel-item'));
         let visibleCards = [...allCards];
         let activeIndex = 0;
 
-        // A. Build Dynamic Material You Expanding Pill Pagination
         function renderDots() {
             if (!dotsContainer) return;
             dotsContainer.innerHTML = '';
@@ -383,7 +371,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // B. Scroll to Card by index
         function scrollToCardIndex(index) {
             if (index < 0) index = 0;
             if (index >= visibleCards.length) index = visibleCards.length - 1;
@@ -401,7 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // C. Update Active Card & Status Display
         function updateActiveCard() {
             const viewportCenter = viewport.scrollLeft + viewport.offsetWidth / 2;
             let closestIndex = 0;
@@ -442,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // D. Category Filtering
+        // Category Filtering
         filterChips.forEach(chip => {
             chip.addEventListener('click', () => {
                 const filter = chip.dataset.filter || 'all';
@@ -464,27 +450,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 visibleCards = allCards.filter(c => !c.classList.contains('filtered-out'));
                 activeIndex = 0;
                 renderDots();
-                scrollToCardIndex(0);
+                viewport.scrollTo({ left: 0, behavior: 'smooth' });
                 updateActiveCard();
             });
         });
 
-        // E. Prev & Next FAB Click Handlers
         if (prevBtn) {
             prevBtn.addEventListener('click', () => {
-                const prevIndex = Math.max(0, activeIndex - 1);
-                scrollToCardIndex(prevIndex);
+                scrollToCardIndex(Math.max(0, activeIndex - 1));
             });
         }
 
         if (nextBtn) {
             nextBtn.addEventListener('click', () => {
-                const nextIndex = Math.min(visibleCards.length - 1, activeIndex + 1);
-                scrollToCardIndex(nextIndex);
+                scrollToCardIndex(Math.min(visibleCards.length - 1, activeIndex + 1));
             });
         }
 
-        // F. Keyboard Arrow Navigation
         viewport.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 e.preventDefault();
@@ -495,13 +477,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // G. Mouse Drag to Scroll
+        // Mouse Drag to Scroll & Click to Center
         let isDown = false;
+        let isDragging = false;
         let startX = 0;
         let scrollStart = 0;
 
+        allCards.forEach((card) => {
+            card.addEventListener('click', () => {
+                if (isDragging) return;
+                const idx = visibleCards.indexOf(card);
+                if (idx !== -1) scrollToCardIndex(idx);
+            });
+        });
+
         viewport.addEventListener('mousedown', (e) => {
             isDown = true;
+            isDragging = false;
             startX = e.pageX - viewport.offsetLeft;
             scrollStart = viewport.scrollLeft;
         });
@@ -517,22 +509,24 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - viewport.offsetLeft;
-            const walk = (x - startX) * 1.6;
+            const walk = (x - startX) * 1.4;
+            if (Math.abs(walk) > 6) isDragging = true;
             viewport.scrollLeft = scrollStart - walk;
         });
 
-        // H. REACTIVE SHOWCASE SHAPES: Glide left/right and rotate on carousel browsing
+        // Bounded Reactive Showcase Shapes: Normalized [0..1] progress so shapes stay in their corners
         let ticking = false;
         viewport.addEventListener('scroll', () => {
             if (!ticking) {
                 requestAnimationFrame(() => {
-                    const scrollLeft = viewport.scrollLeft;
+                    const maxScroll = Math.max(1, viewport.scrollWidth - viewport.clientWidth);
+                    const progress = Math.max(0, Math.min(1, viewport.scrollLeft / maxScroll));
 
                     showcaseShapes.forEach(shape => {
-                        const pX = parseFloat(shape.dataset.parallaxX || '0.25');
-                        const pRot = parseFloat(shape.dataset.rot || '0.15');
-                        const xOffset = scrollLeft * pX;
-                        const rotOffset = scrollLeft * pRot;
+                        const maxShiftX = parseFloat(shape.dataset.shiftX || '50');
+                        const maxRot = parseFloat(shape.dataset.rot || '140');
+                        const xOffset = (progress - 0.5) * 2 * maxShiftX;
+                        const rotOffset = progress * maxRot;
                         shape.style.transform = 'translate3d(' + xOffset.toFixed(1) + 'px, 0, 0) rotate(' + rotOffset.toFixed(1) + 'deg)';
                     });
 
@@ -543,7 +537,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
 
-        // Initialize
         renderDots();
         updateActiveCard();
     }
@@ -551,29 +544,35 @@ document.addEventListener('DOMContentLoaded', () => {
     initMaterialYouCarousel();
 
     // ==========================================================
-    // 6. Page-wide Reactive Background Shapes (Spinning on Scroll)
+    // 6. Page-wide Reactive Shapes (Spinning on Scroll, Bounded Y)
     // ==========================================================
     function initPageReactiveShapes() {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) return;
 
         const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape');
-        if (!pageShapes.length) return;
+        const sectionMarks = document.querySelectorAll('.section-shape-mark');
 
-        let lastScrollY = window.pageYOffset || window.scrollY || 0;
-        let smoothScrollY = lastScrollY;
+        let smoothScrollY = window.pageYOffset || window.scrollY || 0;
         let isTicking = false;
 
         function updateShapes() {
             const currentY = window.pageYOffset || window.scrollY || 0;
-            smoothScrollY += (currentY - smoothScrollY) * 0.12;
+            smoothScrollY += (currentY - smoothScrollY) * 0.14;
 
             pageShapes.forEach(shape => {
-                const pRot = parseFloat(shape.dataset.rot || '0.18');
-                const pY = parseFloat(shape.dataset.parallaxY || '0.12');
+                const pRot = parseFloat(shape.dataset.rot || '0.10');
+                const pY = parseFloat(shape.dataset.parallaxY || '0.05');
                 const rot = (smoothScrollY * pRot) % 360;
-                const transY = (smoothScrollY * pY);
-                shape.style.transform = 'translate3d(0, ' + transY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+                // Bound vertical offset to +/- 24px so shapes stay anchored in their section
+                const rawY = Math.sin(smoothScrollY * 0.003) * 24 * (pY >= 0 ? 1 : -1);
+                shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+            });
+
+            sectionMarks.forEach((mark, idx) => {
+                const dir = idx % 2 === 0 ? 1 : -1;
+                const rot = (smoothScrollY * 0.12 * dir) % 360;
+                mark.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
             if (Math.abs(currentY - smoothScrollY) > 0.5) {

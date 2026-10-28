@@ -44,7 +44,6 @@
 }
 
 /* ==================== RESPONSIVE BEHAVIOR (Organic Spec) ==================== */
-/* At 1000px, tighten the major splits and spacing */
 @media (max-width: 1000px) {
     .hero-grid {
         gap: 32px;
@@ -62,8 +61,13 @@
     .download-section {
         padding: 44px 32px;
     }
-    .showcase-container {
-        padding: 28px 20px;
+    .m3-carousel-section {
+        padding: 32px 24px 28px;
+    }
+    .showcase-top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
     }
     .nav-links {
         display: none;
@@ -73,26 +77,46 @@
     }
 }
 
-/* At 700px, stack the opening, reading sections, images, steps, quotes, and comparison contents.
-   Facts remain in two columns; footer links in two columns. */
 @media (max-width: 700px) {
     .container {
         padding: 0 18px;
     }
     .hero-grid {
         grid-template-columns: 1fr;
-        gap: 36px;
-        padding: 16px 0 56px;
+        gap: 28px;
+        padding: 16px 0 52px;
     }
     .hero-actions .btn {
         width: 100%;
     }
     .chip-row {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         width: 100%;
-        padding: 18px 20px;
-        gap: 12px;
+        padding: 16px 18px;
+        gap: 12px 18px;
+    }
+    .hero-visual {
+        min-height: 430px;
+        padding: 12px;
+    }
+    .hero-phone {
+        max-width: 210px;
+    }
+    .hero-shape-cookie {
+        width: 185px;
+        height: 185px;
+        left: calc(50% - 145px);
+    }
+    .hero-shape-squircle {
+        width: 165px;
+        height: 165px;
+        right: calc(50% - 140px);
+    }
+    .hero-shape-star {
+        width: 105px;
+        height: 105px;
+        right: calc(50% - 135px);
     }
     .features-grid,
     .support-grid {
@@ -107,12 +131,33 @@
     .legal-card {
         padding: 32px 22px;
     }
-    .showcase-container {
-        padding: 22px 14px;
+    .m3-carousel-section {
+        padding: 24px 16px 20px;
+        border-radius: 22px;
+    }
+    .m3-filter-bar {
+        gap: 6px;
+    }
+    .m3-filter-chip {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+    .m3-carousel-track {
+        gap: 16px;
+    }
+    .m3-carousel-item {
+        flex: 0 0 186px;
+    }
+    .m3-carousel-item img {
         border-radius: 18px;
     }
-    .device-card {
-        flex: 0 0 185px;
+    .m3-carousel-footer {
+        gap: 12px;
+    }
+    .m3-carousel-dots {
+        order: 3;
+        width: 100%;
+        justify-content: center;
     }
     .contact-compact-card {
         flex-direction: column;
@@ -144,71 +189,19 @@
     }
 }
 
-/* ==================== SCROLL REVEAL (Runs everytime scrolling up or down) ==================== */
+/* ==================== SCROLL REVEAL ==================== */
 html.reveal-ready .reveal-item {
     opacity: 0;
-    transform: translateY(22px) scale(0.98);
+    transform: translateY(18px);
     transition:
         opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.48s cubic-bezier(0.22, 1, 0.36, 1);
+        transform 0.46s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
 }
 
 html.reveal-ready .reveal-item.is-visible {
     opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-/* Staggering in showcase gallery cards */
-.showcase-scroll .device-card:nth-child(1) { transition-delay: 0.02s; }
-.showcase-scroll .device-card:nth-child(2) { transition-delay: 0.06s; }
-.showcase-scroll .device-card:nth-child(3) { transition-delay: 0.10s; }
-.showcase-scroll .device-card:nth-child(4) { transition-delay: 0.14s; }
-.showcase-scroll .device-card:nth-child(5) { transition-delay: 0.18s; }
-.showcase-scroll .device-card:nth-child(6) { transition-delay: 0.22s; }
-.showcase-scroll .device-card:nth-child(7) { transition-delay: 0.26s; }
-
-/* Showcase photos & components dynamic scroll animation */
-html.reveal-ready .device-card {
-    opacity: 0;
-    transform: translateY(26px) scale(0.94);
-    transition:
-        opacity 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
-}
-
-html.reveal-ready .device-card.is-visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-html.reveal-ready .device-card img {
-    transition:
-        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 0.4s ease,
-        opacity 0.4s ease;
-}
-
-html.reveal-ready .device-card:not(.is-visible) img {
-    transform: translateY(12px) scale(0.92) !important;
-    filter: sepia(0.22) saturate(0.7) blur(0.5px);
-    opacity: 0.8;
-}
-
-html.reveal-ready .device-card.is-visible img {
-    filter: sepia(0.14) saturate(0.86) contrast(0.98);
-    opacity: 1;
-}
-
-html.reveal-ready .device-card:nth-child(3n + 1).is-visible img {
-    transform: rotate(-0.8deg) scale(1) translateY(0);
-}
-html.reveal-ready .device-card:nth-child(3n + 2).is-visible img {
-    transform: rotate(0.8deg) scale(1) translateY(0);
-}
-html.reveal-ready .device-card:nth-child(3n).is-visible img {
-    transform: rotate(-0.5deg) scale(1) translateY(0);
+    transform: translateY(0);
 }
 
 /* ==================== REDUCED MOTION ==================== */
@@ -220,7 +213,9 @@ html.reveal-ready .device-card:nth-child(3n).is-visible img {
     }
     .btn:active,
     .support-card:active,
-    .menu-toggle:active {
+    .menu-toggle:active,
+    .m3-reactive-shape,
+    .section-shape-mark {
         transform: none !important;
     }
 }
@@ -262,36 +257,21 @@ html.reveal-ready .device-card:nth-child(3n).is-visible img {
         background-color: #cfc8a3;
         color: #1c1915 !important;
     }
-}
 
-/* ==================== M3 EXPRESSIVE CAROUSEL & SHAPES RESPONSIVE & DARK MODE ==================== */
-
-/* Dark Mode Overrides for M3 Carousel */
-@media (prefers-color-scheme: dark) {
-    .m3-carousel-section {
-        background-color: var(--dp-color-surface);
-        border-color: var(--dp-color-surface-muted);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    .hero-phone img,
+    .m3-carousel-item img {
+        border-color: rgba(238, 230, 214, 0.14);
+        box-shadow:
+            0 10px 26px -6px rgba(0, 0, 0, 0.5),
+            0 2px 6px rgba(0, 0, 0, 0.3);
     }
 
-    .m3-carousel-card {
-        background-color: #1f1b17;
-        border-color: var(--dp-color-surface-muted);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    }
-
-    .m3-carousel-card:hover {
-        border-color: var(--dp-color-highlight);
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
-    }
-
-    .m3-carousel-card.is-active-card {
-        border-color: var(--dp-color-highlight);
-        box-shadow: 0 14px 32px rgba(185, 178, 139, 0.18);
+    .m3-carousel-item.is-active-card img {
+        border-color: rgba(185, 178, 139, 0.45);
     }
 
     .m3-filter-chip {
-        background-color: #1f1b17;
+        background-color: #1c1915;
         border-color: var(--dp-color-surface-muted);
         color: var(--dp-color-ink-muted);
     }
@@ -305,7 +285,6 @@ html.reveal-ready .device-card:nth-child(3n).is-visible img {
         background-color: var(--dp-color-highlight);
         color: #1c1915 !important;
         border-color: var(--dp-color-highlight);
-        box-shadow: 0 4px 14px rgba(185, 178, 139, 0.3);
     }
 
     .m3-filter-chip.active .chip-shape {
@@ -313,67 +292,28 @@ html.reveal-ready .device-card:nth-child(3n).is-visible img {
     }
 
     .m3-carousel-fab {
-        background-color: #1f1b17;
+        background-color: #1c1915;
         border-color: var(--dp-color-surface-muted);
         color: var(--dp-color-ink);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
     }
 
     .m3-carousel-fab:hover {
         background-color: var(--dp-color-highlight);
         color: #1c1915;
         border-color: var(--dp-color-highlight);
-        box-shadow: 0 6px 20px rgba(185, 178, 139, 0.35);
     }
 
-    .m3-status-badge {
-        background-color: #1f1b17;
-        border-color: var(--dp-color-surface-muted);
-        color: var(--dp-color-ink);
-    }
-
+    .m3-status-badge,
     .m3-carousel-dots {
-        background-color: #1f1b17;
+        background-color: #1c1915;
         border-color: var(--dp-color-surface-muted);
-    }
-
-    .m3-dot {
-        background-color: var(--dp-color-surface-muted);
     }
 
     .m3-dot.active {
         background-color: var(--dp-color-highlight);
     }
 
-    .m3-section-marker {
-        background-color: #1f1b17;
-        border-color: var(--dp-color-surface-muted);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .m3-section-marker:hover {
-        background-color: var(--dp-color-surface-muted);
-        border-color: var(--dp-color-highlight);
-    }
-
-    .marker-cookie .m3-marker-icon { color: var(--dp-color-highlight); }
-    .marker-star .m3-marker-icon, .marker-star8 .m3-marker-icon { color: var(--dp-color-art-accent); }
-    .marker-triangle .m3-marker-icon { color: var(--dp-color-highlight); }
-    .marker-oval .m3-marker-icon { color: var(--dp-color-art-accent); }
-    .marker-circle .m3-marker-icon { color: var(--dp-color-highlight); }
-    .marker-squircle .m3-marker-icon { color: var(--dp-color-art-accent); }
-}
-
-/* Reduced Motion Handling */
-@media (prefers-reduced-motion: reduce) {
-    .m3-reactive-shape {
-        transform: none !important;
-        transition: none !important;
-    }
-    .m3-carousel-viewport {
-        scroll-behavior: auto !important;
-    }
-    .m3-carousel-card {
-        transition: none !important;
+    .mark-primary {
+        color: var(--dp-color-highlight);
     }
 }
