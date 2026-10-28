@@ -263,3 +263,117 @@ html.reveal-ready .device-card:nth-child(3n).is-visible img {
         color: #1c1915 !important;
     }
 }
+
+/* ==================== M3 EXPRESSIVE CAROUSEL & SHAPES RESPONSIVE & DARK MODE ==================== */
+
+/* Dark Mode Overrides for M3 Carousel */
+@media (prefers-color-scheme: dark) {
+    .m3-carousel-section {
+        background-color: var(--dp-color-surface);
+        border-color: var(--dp-color-surface-muted);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .m3-carousel-card {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .m3-carousel-card:hover {
+        border-color: var(--dp-color-highlight);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+    }
+
+    .m3-carousel-card.is-active-card {
+        border-color: var(--dp-color-highlight);
+        box-shadow: 0 14px 32px rgba(185, 178, 139, 0.18);
+    }
+
+    .m3-filter-chip {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+        color: var(--dp-color-ink-muted);
+    }
+
+    .m3-filter-chip:hover {
+        background-color: var(--dp-color-surface-muted);
+        color: var(--dp-color-ink);
+    }
+
+    .m3-filter-chip.active {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915 !important;
+        border-color: var(--dp-color-highlight);
+        box-shadow: 0 4px 14px rgba(185, 178, 139, 0.3);
+    }
+
+    .m3-filter-chip.active .chip-shape {
+        color: #1c1915;
+    }
+
+    .m3-carousel-fab {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+        color: var(--dp-color-ink);
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .m3-carousel-fab:hover {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915;
+        border-color: var(--dp-color-highlight);
+        box-shadow: 0 6px 20px rgba(185, 178, 139, 0.35);
+    }
+
+    .m3-status-badge {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+        color: var(--dp-color-ink);
+    }
+
+    .m3-carousel-dots {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+    }
+
+    .m3-dot {
+        background-color: var(--dp-color-surface-muted);
+    }
+
+    .m3-dot.active {
+        background-color: var(--dp-color-highlight);
+    }
+
+    .m3-section-marker {
+        background-color: #1f1b17;
+        border-color: var(--dp-color-surface-muted);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .m3-section-marker:hover {
+        background-color: var(--dp-color-surface-muted);
+        border-color: var(--dp-color-highlight);
+    }
+
+    .marker-cookie .m3-marker-icon { color: var(--dp-color-highlight); }
+    .marker-star .m3-marker-icon, .marker-star8 .m3-marker-icon { color: var(--dp-color-art-accent); }
+    .marker-triangle .m3-marker-icon { color: var(--dp-color-highlight); }
+    .marker-oval .m3-marker-icon { color: var(--dp-color-art-accent); }
+    .marker-circle .m3-marker-icon { color: var(--dp-color-highlight); }
+    .marker-squircle .m3-marker-icon { color: var(--dp-color-art-accent); }
+}
+
+/* Reduced Motion Handling */
+@media (prefers-reduced-motion: reduce) {
+    .m3-reactive-shape {
+        transform: none !important;
+        transition: none !important;
+    }
+    .m3-carousel-viewport {
+        scroll-behavior: auto !important;
+    }
+    .m3-carousel-card {
+        transition: none !important;
+    }
+}
