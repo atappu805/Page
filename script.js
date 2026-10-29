@@ -768,4 +768,78 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initButtonShapeMorph();
+
+    // Smooth Animated FAQ Details Accordion
+    function initFaqAccordion() {
+        const detailsList = document.querySelectorAll('.faq details');
+
+        detailsList.forEach(details => {
+            const summary = details.querySelector('summary');
+            const content = details.querySelector('.faq-content');
+            if (!summary || !content) return;
+
+            let animation = null;
+            let isClosing = false;
+            let isExpanding = false;
+
+            summary.addEventListener('click', (e) => {
+                e.preventDefault();
+                details.style.overflow = 'hidden';
+
+                if (isClosing || !details.open) {
+                    details.style.height = `${details.offsetHeight}px`;
+                    details.open = true;
+
+                    window.requestAnimationFrame(() => {
+                        isExpanding = true;
+                        const startHeight = `${details.offsetHeight}px`;
+                        const endHeight = `${summary.offsetHeight + content.offsetHeight}px`;
+
+                        if (animation) animation.cancel();
+
+                        animation = details.animate({
+                            height: [startHeight, endHeight]
+                        }, {
+                            duration: 320,
+                            easing: 'cubic-bezier(0.2, 0, 0, 1)'
+                        });
+
+                        animation.onfinish = () => {
+                            isExpanding = false;
+                            details.style.height = '';
+                            details.style.overflow = '';
+                        };
+                        animation.oncancel = () => {
+                            isExpanding = false;
+                        };
+                    });
+                } else if (isExpanding || details.open) {
+                    isClosing = true;
+                    const startHeight = `${details.offsetHeight}px`;
+                    const endHeight = `${summary.offsetHeight}px`;
+
+                    if (animation) animation.cancel();
+
+                    animation = details.animate({
+                        height: [startHeight, endHeight]
+                    }, {
+                        duration: 280,
+                        easing: 'cubic-bezier(0.2, 0, 0, 1)'
+                    });
+
+                    animation.onfinish = () => {
+                        details.open = false;
+                        isClosing = false;
+                        details.style.height = '';
+                        details.style.overflow = '';
+                    };
+                    animation.oncancel = () => {
+                        isClosing = false;
+                    };
+                }
+            });
+        });
+    }
+
+    initFaqAccordion();
 });

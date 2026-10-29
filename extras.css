@@ -199,8 +199,15 @@ code, pre, .hash, .hash-label {
         text-align: left;
     }
     .faq details[open] {
-        margin: 8px 0;
-        padding: 10px 16px 16px;
+        margin: 10px 0;
+        padding: 0;
+    }
+    .faq summary {
+        padding: 14px 16px;
+        font-size: 1.15rem;
+    }
+    .faq-content {
+        padding: 0 16px 18px;
     }
     .footer-links {
         display: grid;
@@ -400,6 +407,19 @@ html.reveal-ready .reveal-item.is-visible {
         color: #1c1915 !important;
         border-color: var(--dp-color-highlight);
         box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 0 0 2px var(--dp-color-highlight);
+    }
+
+    .faq details[open] {
+        background-color: #26221d;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+    }
+    .faq-icon {
+        background-color: #332e27;
+        color: var(--dp-color-ink);
+    }
+    .faq details[open] .faq-icon {
+        background-color: var(--dp-color-highlight);
+        color: #1c1915;
     }
 
     .contact-compact-card,
