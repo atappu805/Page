@@ -201,7 +201,7 @@ a:hover {
 }
 
 .btn-primary:active {
-    transform: scale(0.93);
+    transform: scale(0.95);
 }
 
 .btn-secondary {
@@ -219,7 +219,7 @@ a:hover {
 }
 
 .btn-secondary:active {
-    transform: scale(0.93);
+    transform: scale(0.95);
 }
 
 /* ==================== UNIVERSAL TAP SHAPE MORPHING ==================== */
@@ -229,13 +229,14 @@ a:hover {
 .tab-btn,
 .m3-filter-chip,
 .m3-carousel-fab,
-.support-card {
+.support-card,
+.menu-toggle {
     will-change: transform, border-radius;
     transition: background-color var(--dp-motion-interaction),
                 color var(--dp-motion-interaction),
                 border-color var(--dp-motion-interaction),
-                transform 0.18s cubic-bezier(0.2, 0, 0, 1),
-                border-radius 0.24s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.22s cubic-bezier(0.2, 0, 0, 1),
+                border-radius 0.24s cubic-bezier(0.2, 0, 0, 1),
                 box-shadow var(--dp-motion-interaction);
 }
 
@@ -244,33 +245,25 @@ a:hover {
 .contact-chip:active,
 .tab-btn:active,
 .m3-filter-chip:active,
-.m3-carousel-fab:active {
-    transform: scale(0.93) !important;
-    border-radius: 46px 14px 44px 16px / 16px 44px 14px 46px !important;
-    transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1), border-radius 0.14s cubic-bezier(0.2, 0, 0, 1) !important;
-}
-
-.support-card:active {
-    transform: scale(0.97) !important;
-    border-radius: 42px 24px 46px 22px / 24px 46px 20px 42px !important;
+.m3-carousel-fab:active,
+.support-card:active,
+.menu-toggle:active {
+    transform: scale(0.95) !important;
+    border-radius: 34px 18px 32px 18px / 20px 32px 18px 30px !important;
     transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1), border-radius 0.14s cubic-bezier(0.2, 0, 0, 1) !important;
 }
 
 .shape-morph-tap {
-    animation: m3ButtonMorphTap 0.46s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    animation: m3ButtonMorphTap 0.32s cubic-bezier(0.2, 0, 0, 1) forwards !important;
 }
 
 @keyframes m3ButtonMorphTap {
     0% {
         transform: scale(1);
     }
-    28% {
-        transform: scale(0.92);
-        border-radius: 48px 12px 46px 14px / 14px 48px 12px 46px;
-    }
-    64% {
-        transform: scale(1.03);
-        border-radius: 14px 46px 16px 48px / 46px 14px 48px 14px;
+    40% {
+        transform: scale(0.95);
+        border-radius: 34px 18px 32px 18px / 20px 32px 18px 30px;
     }
     100% {
         transform: scale(1);
@@ -369,7 +362,7 @@ a:hover {
 }
 
 .menu-toggle:active {
-    transform: scale(0.92);
+    transform: scale(0.95);
 }
 
 .menu-toggle-shape {

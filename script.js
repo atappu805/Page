@@ -741,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Universal Material You Shape Morphing on Button Taps
     function initButtonShapeMorph() {
-        const btnSelector = '.btn, .trust-btn, .contact-chip, .tab-btn, .m3-filter-chip, .support-card, .m3-carousel-fab, .asset-name';
+        const btnSelector = '.btn, .trust-btn, .contact-chip, .tab-btn, .m3-filter-chip, .support-card, .m3-carousel-fab, .menu-toggle, .asset-name';
 
         document.addEventListener('pointerdown', (e) => {
             const targetBtn = e.target.closest(btnSelector);
@@ -753,7 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             setTimeout(() => {
                 targetBtn.classList.remove('shape-morph-tap');
-            }, 470);
+            }, 340);
         }, { passive: true });
     }
 
