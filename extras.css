@@ -477,11 +477,12 @@ html.reveal-ready .reveal-item.is-visible {
     border: 1px solid rgba(41, 37, 29, .16);
     box-shadow: 0 12px 26px -6px rgba(41, 37, 29, .3), 0 2px 6px rgba(41, 37, 29, .08);
 }
-.stage-card:nth-child(1) { --x: -.74; --y:  .07; --r: -9deg;   --s: .8; --z: 1; }
-.stage-card:nth-child(2) { --x: -.40; --y: -.02; --r: -4.5deg; --s: .9; --z: 2; }
-.stage-card:nth-child(3) { --x: 0;    --y: 0;    --r: 0deg;    --s: 1;  --z: 3; }
-.stage-card:nth-child(4) { --x:  .40; --y: -.02; --r: 4.5deg;  --s: .9; --z: 2; }
-.stage-card:nth-child(5) { --x:  .74; --y:  .07; --r: 9deg;    --s: .8; --z: 1; }
+/* child 1 is .organic-cluster, so cards are children 2-6 */
+.stage-card:nth-child(2) { --x: -.74; --y:  .07; --r: -9deg;   --s: .8; --z: 1; }
+.stage-card:nth-child(3) { --x: -.40; --y: -.02; --r: -4.5deg; --s: .9; --z: 2; }
+.stage-card:nth-child(4) { --x: 0;    --y: 0;    --r: 0deg;    --s: 1;  --z: 3; }
+.stage-card:nth-child(5) { --x:  .40; --y: -.02; --r: 4.5deg;  --s: .9; --z: 2; }
+.stage-card:nth-child(6) { --x:  .74; --y:  .07; --r: 9deg;    --s: .8; --z: 1; }
 @media (hover: hover) {
     .stage-card:hover { --hs: 1.05; z-index: 4; }
 }
