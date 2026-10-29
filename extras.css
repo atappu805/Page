@@ -431,3 +431,52 @@ html.reveal-ready .reveal-item.is-visible {
         color: var(--dp-color-primary);
     }
 }
+
+/* ==================== HERO STAGE ==================== */
+.hero-visual { container-type: inline-size; padding: 0; min-height: 0; }
+.hero-stage {
+    --w: min(200px, 44cqw);
+    position: relative;
+    width: 100%;
+    height: calc(var(--w) * 2.45);
+}
+.stage-card {
+    --hs: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--w);
+    margin-left: calc(var(--w) / -2);
+    z-index: var(--z);
+    transform:
+        translate(calc(var(--x) * var(--w)), calc(-50% + var(--y) * var(--w)))
+        rotate(var(--r)) scale(calc(var(--s) * var(--hs)));
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.stage-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 20;
+    object-fit: cover;
+    border-radius: 22px;
+    border: 1px solid rgba(41, 37, 29, .16);
+    box-shadow: 0 12px 26px -6px rgba(41, 37, 29, .3), 0 2px 6px rgba(41, 37, 29, .08);
+}
+.stage-card:nth-child(1) { --x: -.74; --y:  .07; --r: -9deg;   --s: .8; --z: 1; }
+.stage-card:nth-child(2) { --x: -.40; --y: -.02; --r: -4.5deg; --s: .9; --z: 2; }
+.stage-card:nth-child(3) { --x: 0;    --y: 0;    --r: 0deg;    --s: 1;  --z: 3; }
+.stage-card:nth-child(4) { --x:  .40; --y: -.02; --r: 4.5deg;  --s: .9; --z: 2; }
+.stage-card:nth-child(5) { --x:  .74; --y:  .07; --r: 9deg;    --s: .8; --z: 1; }
+@media (hover: hover) {
+    .stage-card:hover { --hs: 1.05; z-index: 4; }
+}
+@media (max-width: 700px) {
+    .hero-stage { --w: min(200px, 52vw); }
+}
+@media (prefers-color-scheme: dark) {
+    .stage-card img {
+        border-color: rgba(238, 230, 214, .14);
+        box-shadow: 0 12px 26px -6px rgba(0, 0, 0, .55);
+    }
+}
