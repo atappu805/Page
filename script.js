@@ -646,68 +646,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Closing 3 Shapes Choreography: (Triangle, Cookie, Star)
-            // Cookie starts large in the background at Contact area, spins & shrinks/grows on scroll down/up,
-            // and docks at its small position at the bottom while Triangle and Star rise up from down below.
-            if (contactSection && closingContainer && closingCookie && closingTriangle && closingStar) {
+            // Closing 3 Shapes Choreography: (Triangle, Cookie, Star) above Footer
+            // Center Cookie shrinks and docks smoothly into its 58px slot as closingOrganic enters view,
+            // while Triangle and Star rise up from below. Viewport-relative so tab height changes never cause jumps.
+            if (closingContainer && closingCookie && closingTriangle && closingStar) {
                 const vh = window.innerHeight || 800;
-                const vw = window.innerWidth || 400;
-                const docHeight = Math.max(
-                    document.body.scrollHeight || 0,
-                    document.documentElement.scrollHeight || 0
-                );
-                const maxScroll = Math.max(1, docHeight - vh);
-
-                const contactTop = contactSection.offsetTop;
-                const closingTop = closingContainer.offsetTop;
-                const closingHeight = closingContainer.offsetHeight || 90;
-
-                // Vertical distance from closing slot up to the center of Contact section
-                const contactCenterDoc = contactTop + (contactSection.offsetHeight || 380) * 0.42;
-                const closingCenterDoc = closingTop + closingHeight * 0.5;
-                const travelDistanceY = Math.max(300, closingCenterDoc - contactCenterDoc);
-
-                // Scroll window: starts as Contact enters view, reaches 1.0 as user reaches bottom
-                const startScroll = Math.max(0, contactTop - vh * 0.70);
-                const endScroll = Math.max(
-                    startScroll + 220,
-                    Math.min(maxScroll - 16, (closingTop + closingHeight * 0.5) - vh * 0.68)
-                );
-
-                const rawT = (smoothScrollY - startScroll) / Math.max(1, endScroll - startScroll);
+                const closingRect = closingContainer.getBoundingClientRect();
+                const enterY = vh * 1.15;
+                const finishY = vh * 0.70;
+                const rawT = (enterY - closingRect.top) / Math.max(1, enterY - finishY);
                 const t = Math.max(0, Math.min(1, rawT));
 
-                // 1. Center Cookie: significantly larger in background at Contact (t=0), spins & shrinks down to small slot (t=1)
-                const maxScale = vw < 700 ? 13.2 : 16.5;
+                // 1. Center Cookie: spins and shrinks from background scale down to 1.0 slot
+                const maxScale = 2.8;
                 const cookieScale = 1 + (1 - t) * (maxScale - 1);
-                const cookieY = -(1 - t) * travelDistanceY;
-                const cookieRot = (1 - t) * 540;
-                // Soft background opacity while behind Contact/Policies cards, solid 1.0 when docked at bottom
-                const cookieOpacity = t < 0.72
-                    ? (0.16 + (t / 0.72) * 0.22)
-                    : (0.38 + ((t - 0.72) / 0.28) * 0.62);
+                const cookieY = -(1 - t) * 75;
+                const cookieRot = (1 - t) * 360;
+                const cookieOpacity = 0.20 + 0.80 * t;
 
                 closingCookie.style.transform =
                     'translate3d(0, ' + cookieY.toFixed(1) + 'px, 0) scale(' + cookieScale.toFixed(3) + ') rotate(' + cookieRot.toFixed(1) + 'deg)';
                 closingCookie.style.opacity = cookieOpacity.toFixed(3);
 
-                // 2. Left Triangle & Right Star: rise up from down below as Cookie docks near the bottom
-                const u = Math.max(0, Math.min(1, (t - 0.42) / 0.58));
+                // 2. Left Triangle & Right Star: rise up smoothly as Cookie docks
+                const u = Math.max(0, Math.min(1, (t - 0.25) / 0.75));
                 const easeU = 1 - Math.pow(1 - u, 3);
 
-                const triY = (1 - easeU) * 145;
-                const triX = -(1 - easeU) * 24;
-                const triScale = 0.42 + 0.58 * easeU;
-                const triRot = -6 - (1 - easeU) * 135;
+                const triY = (1 - easeU) * 85;
+                const triX = -(1 - easeU) * 16;
+                const triScale = 0.5 + 0.5 * easeU;
+                const triRot = -6 - (1 - easeU) * 90;
 
                 closingTriangle.style.transform =
                     'translate3d(' + triX.toFixed(1) + 'px, ' + triY.toFixed(1) + 'px, 0) scale(' + triScale.toFixed(3) + ') rotate(' + triRot.toFixed(1) + 'deg)';
                 closingTriangle.style.opacity = easeU.toFixed(3);
 
-                const starY = (1 - easeU) * 160;
-                const starX = (1 - easeU) * 24;
-                const starScale = 0.42 + 0.58 * easeU;
-                const starRot = 8 + (1 - easeU) * 150;
+                const starY = (1 - easeU) * 95;
+                const starX = (1 - easeU) * 16;
+                const starScale = 0.5 + 0.5 * easeU;
+                const starRot = 8 + (1 - easeU) * 100;
 
                 closingStar.style.transform =
                     'translate3d(' + starX.toFixed(1) + 'px, ' + starY.toFixed(1) + 'px, 0) scale(' + starScale.toFixed(3) + ') rotate(' + starRot.toFixed(1) + 'deg)';
