@@ -40,6 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const active = btn.dataset.target === targetId;
             btn.classList.toggle('active', active);
             btn.setAttribute('aria-selected', active);
+            if (active) {
+                btn.classList.remove('shape-morph-tap');
+                void btn.offsetWidth;
+                btn.classList.add('shape-morph-tap');
+                setTimeout(() => btn.classList.remove('shape-morph-tap'), 340);
+            }
         });
 
         tabPanes.forEach(pane => {
