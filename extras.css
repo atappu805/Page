@@ -486,6 +486,16 @@ html.reveal-ready .reveal-item.is-visible {
 @media (hover: hover) {
     .stage-card:hover { --hs: 1.05; z-index: 4; }
 }
+
+/* Hero chips: even 2x2 grid on phones */
+@media (max-width: 700px) {
+    .chip-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 10px;
+    }
+    .chip-row li { font-size: 12px; }
+}
 @media (prefers-color-scheme: dark) {
     .stage-card img {
         border-color: rgba(238, 230, 214, .14);
