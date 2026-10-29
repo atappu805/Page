@@ -533,7 +533,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         const maxRot = parseFloat(shape.dataset.rot || '140');
                         const xOffset = (progress - 0.5) * 2 * maxShiftX;
                         const rotOffset = progress * maxRot;
-                        shape.style.transform = 'translate3d(' + xOffset.toFixed(1) + 'px, 0, 0) rotate(' + rotOffset.toFixed(1) + 'deg)';
+                        shape.style.setProperty('--cx', xOffset.toFixed(1) + 'px');
+                        shape.style.setProperty('--cr', rotOffset.toFixed(1) + 'deg');
                     });
 
                     updateActiveCard();
@@ -556,7 +557,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (prefersReducedMotion) return;
 
-        const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape');
+        const pageShapes = document.querySelectorAll('.m3-section-bg-shapes .m3-reactive-shape, .organic-cluster .m3-reactive-shape, .m3-carousel-bg-shapes .m3-reactive-shape');
         const sectionMarks = document.querySelectorAll('.section-shape-mark');
         const featureBadges = document.querySelectorAll('.feature-shape-badge > .m3-shape-svg');
         const chipIcons = document.querySelectorAll('.chip-shape-icon, .m3-filter-chip .chip-shape');
@@ -596,11 +597,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Faster, energetic rotation for background shapes
             pageShapes.forEach(shape => {
-                const pRot = parseFloat(shape.dataset.rot || '0.10') * 2.8;
+                const isCarouselShape = !!shape.closest('.m3-carousel-bg-shapes');
+                // Gallery shapes use data-rot as carousel degrees, so give them a fixed page-scroll rate
+                const pRot = isCarouselShape
+                    ? 0.28 * (parseFloat(shape.dataset.rot || '1') < 0 ? -1 : 1)
+                    : parseFloat(shape.dataset.rot || '0.10') * 2.8;
                 const pY = parseFloat(shape.dataset.parallaxY || '0.05');
                 const rot = (smoothScrollY * pRot) % 360;
                 const rawY = Math.sin(smoothScrollY * 0.003) * 24 * (pY >= 0 ? 1 : -1);
-                shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+                if (isCarouselShape) {
+                    // carousel swipe sets --cx/--cr; page scroll adds the extra spin and bob
+                    shape.style.transform = 'translate3d(var(--cx, 0px), ' + rawY.toFixed(1) + 'px, 0) rotate(calc(var(--cr, 0deg) + ' + rot.toFixed(1) + 'deg))';
+                } else {
+                    shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
+                }
             });
 
             // Section marks: 5x faster rotation (0.68) with alternating directions
