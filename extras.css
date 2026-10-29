@@ -435,10 +435,24 @@ html.reveal-ready .reveal-item.is-visible {
 /* ==================== HERO STAGE ==================== */
 .hero-visual { container-type: inline-size; padding: 0; min-height: 0; }
 .hero-stage {
-    --w: min(200px, 44cqw);
+    --w: clamp(96px, 34cqw, 190px);
     position: relative;
     width: 100%;
-    height: calc(var(--w) * 2.45);
+    height: calc(var(--w) * 2.9);
+}
+/* Material shapes sit behind the fan, sized relative to the cards */
+.hero-stage .organic-cluster { z-index: 0; }
+.hero-stage .hero-shape-cookie {
+    width: calc(var(--w) * 1.3); height: calc(var(--w) * 1.3);
+    left: calc(50% - var(--w) * 1.5); top: 0; right: auto; bottom: auto;
+}
+.hero-stage .hero-shape-star {
+    width: calc(var(--w) * .7); height: calc(var(--w) * .7);
+    left: calc(50% + var(--w) * .8); top: calc(var(--w) * .05); right: auto; bottom: auto;
+}
+.hero-stage .hero-shape-squircle {
+    width: calc(var(--w) * 1.1); height: calc(var(--w) * 1.1);
+    left: calc(50% + var(--w) * .3); bottom: 0; top: auto; right: auto;
 }
 .stage-card {
     --hs: 1;
@@ -470,9 +484,6 @@ html.reveal-ready .reveal-item.is-visible {
 .stage-card:nth-child(5) { --x:  .74; --y:  .07; --r: 9deg;    --s: .8; --z: 1; }
 @media (hover: hover) {
     .stage-card:hover { --hs: 1.05; z-index: 4; }
-}
-@media (max-width: 700px) {
-    .hero-stage { --w: min(200px, 52vw); }
 }
 @media (prefers-color-scheme: dark) {
     .stage-card img {
