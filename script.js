@@ -190,7 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             relVersion.textContent = releaseTitle;
 
-            const apkAsset = assets.find(a => a.name && a.name.toLowerCase().endsWith('.apk')) || assets[0];
+            function archRank(name) {
+                const n = (name || '').toLowerCase();
+                if (n.includes('arm64') || n.includes('v8a')) return 0;
+                if (n.includes('universal')) return 1;
+                if (n.includes('armeabi') || n.includes('v7a')) return 2;
+                return 3;
+            }
+
+            function archLabel(name) {
+                const n = (name || '').toLowerCase();
+                if (n.includes('arm64') || n.includes('v8a')) return 'ARM64 · Recommended';
+                if (n.includes('universal')) return 'Universal · All devices';
+                if (n.includes('armeabi') || n.includes('v7a')) return 'ARMv7 · 32-bit';
+                return '';
+            }
+
+            const sortedAssets = [...assets].sort((a, b) => archRank(a.name) - archRank(b.name));
+            const apkAssets = sortedAssets.filter(a => a.name && a.name.toLowerCase().endsWith('.apk'));
+            const apkAsset = apkAssets[0] || sortedAssets[0];
 
             const metaParts = [];
             if (publishedDate) metaParts.push('Released on ' + publishedDate);
@@ -202,8 +220,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (relPrimary) {
                 if (apkAsset && apkAsset.browser_download_url) {
+                    const primaryArch = archLabel(apkAsset.name);
+                    const btnLabel = primaryArch.startsWith('ARM64') ? 'Download ARM64 APK' : 'Download APK';
                     relPrimary.href = apkAsset.browser_download_url;
-                    relPrimary.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right: 6px; vertical-align: -3px;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>Download APK (' + formatBytes(apkAsset.size) + ')';
+                    relPrimary.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right: 6px; vertical-align: -3px;"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>' + btnLabel + ' (' + formatBytes(apkAsset.size) + ')';
                     relPrimary.setAttribute('download', apkAsset.name);
                 } else {
                     relPrimary.href = htmlUrl;
@@ -226,18 +246,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (relAssets) {
-                if (assets.length > 0) {
+                if (sortedAssets.length > 0) {
                     const releaseBody = release.body || '';
-                    relAssets.innerHTML = assets.map(asset => {
+                    relAssets.innerHTML = sortedAssets.map(asset => {
                         const isApk = asset.name.toLowerCase().endsWith('.apk');
                         const sizeStr = formatBytes(asset.size);
+                        const label = isApk ? archLabel(asset.name) : '';
                         const sha = extractSha256(releaseBody, asset.name);
                         return '<div class="asset-row">' +
                             '<div class="asset-top">' +
                                 '<a class="asset-name" href="' + asset.browser_download_url + '" ' + (isApk ? 'download' : '') + ' target="_blank" rel="noopener">' +
                                     escapeHtml(asset.name) +
                                 '</a>' +
-                                '<span class="asset-size">' + sizeStr + '</span>' +
+                                '<span class="asset-size">' + (label ? escapeHtml(label) + ' · ' : '') + sizeStr + '</span>' +
                             '</div>' +
                             (sha ? '<div class="hash"><span class="hash-label">SHA-256: </span>' + sha + '</div>' : '') +
                         '</div>';
