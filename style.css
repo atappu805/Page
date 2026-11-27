@@ -15,6 +15,10 @@
     --dp-color-surface-muted: #eadfd4;
     --dp-color-highlight: #f8d8c4;
     --dp-color-ink-muted: #56453c;
+    --dp-color-on-field: #f4ebe2;
+    --dp-color-on-field-muted: #eadfd4;
+    --dp-color-on-primary: #f4ebe2;
+    --dp-color-on-primary-muted: #eadfd4;
 
     --dp-typography-display: "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
     --dp-typography-reading: "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -538,18 +542,18 @@ a:hover {
 /* ==================== FEATURES IN CONTINUOUS CLAY FIELD ==================== */
 #features {
     background-color: var(--dp-color-field);
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-field);
     padding: 64px 48px;
     border-radius: var(--radius-field-clay);
     margin-bottom: 92px;
 }
 
 #features .section-header h2 {
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-field);
 }
 
 #features .section-header p {
-    color: var(--dp-color-surface-muted);
+    color: var(--dp-color-on-field-muted);
 }
 
 .features-grid {
@@ -581,29 +585,42 @@ a:hover {
 }
 
 .feature-card h3 {
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-field);
     font-family: var(--dp-typography-display);
     font-size: 1.3rem;
     font-weight: 500;
 }
 
 .feature-card p {
-    color: rgba(245, 237, 223, 0.86);
+    color: rgba(245, 237, 223, 0.88);
     font-size: var(--dp-typography-reading-small);
     line-height: var(--dp-typography-reading-leading);
+}
+
+.feature-card a,
+.feature-inline-link {
+    color: var(--dp-color-highlight);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.feature-card a:hover,
+.feature-inline-link:hover {
+    color: var(--dp-color-on-field);
 }
 
 /* ==================== DOWNLOAD IN CONTINUOUS MOSS BASIN ==================== */
 .download-section {
     background-color: var(--dp-color-primary);
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-primary);
     padding: 64px 48px;
     border-radius: var(--radius-field-moss);
     margin-bottom: 92px;
 }
 
 .download-section .section-header h2 {
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-primary);
 }
 
 .download-section .section-header p {
@@ -628,7 +645,7 @@ a:hover {
 }
 
 .release-version {
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-primary);
     font-size: clamp(1.75rem, 3vw, 2.3rem);
     margin-bottom: 4px;
 }
@@ -640,9 +657,9 @@ a:hover {
 }
 
 .download-section .btn-primary {
-    background-color: var(--dp-color-surface);
+    background-color: var(--dp-color-on-primary);
     color: var(--dp-color-primary) !important;
-    border-color: var(--dp-color-surface);
+    border-color: var(--dp-color-on-primary);
 }
 
 .download-section .btn-primary:hover {
@@ -653,12 +670,12 @@ a:hover {
 .download-section .btn-secondary {
     background-color: rgba(245, 237, 223, 0.14);
     border-color: rgba(245, 237, 223, 0.38);
-    color: var(--dp-color-surface) !important;
+    color: var(--dp-color-on-primary) !important;
 }
 
 .download-section .btn-secondary:hover {
     background-color: rgba(245, 237, 223, 0.26);
-    color: var(--dp-color-surface) !important;
+    color: var(--dp-color-on-primary) !important;
 }
 
 .release-assets {
@@ -683,10 +700,14 @@ a:hover {
 }
 
 .asset-name {
-    color: var(--dp-color-surface) !important;
+    color: var(--dp-color-on-primary) !important;
     font-weight: 600;
     font-size: var(--dp-typography-reading-small);
     word-break: break-all;
+}
+
+.asset-name:hover {
+    color: var(--dp-color-highlight) !important;
 }
 
 .asset-size {
@@ -697,7 +718,7 @@ a:hover {
 .hash {
     font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
     font-size: var(--dp-typography-metadata);
-    color: var(--dp-color-surface-muted);
+    color: var(--dp-color-on-primary-muted);
     word-break: break-all;
     margin-top: 6px;
 }
@@ -714,7 +735,7 @@ a:hover {
 }
 
 .whatsnew h3 {
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-primary);
     margin-bottom: 10px;
 }
 
@@ -724,7 +745,7 @@ a:hover {
 }
 
 .whatsnew li {
-    color: rgba(245, 237, 223, 0.88);
+    color: rgba(245, 237, 223, 0.90);
     font-size: var(--dp-typography-reading-small);
     margin-bottom: 6px;
 }
@@ -750,12 +771,12 @@ a:hover {
     cursor: pointer;
     font-family: var(--dp-typography-display);
     font-size: 1.15rem;
-    color: var(--dp-color-surface);
+    color: var(--dp-color-on-primary);
     padding: 8px 0;
 }
 
 .verify p {
-    color: rgba(245, 237, 223, 0.86);
+    color: rgba(245, 237, 223, 0.88);
     font-size: var(--dp-typography-reading-small);
     margin: 8px 0;
 }
@@ -765,9 +786,9 @@ a:hover {
     padding: 14px 18px;
     margin: 10px 0 16px;
     border-radius: 18px 14px 20px 15px;
-    background-color: rgba(25, 31, 21, 0.65);
-    border: var(--dp-border-hairline) solid rgba(245, 237, 223, 0.2);
-    color: var(--dp-color-surface);
+    background-color: rgba(25, 19, 17, 0.72);
+    border: var(--dp-border-hairline) solid rgba(245, 237, 223, 0.22);
+    color: var(--dp-color-on-primary);
     font-family: ui-monospace, 'SF Mono', monospace;
     font-size: var(--dp-typography-caption);
 }
