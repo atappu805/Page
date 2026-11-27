@@ -253,18 +253,64 @@ html.reveal-ready .reveal-item.is-visible {
     }
 }
 
-/* ==================== DARK PEAT & EARTH MODE ==================== */
+/* ==================== MATERIAL YOU EXPRESSIVE PILLS & TAP PHYSICS ==================== */
+.btn,
+.trust-btn,
+.contact-chip,
+.tab-btn,
+.m3-filter-chip,
+.m3-status-badge,
+.m3-carousel-dots,
+.asset-name {
+    border-radius: 999px !important;
+    transition:
+        transform 240ms cubic-bezier(0.2, 0.9, 0.25, 1.12),
+        background-color 200ms ease,
+        color 200ms ease,
+        border-color 200ms ease !important;
+}
+
+.chip-row,
+.support-card,
+.trust-item,
+.download-card,
+.contact-compact-card,
+.legal-card,
+.feature-card {
+    border-radius: 28px !important;
+}
+
+.shape-morph-tap {
+    border-radius: 999px !important;
+    transform: scale(0.96) !important;
+}
+
+.support-card.shape-morph-tap {
+    border-radius: 28px !important;
+    transform: scale(0.98) !important;
+}
+
+.btn:active,
+.trust-btn:active,
+.contact-chip:active,
+.tab-btn:active,
+.m3-filter-chip:active,
+.m3-carousel-fab:active {
+    transform: scale(0.96) !important;
+}
+
+/* ==================== MATERIAL YOU EXPRESSIVE DARK MODE ==================== */
 @media (prefers-color-scheme: dark) {
     :root {
-        --dp-color-ground: #1c1915;
-        --dp-color-surface: #26221d;
-        --dp-color-ink: #eee6d6;
-        --dp-color-ink-muted: #c2b8a6;
-        --dp-color-primary: #3b4a32;
-        --dp-color-field: #5e3f31;
-        --dp-color-art-accent: #ad7d62;
-        --dp-color-surface-muted: #332e27;
-        --dp-color-highlight: #b9b28b;
+        --dp-color-ground: #191311;
+        --dp-color-surface: #241c19;
+        --dp-color-ink: #f7ede7;
+        --dp-color-ink-muted: #cbb9ae;
+        --dp-color-primary: #63311a;
+        --dp-color-field: #4c3328;
+        --dp-color-art-accent: #d89678;
+        --dp-color-surface-muted: #332823;
+        --dp-color-highlight: #f3b79b;
     }
 
     body::before {
