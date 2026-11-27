@@ -280,14 +280,8 @@ html.reveal-ready .reveal-item.is-visible {
     border-radius: 28px !important;
 }
 
-.shape-morph-tap {
-    border-radius: 999px !important;
-    transform: scale(0.96) !important;
-}
-
-.support-card.shape-morph-tap {
-    border-radius: 28px !important;
-    transform: scale(0.98) !important;
+.tab-btn.active {
+    box-shadow: none !important;
 }
 
 .btn:active,
@@ -450,9 +444,9 @@ html.reveal-ready .reveal-item.is-visible {
 
     .tab-btn.active {
         background-color: var(--dp-color-highlight);
-        color: #1c1915 !important;
+        color: #191311 !important;
         border-color: var(--dp-color-highlight);
-        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 0 0 2px var(--dp-color-highlight);
+        box-shadow: none;
     }
 
     .faq details[open] {
