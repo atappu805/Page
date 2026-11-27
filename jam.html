@@ -370,8 +370,8 @@
       flex: none;
     }
     .s-body { flex: 1; min-width: 0; }
-    .s-name { font-size: 16px; font-weight: 700; }
-    .s-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .s-name { display: block; font-size: 16px; font-weight: 700; line-height: 1.25; }
+    .s-desc { display: block; font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.35; }
     .s-pill {
       padding: 8px 16px;
       border-radius: 999px;
@@ -448,6 +448,62 @@
     .dl-text h2 { font-size: 15.5px; font-weight: 700; }
     .dl-text p { font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.45; }
     .dl-btn { height: 44px; padding: 0 18px; font-size: 13.5px; flex: none; }
+
+    /* Credits & Links Footer Card */
+    .footer-card {
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: 28px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      animation: enterUp 0.75s var(--spring) 220ms both;
+    }
+    .credit-box {
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: var(--surface-hi);
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .credit-box strong { color: var(--text); font-weight: 700; }
+    .credit-box a {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .link-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+      font-size: 13px;
+      font-weight: 600;
+      transition: transform 0.22s var(--spring-bounce), background 0.2s, color 0.2s;
+    }
+    .link-chip:hover {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      transform: translateY(-1px);
+    }
+    .link-chip:active { transform: scale(0.96); }
+    .foot-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      opacity: 0.85;
+    }
 
     .back-link {
       display: inline-flex;
@@ -583,6 +639,21 @@
       </div>
       <a href="https://pixelmusic.pages.dev/#download" class="btn btn-primary dl-btn">Download APK</a>
     </aside>
+
+    <!-- Credits & PixelMusic Links -->
+    <footer class="footer-card" aria-label="Credits and PixelMusic links">
+      <div class="credit-box">
+        <strong>Special thanks</strong> to <a href="https://github.com/Clash-Projects/lastwave-jam" target="_blank" rel="noopener noreferrer">LastWave Jam</a> by Clash Projects for their amazing open-source sync server that inspired and powered PixelJam.
+      </div>
+      <nav class="link-chips" aria-label="PixelMusic links">
+        <a class="link-chip" href="https://pixelmusic.pages.dev/">Website</a>
+        <a class="link-chip" href="https://t.me/Saurav124x" target="_blank" rel="noopener noreferrer">Developer · Saurav</a>
+        <a class="link-chip" href="https://t.me/thePixelMusicBot" target="_blank" rel="noopener noreferrer">@thePixelMusicBot</a>
+        <a class="link-chip" href="https://www.instagram.com/holy_saurav" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a class="link-chip" href="https://github.com/Saurav-02/PixelMusic" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+      <p class="foot-note">PixelMusic · Built by Saurav Biswas</p>
+    </footer>
   </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
