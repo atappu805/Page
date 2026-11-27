@@ -614,44 +614,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateShapes() {
             const currentY = window.pageYOffset || window.scrollY || 0;
-            smoothScrollY += (currentY - smoothScrollY) * 0.16;
+            smoothScrollY += (currentY - smoothScrollY) * 0.10;
 
-            // Faster, energetic rotation for background shapes
+            // Calm, expressive slow rotation for background shapes
             pageShapes.forEach(shape => {
                 const isCarouselShape = !!shape.closest('.m3-carousel-bg-shapes');
-                // Gallery shapes use data-rot as carousel degrees, so give them a fixed page-scroll rate
                 const pRot = isCarouselShape
-                    ? 0.28 * (parseFloat(shape.dataset.rot || '1') < 0 ? -1 : 1)
-                    : parseFloat(shape.dataset.rot || '0.10') * 2.8;
+                    ? 0.07 * (parseFloat(shape.dataset.rot || '1') < 0 ? -1 : 1)
+                    : parseFloat(shape.dataset.rot || '0.10') * 0.7;
                 const pY = parseFloat(shape.dataset.parallaxY || '0.05');
                 const rot = (smoothScrollY * pRot) % 360;
-                const rawY = Math.sin(smoothScrollY * 0.003) * 24 * (pY >= 0 ? 1 : -1);
+                const rawY = Math.sin(smoothScrollY * 0.0018) * 18 * (pY >= 0 ? 1 : -1);
                 if (isCarouselShape) {
-                    // carousel swipe sets --cx/--cr; page scroll adds the extra spin and bob
                     shape.style.transform = 'translate3d(var(--cx, 0px), ' + rawY.toFixed(1) + 'px, 0) rotate(calc(var(--cr, 0deg) + ' + rot.toFixed(1) + 'deg))';
                 } else {
                     shape.style.transform = 'translate3d(0, ' + rawY.toFixed(1) + 'px, 0) rotate(' + rot.toFixed(1) + 'deg)';
                 }
             });
 
-            // Section marks: 5x faster rotation (0.68) with alternating directions
+            // Section marks: gentle slow rotation with alternating directions
             sectionMarks.forEach((mark, idx) => {
                 const dir = idx % 2 === 0 ? 1 : -1;
-                const rot = (smoothScrollY * 0.68 * dir) % 360;
+                const rot = (smoothScrollY * 0.16 * dir) % 360;
                 mark.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
-            // Feature shape badges: active fast spin (0.58) as user scrolls down/up
+            // Feature shape badges: subtle slow drift on scroll
             featureBadges.forEach((badge, idx) => {
                 const dir = idx % 2 === 0 ? 1 : -1;
-                const rot = (smoothScrollY * 0.58 * dir) % 360;
+                const rot = (smoothScrollY * 0.14 * dir) % 360;
                 badge.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
-            // Highlight chips & filter chips: lively spin on scroll
+            // Highlight chips & filter chips: slow expressive drift
             chipIcons.forEach((chipIcon, idx) => {
                 const dir = idx % 2 === 0 ? 1 : -1;
-                const rot = (smoothScrollY * 0.52 * dir) % 360;
+                const rot = (smoothScrollY * 0.12 * dir) % 360;
                 chipIcon.style.transform = 'rotate(' + rot.toFixed(1) + 'deg)';
             });
 
@@ -680,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuMorphPath.setAttribute('d', getMorphSvgPath(currentCoords));
 
                 if (menuToggleSvg) {
-                    const btnRot = (smoothScrollY * 0.45) % 360;
+                    const btnRot = (smoothScrollY * 0.12) % 360;
                     menuToggleSvg.style.transform = 'rotate(' + btnRot.toFixed(1) + 'deg)';
                 }
             }
@@ -723,7 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const maxScale = vw < 700 ? 13.5 : 16.5;
                 const cookieScale = 1 + (1 - t) * (maxScale - 1);
                 const cookieY = -(1 - t) * smoothTravelDistY;
-                const cookieRot = (1 - t) * 540;
+                const cookieRot = (1 - t) * 180;
                 const cookieOpacity = t < 0.72
                     ? (0.16 + (t / 0.72) * 0.22)
                     : (0.38 + ((t - 0.72) / 0.28) * 0.62);
@@ -739,7 +737,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const triY = (1 - easeU) * 145;
                 const triX = -(1 - easeU) * 24;
                 const triScale = 0.42 + 0.58 * easeU;
-                const triRot = -6 - (1 - easeU) * 135;
+                const triRot = -6 - (1 - easeU) * 48;
 
                 closingTriangle.style.transform =
                     'translate3d(' + triX.toFixed(1) + 'px, ' + triY.toFixed(1) + 'px, 0) scale(' + triScale.toFixed(3) + ') rotate(' + triRot.toFixed(1) + 'deg)';
@@ -748,7 +746,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const starY = (1 - easeU) * 160;
                 const starX = (1 - easeU) * 24;
                 const starScale = 0.42 + 0.58 * easeU;
-                const starRot = 8 + (1 - easeU) * 150;
+                const starRot = 8 + (1 - easeU) * 52;
 
                 closingStar.style.transform =
                     'translate3d(' + starX.toFixed(1) + 'px, ' + starY.toFixed(1) + 'px, 0) scale(' + starScale.toFixed(3) + ') rotate(' + starRot.toFixed(1) + 'deg)';

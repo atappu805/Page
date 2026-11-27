@@ -1,42 +1,42 @@
 /* ==========================================================
-   PixelMusic — Organic Design System
-   Shared worktable of sand-colored paper, irregular shapes,
-   dark brown type, moss, and fired clay.
+   PixelMusic — Material You Expressive Design System
+   Warm tonal surfaces, expressive pill & squircle geometry,
+   fluid spring motion, and tactile contrast.
    ========================================================== */
 
 :root {
-    /* Authoritative Organic Tokens */
-    --dp-color-ground: #eee6d6;
-    --dp-color-surface: #f5eddf;
-    --dp-color-ink: #29251d;
-    --dp-color-primary: #35422d;
-    --dp-color-field: #694737;
-    --dp-color-art-accent: #ad7d62;
-    --dp-color-surface-muted: #ddd5c3;
-    --dp-color-highlight: #b9b28b;
-    --dp-color-ink-muted: #443b2f;
+    /* Material You Expressive Warm Tonal Tokens */
+    --dp-color-ground: #faf5ef;
+    --dp-color-surface: #f4ebe2;
+    --dp-color-ink: #231915;
+    --dp-color-primary: #7c3f23;
+    --dp-color-field: #5d3f31;
+    --dp-color-art-accent: #b46a49;
+    --dp-color-surface-muted: #eadfd4;
+    --dp-color-highlight: #f8d8c4;
+    --dp-color-ink-muted: #56453c;
 
-    --dp-typography-display: "Organic Source Serif", "Source Serif 4", Georgia, serif;
-    --dp-typography-reading: "Organic Instrument Sans", "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --dp-typography-display: "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --dp-typography-reading: "Instrument Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 
     --dp-typography-body: 16px;
     --dp-typography-reading-small: 15px;
     --dp-typography-control: 14px;
     --dp-typography-caption: 13px;
     --dp-typography-metadata: 12px;
-    --dp-typography-reading-leading: 1.8;
+    --dp-typography-reading-leading: 1.7;
 
     --dp-spacing-content-gap: 24px;
-    --dp-radius-control: 27px 19px 29px 16px / 22px 26px 19px 29px;
+    --dp-radius-control: 999px;
     --dp-border-hairline: 1px;
-    --dp-motion-interaction: 240ms ease;
+    --dp-motion-interaction: 280ms cubic-bezier(0.2, 0.9, 0.25, 1.12);
 
-    /* Organic sheet & field radii (distinct per surface) */
-    --radius-sheet-a: 38px 24px 44px 28px / 26px 40px 22px 36px;
-    --radius-sheet-b: 28px 42px 26px 38px / 36px 24px 40px 28px;
-    --radius-field-clay: 52px 34px 58px 38px / 38px 54px 32px 48px;
-    --radius-field-moss: 36px 50px 38px 54px / 48px 34px 52px 36px;
-    --radius-tray: 32px 18px 36px 22px / 20px 34px 18px 30px;
+    /* Material You Expressive symmetrical sheet & container radii */
+    --radius-sheet-a: 32px;
+    --radius-sheet-b: 28px;
+    --radius-field-clay: 36px;
+    --radius-field-moss: 32px;
+    --radius-tray: 28px;
 }
 
 /* Base Reset */
