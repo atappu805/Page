@@ -604,7 +604,7 @@
             <span class="s-ico" aria-hidden="true">🇮🇳</span>
             <span class="s-body">
               <span class="s-name">India</span>
-              <span class="s-desc">24/7 Live Radio · Always playing</span>
+              <span class="s-desc" data-room-desc="INDIA">24/7 Live Radio · Always playing</span>
             </span>
             <span class="s-pill">Join</span>
           </a>
@@ -612,7 +612,7 @@
             <span class="s-ico" aria-hidden="true">🌍</span>
             <span class="s-body">
               <span class="s-name">International</span>
-              <span class="s-desc">24/7 Live Radio · Always playing</span>
+              <span class="s-desc" data-room-desc="WORLD">24/7 Live Radio · Always playing</span>
             </span>
             <span class="s-pill">Join</span>
           </a>
@@ -783,6 +783,62 @@
           }
         };
         lobbyView.classList.remove('hidden');
+
+        var ROOMS_ENDPOINT = 'https://pixelmusic-jam.onrender.com/rooms';
+        var DEFAULT_SUBTITLE = '24/7 Live Radio · Always playing';
+        var FETCH_TIMEOUT_MS = 6000;
+        var REFRESH_INTERVAL_MS = 30000;
+        var roomsInFlight = false;
+        var lastFetchAt = 0;
+
+        function fetchLiveRoomCounts() {
+          if (roomsInFlight || typeof fetch !== 'function') return;
+          roomsInFlight = true;
+          lastFetchAt = Date.now();
+
+          var controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+          var timerId = controller ? setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT_MS) : null;
+
+          fetch(ROOMS_ENDPOINT, controller ? { signal: controller.signal } : undefined)
+            .then(function (res) {
+              if (!res.ok) throw new Error('HTTP ' + res.status);
+              return res.json();
+            })
+            .then(function (data) {
+              if (!data || !Array.isArray(data.rooms)) return;
+              data.rooms.forEach(function (room) {
+                if (!room || !room.code) return;
+                var roomCode = String(room.code).trim().toUpperCase();
+                var descEl = document.querySelector('[data-room-desc="' + roomCode + '"]');
+                if (!descEl) return;
+                var count = Number(room.participants);
+                descEl.textContent = (isFinite(count) && count > 0)
+                  ? ('24/7 Live Radio · ' + Math.floor(count) + ' listening')
+                  : DEFAULT_SUBTITLE;
+              });
+            })
+            .catch(function () {
+              // Keep fallback/current subtitle silently if server is unreachable or restarting.
+            })
+            .finally(function () {
+              if (timerId) clearTimeout(timerId);
+              roomsInFlight = false;
+            });
+        }
+
+        fetchLiveRoomCounts();
+
+        setInterval(function () {
+          if (document.visibilityState === 'visible') {
+            fetchLiveRoomCounts();
+          }
+        }, REFRESH_INTERVAL_MS);
+
+        document.addEventListener('visibilitychange', function () {
+          if (document.visibilityState === 'visible' && (Date.now() - lastFetchAt) >= REFRESH_INTERVAL_MS) {
+            fetchLiveRoomCounts();
+          }
+        });
       }
     })();
   </script>
