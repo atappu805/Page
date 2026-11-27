@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>PixelJam — Invite</title>
+  <meta name="description" content="Join a PixelJam synchronized listening room in the PixelMusic Android app.">
+  <meta name="theme-color" content="#141218" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f7f2ea" media="(prefers-color-scheme: light)">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PixelJam">
+  <meta property="og:title" content="Join my PixelJam on PixelMusic">
+  <meta property="og:description" content="Open PixelMusic on Android to listen together in real time, or download the APK to join.">
+  <meta property="og:url" content="https://pixelmusic.pages.dev/jam">
+  <meta property="og:image" content="https://pixelmusic.pages.dev/IMG_20261002_120012.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="./Gemini_Generated_Image_9tunck9tunck9tun.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #141218;
+      --surface: #1e1b24;
+      --surface-hi: #292531;
+      --outline: rgba(230, 224, 233, 0.12);
+      --outline-hi: rgba(208, 188, 255, 0.34);
+      --text: #ece6f0;
+      --muted: #b6aebf;
+      --primary: #d0bcff;
+      --on-primary: #381e72;
+      --primary-container: #4f378b;
+      --on-primary-container: #eaddff;
+      --secondary-container: #383344;
+      --on-secondary-container: #e6e0e9;
+      --shadow: 0 28px 72px -18px rgba(0, 0, 0, 0.65);
+      --sans: 'Instrument Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f2ea;
+        --surface: #fffdf9;
+        --surface-hi: #f2ebe1;
+        --outline: rgba(31, 27, 22, 0.10);
+        --outline-hi: rgba(103, 80, 164, 0.32);
+        --text: #1f1b16;
+        --muted: #5d554d;
+        --primary: #6750a4;
+        --on-primary: #ffffff;
+        --primary-container: #eaddff;
+        --on-primary-container: #21005d;
+        --secondary-container: #ece3d6;
+        --on-secondary-container: #1f1b16;
+        --shadow: 0 24px 60px -20px rgba(31, 27, 22, 0.16);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background:
+        radial-gradient(60% 48% at 18% 0%, rgba(208, 188, 255, 0.16), transparent 65%),
+        radial-gradient(50% 45% at 88% 96%, rgba(239, 184, 200, 0.12), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; color: inherit; }
+    .hidden { display: none !important; }
+
+    .wrap {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .card {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: 30px;
+      padding: 26px 22px;
+      box-shadow: var(--shadow);
+      animation: rise 0.45s var(--ease) both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px) scale(0.985); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .brand-logo {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+    }
+    .brand-pill {
+      font-family: var(--mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .center { text-align: center; }
+    h1 {
+      font-size: clamp(24px, 6vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+    .sub {
+      margin-top: 8px;
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .room-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .code-box {
+      margin-top: 20px;
+      padding: 20px 14px;
+      border-radius: 22px;
+      background: var(--surface-hi);
+      border: 1px solid var(--outline-hi);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), border-color 0.2s;
+    }
+    .code-box:active { transform: scale(0.985); }
+    .code-tiles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+    }
+    .tile {
+      min-width: 40px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      padding: 0 6px;
+      border-radius: 14px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--mono);
+      font-size: 26px;
+      font-weight: 700;
+      animation: pop 0.42s var(--ease) both;
+    }
+    @keyframes pop {
+      from { opacity: 0; transform: translateY(10px) scale(0.9); }
+      to { opacity: 1; transform: none; }
+    }
+    .code-hint {
+      display: block;
+      margin-top: 10px;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .status-row {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-size: 13.5px;
+      color: var(--muted);
+      min-height: 20px;
+    }
+    .spinner {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid var(--outline-hi);
+      border-top-color: var(--primary);
+      animation: spin 0.8s linear infinite;
+      flex: none;
+    }
+    .status-row.done .spinner { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 52px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 0;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s var(--ease), filter 0.18s;
+      user-select: none;
+    }
+    .btn:active { transform: scale(0.975); }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+    .btn-primary:hover { filter: brightness(1.06); }
+    .btn-tonal {
+      background: var(--secondary-container);
+      color: var(--on-secondary-container);
+    }
+    .btn-tonal:hover { filter: brightness(1.06); }
+
+    .section-label {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stations {
+      display: grid;
+      gap: 4px;
+    }
+    .station {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--surface-hi);
+      border: 1px solid var(--outline);
+      transition: transform 0.2s var(--ease), border-color 0.2s;
+    }
+    .station:first-child { border-radius: 22px 22px 8px 8px; }
+    .station:last-child { border-radius: 8px 8px 22px 22px; }
+    .station:hover { border-color: var(--outline-hi); transform: translateY(-1px); }
+    .s-ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      background: var(--secondary-container);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      flex: none;
+    }
+    .s-body { flex: 1; min-width: 0; }
+    .s-name { font-size: 15.5px; font-weight: 700; }
+    .s-desc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .s-pill {
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 13px;
+      font-weight: 700;
+      flex: none;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 18px 0 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--outline);
+    }
+
+    .code-form {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 6px 6px 16px;
+      border-radius: 22px;
+      background: var(--surface-hi);
+      border: 1px solid var(--outline);
+    }
+    .code-form:focus-within { border-color: var(--outline-hi); }
+    .code-form input {
+      flex: 1;
+      min-width: 0;
+      height: 44px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+    .code-form input::placeholder {
+      color: var(--muted);
+      opacity: 0.65;
+      letter-spacing: 0.14em;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .code-form .btn { height: 42px; padding: 0 18px; }
+
+    .download-card {
+      background: var(--surface);
+      border: 1px solid var(--outline);
+      border-radius: 26px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      animation: rise 0.55s var(--ease) both;
+    }
+    .dl-text h2 { font-size: 15px; font-weight: 700; }
+    .dl-text p { font-size: 13px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+    .dl-btn {
+      height: 42px;
+      padding: 0 16px;
+      font-size: 13.5px;
+      flex: none;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .back-link:hover { color: var(--primary); }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(24px, env(safe-area-inset-bottom));
+      transform: translate(-50%, 16px);
+      opacity: 0;
+      pointer-events: none;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-size: 13.5px;
+      font-weight: 700;
+      transition: transform 0.28s var(--ease), opacity 0.22s;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 420px) {
+      .download-card { flex-direction: column; align-items: stretch; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <div class="brand-row">
+        <img src="./Gemini_Generated_Image_9tunck9tunck9tun.png" alt="PixelMusic" class="brand-logo" onerror="this.style.display='none'">
+        <span class="brand-title">PixelMusic</span>
+        <span class="brand-pill">PIXELJAM</span>
+      </div>
+
+      <!-- Invite View (?code=...) -->
+      <section id="invite-view" class="hidden center" aria-label="PixelJam room invite">
+        <h1>You're invited to jam</h1>
+        <p class="sub">Open PixelMusic on Android to join this room and listen in sync.</p>
+        <div id="room-badge" class="room-badge hidden"></div>
+
+        <div id="copy-code-btn" class="code-box" role="button" tabindex="0" aria-label="Copy room code">
+          <div id="code-tiles" class="code-tiles"></div>
+          <span id="copy-hint" class="code-hint">Tap to copy room code</span>
+        </div>
+
+        <div id="opening" class="status-row">
+          <span class="spinner" aria-hidden="true"></span>
+          <span id="opening-text">Opening PixelMusic…</span>
+        </div>
+
+        <div class="actions">
+          <a id="btn-join-app" href="#" class="btn btn-primary">Join in PixelMusic</a>
+          <button id="btn-copy-link" type="button" class="btn btn-tonal">Copy Invite Link</button>
+        </div>
+
+        <a class="back-link" href="./jam">← All rooms</a>
+      </section>
+
+      <!-- Lobby View (no code) -->
+      <section id="lobby-view" class="hidden" aria-label="Join a PixelJam room">
+        <div class="center">
+          <h1>Listen in sync.</h1>
+          <p class="sub">Join an always-on radio room or enter a friend's room code inside the PixelMusic app.</p>
+        </div>
+
+        <div class="section-label">24/7 Live Radio Rooms</div>
+        <div class="stations">
+          <a class="station" href="?code=INDIA">
+            <span class="s-ico" aria-hidden="true">🇮🇳</span>
+            <span class="s-body">
+              <span class="s-name">India</span>
+              <span class="s-desc">24/7 Live Radio · Always playing</span>
+            </span>
+            <span class="s-pill">Join</span>
+          </a>
+          <a class="station" href="?code=WORLD">
+            <span class="s-ico" aria-hidden="true">🌍</span>
+            <span class="s-body">
+              <span class="s-name">International</span>
+              <span class="s-desc">24/7 Live Radio · Always playing</span>
+            </span>
+            <span class="s-pill">Join</span>
+          </a>
+        </div>
+
+        <div class="divider">or enter a code</div>
+
+        <form id="code-form" class="code-form" autocomplete="off">
+          <input id="code-input" type="text" placeholder="ROOM CODE" maxlength="12" autocapitalize="characters" spellcheck="false" aria-label="Room code">
+          <button type="submit" class="btn btn-primary">Join</button>
+        </form>
+
+        <div class="actions">
+          <a id="btn-open-app" href="pixelmusic://jam" class="btn btn-tonal">Open PixelMusic App</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Download Fallback Card (always visible so nobody hits a dead end) -->
+    <aside class="download-card" aria-label="Download PixelMusic">
+      <div class="dl-text">
+        <h2>Don't have PixelMusic?</h2>
+        <p>Install the free Android app to join PixelJam rooms.</p>
+      </div>
+      <a href="https://pixelmusic.pages.dev/#download" class="btn btn-primary dl-btn">Download APK</a>
+    </aside>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Copied</div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var params = new URLSearchParams(window.location.search);
+      var code = (params.get('code') || params.get('room') || '')
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]/g, '')
+        .slice(0, 12);
+
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var inviteView = document.getElementById('invite-view');
+      var lobbyView = document.getElementById('lobby-view');
+      var toast = document.getElementById('toast');
+      var toastTimer = null;
+
+      var STATIONS = {
+        INDIA: { icon: '🇮🇳', label: 'India · 24/7 Live Radio' },
+        WORLD: { icon: '🌍', label: 'International · 24/7 Live Radio' }
+      };
+
+      function showToast(msg) {
+        clearTimeout(toastTimer);
+        toast.textContent = msg;
+        toast.classList.add('show');
+        toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1900);
+      }
+
+      function copyText(val, msg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(val).then(function () { showToast(msg); }).catch(function () { fallbackCopy(val, msg); });
+        } else {
+          fallbackCopy(val, msg);
+        }
+      }
+
+      function fallbackCopy(text, msg) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); showToast(msg); } catch (e) { showToast(text); }
+        document.body.removeChild(ta);
+      }
+
+      function buildAppLink(roomCode) {
+        var enc = roomCode ? '?code=' + encodeURIComponent(roomCode) : '';
+        if (isAndroid) {
+          return 'intent://jam' + enc + '#Intent;scheme=pixelmusic;package=com.saurav.pixelmusic;end';
+        }
+        return 'pixelmusic://jam' + enc;
+      }
+
+      if (code.length > 0) {
+        document.title = 'Join ' + code + ' — PixelJam';
+
+        if (STATIONS[code]) {
+          var badge = document.getElementById('room-badge');
+          badge.textContent = STATIONS[code].icon + '  ' + STATIONS[code].label;
+          badge.classList.remove('hidden');
+        }
+
+        var tiles = document.getElementById('code-tiles');
+        code.split('').forEach(function (ch, idx) {
+          var span = document.createElement('span');
+          span.className = 'tile';
+          span.textContent = ch;
+          span.style.animationDelay = (idx * 55) + 'ms';
+          tiles.appendChild(span);
+        });
+
+        var appLink = buildAppLink(code);
+        var joinBtn = document.getElementById('btn-join-app');
+        joinBtn.href = appLink;
+        joinBtn.onclick = function () { showToast('Opening PixelMusic…'); };
+
+        if (isAndroid) {
+          setTimeout(function () { window.location.href = appLink; }, 350);
+          setTimeout(function () {
+            var o = document.getElementById('opening');
+            o.classList.add('done');
+            document.getElementById('opening-text').textContent = 'App didn\'t open? Tap "Join in PixelMusic" or download the APK below.';
+          }, 2800);
+        } else {
+          var o = document.getElementById('opening');
+          o.classList.add('done');
+          document.getElementById('opening-text').textContent = 'Open this link on Android with PixelMusic installed.';
+        }
+
+        var copyBtn = document.getElementById('copy-code-btn');
+        var hint = document.getElementById('copy-hint');
+        function doCopyCode() {
+          copyText(code, 'Room code copied');
+          hint.textContent = '✓ Copied';
+          setTimeout(function () { hint.textContent = 'Tap to copy room code'; }, 1800);
+        }
+        copyBtn.onclick = doCopyCode;
+        copyBtn.onkeydown = function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doCopyCode(); }
+        };
+
+        document.getElementById('btn-copy-link').onclick = function () {
+          copyText(window.location.origin + window.location.pathname + '?code=' + encodeURIComponent(code), 'Invite link copied');
+        };
+
+        inviteView.classList.remove('hidden');
+      } else {
+        document.getElementById('btn-open-app').href = buildAppLink('');
+        var input = document.getElementById('code-input');
+        input.addEventListener('input', function (e) {
+          e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+        });
+        document.getElementById('code-form').onsubmit = function (e) {
+          e.preventDefault();
+          var val = input.value.trim().toUpperCase();
+          if (val.length > 0) {
+            window.location.search = '?code=' + encodeURIComponent(val);
+          }
+        };
+        lobbyView.classList.remove('hidden');
+      }
+    })();
+  </script>
+</body>
+</html>
